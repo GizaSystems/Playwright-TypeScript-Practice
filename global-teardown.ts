@@ -42,9 +42,12 @@ module.exports = async () => {
     }
 
     // 3. Execute command to open the HTML file (Synchronous)
-    console.log(`\n🔄 Openning Allure Report...`);
-    execSync(OPEN_CMD, { stdio: 'inherit' });
-    console.log('🚀 Allure report opened in default browser.');
+    const autoOpenAllureReport = process.env.AUTO_ALLURE_OPEN !== 'false'; // use ($env:AUTO_ALLURE_OPEN="false") command to set it to false when needed
+    if (autoOpenAllureReport) {    // Check if report should be opened (default: true)
+      console.log(`\n🔄 Opening Allure Report...`);
+      execSync(OPEN_CMD, { stdio: 'inherit' });
+      console.log('🚀 Allure report opened in default browser.');
+    }
 
   } catch (error) {
     console.error('\n❌ An error occurred during command execution.');
