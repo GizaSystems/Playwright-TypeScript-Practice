@@ -41,7 +41,7 @@ export default defineConfig({
       links: {
         tms: {
           nameTemplate: 'Test: #%s',
-          urlTemplate: 'https://allurereport.org/docs/playwright-reference/%s'
+          urlTemplate: 'https://github.com/orgs/GizaSystems/projects/2?pane=issue&itemId=%s'
         },
         // issue: {
         //   nameTemplate: 'Bug: #%s',
