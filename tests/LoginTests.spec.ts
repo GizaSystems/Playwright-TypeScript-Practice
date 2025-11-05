@@ -1,4 +1,4 @@
-import { test, expect, Page, BrowserContext } from '@playwright/test';
+import { test, Page, BrowserContext } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 import { LoginPage } from '../pages/LoginPage'
 import { HeaderPage } from '../pages/HeaderPage';
