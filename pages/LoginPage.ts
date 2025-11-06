@@ -30,5 +30,4 @@ export class LoginPage {
       await this.login_Button.click();
     });
   }
-
 }
