@@ -8,6 +8,7 @@ export class LoginPage {
   readonly loginEmail_Input: Locator;
   readonly loginPassword_Input: Locator;
   readonly login_Button: Locator;
+  readonly login_Text: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -15,6 +16,7 @@ export class LoginPage {
     this.loginEmail_Input = page.locator('[data-qa="login-email"]');
     this.loginPassword_Input = page.locator('[data-qa="login-password"]');
     this.login_Button = page.locator('[data-qa="login-button"]');
+    this.login_Text = page.locator("//h2[normalize-space()='Login to your account']")
   }
 
   async navigate() {
@@ -28,6 +30,19 @@ export class LoginPage {
       await this.loginEmail_Input.fill(username);
       await this.loginPassword_Input.fill(password);
       await this.login_Button.click();
+    });
+  }
+
+  async verifyLoginPageLoaded() {
+    await step("Verify 'Login to your account' is visible", async () => {
+     await expect(this.login_Text).toHaveText('Login to your account');
+    });
+  }
+
+  async VerifyThatUserIsNavigatedToLoginPage() {
+    await step(`Verify that user is navigated to login page`, async () => {
+      await expect(this.page).toHaveURL(this.url);
+      await expect(this.login_Text).toBeVisible();
     });
   }
 }
