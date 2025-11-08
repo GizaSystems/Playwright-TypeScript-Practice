@@ -2,5 +2,12 @@
     "username": "ElSharkawy",
     "emailAddress": "m.elsharkawy",
     "password": "tp12345678",
-    "errorMessage": ""
+    "errorMessage": "",
+    "firstName": "Mohamed",
+    "lastName": "elsharkawy",
+    "address": "obour",
+    "state": "NA",
+    "city": "Cairo",
+    "zipcode": "1167",
+    "mobileNumber": "0111111111"
 }

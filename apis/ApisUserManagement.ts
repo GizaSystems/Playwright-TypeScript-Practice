@@ -40,4 +40,41 @@ export class ApisUserManagement {
       }
     );
   }
+  async verifyUserCreatedSuccessfully(createResponse: APIResponse) {
+    await allure.step(`verify User Created Successfully`, async () => {
+      expect(createResponse.status()).toBe(200);
+    });
+  }
+  async loginUser(email: string, password: string): Promise<APIResponse> {
+    return await allure.step(`Login User with Email: ${email} and Password: ${password}`,
+      async () => {
+        const loginData = {
+          email: email,
+          password: password
+        }
+        const response = await this.apiActions.post('/api/verifyLogin', { form: loginData });
+        return response;
+      }
+    );
+  }
+  async verifyUserLogedinSuccessfully(loginResponse: APIResponse, loginJson: { message: string }) {
+    await allure.step(`verify User logedin Successfully`, async () => {
+      expect(loginResponse.status()).toBe(200);
+      expect(loginJson.message).toBe("User exists!");
+    });
+  }
+  async logoutUser(): Promise<APIResponse> {
+    return await allure.step(`Logout User`,
+      async () => {
+        const response = await this.apiActions.get('/logout');
+        return response;
+      }
+    );
+  }
+  // async verifyLogoutRequestNotHandledThroughTheApi(logoutResponse: APIResponse) {
+  //   await allure.step(`verify Logout Request Not Handled Through The Api`, async () => {
+  //     expect(logoutResponse.status()).toBe(500);
+  //   });
+  // }
+
 }

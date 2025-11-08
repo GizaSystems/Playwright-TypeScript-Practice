@@ -7,12 +7,14 @@ export class HeaderPage {
   // Locators
   readonly signupLogin_link: Locator;
   readonly userProfile_link: Locator;
+  readonly logout_Button: Locator;
 
   constructor(page: Page) {
     this.page = page;
     //  Locators
     this.signupLogin_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
+    this.logout_Button = page.locator("//a[normalize-space()='Logout']");
   }
 
   ///// Actions
@@ -22,6 +24,11 @@ export class HeaderPage {
       await this.signupLogin_link.click();
     });
   }
+  async clickOnLogoutButton() {
+    await step("click on logout button", async () => {
+      await this.logout_Button.click();
+    })
+  }
 
   ///// Validations
 
@@ -30,5 +37,5 @@ export class HeaderPage {
       await expect(this.userProfile_link).toContainText(username);
     });
   }
-
+  
 }
