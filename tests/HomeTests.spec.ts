@@ -7,7 +7,7 @@ import * as fs from 'fs';
 let context: BrowserContext;
 let page: Page;
 let homePage: HomePage;
-let footer: FooterPage;
+let footerPage: FooterPage;
 let testData: any;
 const timestamp = new Date().toISOString().replace(/[-T:.]/g, "").slice(0, 17);
 
@@ -19,10 +19,10 @@ test.describe('Verify Email Subscription Functionality From Home Page', () => {
 
     await homePage.navigate();
     await homePage.verifyHomePageVisible();
-    await footer.scrollToFooter();
-    await footer.verifySubscriptionText();
-    await footer.subscribeWithEmail(randomEmail);
-    await footer.verifySuccessMessage();
+    await footerPage.scrollToFooter();
+    await footerPage.verifySubscriptionText();
+    await footerPage.subscribeWithEmail(randomEmail);
+    await footerPage.verifySuccessMessage();
   });
 
    test.beforeAll(async () => {
@@ -33,7 +33,7 @@ test.describe('Verify Email Subscription Functionality From Home Page', () => {
     context = await browser.newContext();
     page = await context.newPage();
     homePage = new HomePage(page);
-    footer = new FooterPage(page);
+    footerPage = new FooterPage(page);
   });
 
   test.afterEach(async () => {

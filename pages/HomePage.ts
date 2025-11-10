@@ -15,7 +15,7 @@ export class HomePage {
 
   async navigate() {
     await step("Navigate to Home Page", async () => {
-      await this.page.goto('/');
+      await this.page.goto('');
     });
   }
 

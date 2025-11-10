@@ -41,7 +41,7 @@ export class FooterPage {
 
   async verifySuccessMessage() {
     await step("Verify success message is visible", async () => {
-    await expect(this.successMessage).toHaveText('You have been successfully subscribed!');
+      await expect(this.successMessage).toHaveText('You have been successfully subscribed!');
     });
   }
 }
