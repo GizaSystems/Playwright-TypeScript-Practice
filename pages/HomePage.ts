@@ -24,7 +24,7 @@ export class HomePage {
   async verifyHomePageVisible() {
     await step("Verify home page is visible successfully", async () => {
       await expect(this.logo).toBeVisible();
-      await expect(this.page).toHaveTitle(/Automation Exercise/);
+      await expect(this.page).toHaveTitle("Automation Exercise");
     });
   }
 }
