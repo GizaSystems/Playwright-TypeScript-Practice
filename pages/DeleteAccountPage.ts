@@ -7,7 +7,6 @@ export class DeleteAccountPage {
     readonly accountDeletedMessage: Locator;
     readonly continue_Button: Locator;
 
-
     constructor(page: Page) {
         this.page = page;
 
@@ -23,7 +22,7 @@ export class DeleteAccountPage {
 
     async assertSuccessDeleteMessage(message: string) {
         await step('Assert on Success Delete Account Message', async () => {
-            await expect(this.accountDeletedMessage).toContainText(message);
+            await expect(this.accountDeletedMessage).toHaveText(message);
         })
     }
 }

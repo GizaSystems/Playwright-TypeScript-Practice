@@ -21,7 +21,7 @@ export class PaymentPage {
         this.expirationMonth_Input = page.locator('.form-control.card-expiry-month');
         this.expirationYear_Input = page.locator('.form-control.card-expiry-year');
         this.payAndConfirmOrder_Button = page.locator('id=submit');
-        this.sucessPaymentAlert = page.locator('//b[.="Order Placed!"]');   
+        this.sucessPaymentAlert = page.locator('[data-qa="order-placed"]');   
     }
 
     async pay(nameOnCard: string, cardNumber: string, cvc: string, expirationMonth: string, expirationYear: string) {
@@ -32,7 +32,6 @@ export class PaymentPage {
             await this.expirationMonth_Input.fill(expirationMonth);
             await this.expirationYear_Input.fill(expirationYear);
             await this.payAndConfirmOrder_Button.click();
-
         })
     }
 

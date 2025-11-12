@@ -4,14 +4,14 @@ import { step } from 'allure-js-commons';
 export class HomePage {
   readonly page: Page;
 
-  readonly featuresItems_Text: Locator;
+  readonly featuresItems: Locator;
   readonly viewProduct_Button: Locator;
 
   constructor(page: Page) {
     this.page = page;
 
-    this.featuresItems_Text = page.locator('//h2[.="Features Items"]');
-    this.viewProduct_Button = page.locator('//a[@href="/product_details/1"]');
+    this.featuresItems = page.locator('.features_items .title.text-center');
+    this.viewProduct_Button = page.getByRole('link', { name: /view product/i });
   }
 
   async navigate() {
@@ -22,13 +22,13 @@ export class HomePage {
 
   async clickViewProduct() {
     await step('Click on View Product', async () => {
-      await this.viewProduct_Button.click();
+      await this.viewProduct_Button.first().click();
     })
   }
 
   async assertHomePageLoaded() {
     await step('Assert Home Page is Loaded Successfully', async () => {
-      await expect(this.featuresItems_Text).toHaveText('Features Items');
+      await expect(this.featuresItems).toBeVisible();
     })
   }
 

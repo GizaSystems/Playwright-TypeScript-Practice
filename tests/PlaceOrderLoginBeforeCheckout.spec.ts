@@ -42,16 +42,16 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     await homePage.clickViewProduct(); 
     await productsPage.clickOnAddToCartButton();
     await headerPage.clickOnCartLink();
-    await cartPage.assertCartPageLoaded();
+    await cartPage.assertCartPageLoaded(testData.messages.shoppingcart);
     await cartPage.clickOnProceedToCheckout();
     await checkoutPage.assertOnAddressDetails(testData.checkout.addressDetails);
     await checkoutPage.writeCommentAndPlaceOrder(testData.checkout.comment);
+    await checkoutPage.clickOnPlaceOrderAndConfirm();
     await paymentPage.pay(testData.payment.name, testData.payment.cardnumber, testData.payment.cvc, testData.payment.expiarymonth, testData.payment.expiaryyear);
     await paymentPage.assertSuccessPaymentMessage(testData.messages.payment);
     await headerPage.clickOnDeleteAccountLink();
     await deleteAccountPage.assertSuccessDeleteMessage(testData.messages.deleteaccount);
     await deleteAccountPage.clickOnContinue();
-
   });
 
   test.beforeAll(async () => {
@@ -60,10 +60,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
 
   test.beforeEach(async ({ request, browser }) => {
     apisUserManagement = new ApisUserManagement(request);
-    timestamp = new Date()
-      .toISOString()
-      .replace(/[-T:.]/g, "")
-      .slice(0, 17);
+    timestamp = new Date().toISOString().replace(/[-T:.]/g, "").slice(0, 17);
     testEmail = testData.user.email + timestamp + "@test.com";
     await apisUserManagement.createUser(testData.user.name, testEmail, testData.user.password)
 
@@ -77,7 +74,6 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     checkoutPage= new CheckoutPage(page);
     deleteAccountPage= new DeleteAccountPage(page);
     paymentPage= new PaymentPage(page);
-
   });
 
   test.afterEach(async () => {

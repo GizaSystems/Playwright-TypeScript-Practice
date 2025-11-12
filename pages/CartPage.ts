@@ -7,12 +7,11 @@ export class CartPage {
     readonly proceedToCheckout_Button: Locator;
     readonly shoppingCart_Text: Locator;
 
-
     constructor(page: Page) {
         this.page = page;
 
-        this.proceedToCheckout_Button = page.locator('//a[@class="btn btn-default check_out"]')
-        this.shoppingCart_Text = page.locator('//li[@class="active"]');
+        this.proceedToCheckout_Button = page.locator('//a[@class="btn btn-default check_out"]');
+        this.shoppingCart_Text = page.locator('.breadcrumb li.active');
     }
 
     async clickOnProceedToCheckout() {
@@ -21,9 +20,9 @@ export class CartPage {
         })
     }
 
-    async assertCartPageLoaded() {
+    async assertCartPageLoaded(message: string) {
         await step('Assert Cart Page is Loaded Successfully', async () => {
-            await expect(this.shoppingCart_Text).toContainText('Shopping Cart');
+            await expect(this.shoppingCart_Text).toContainText(message);
         })
     }
 }

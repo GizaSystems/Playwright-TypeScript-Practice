@@ -17,6 +17,7 @@
     },
     "messages": {
         "deleteaccount": "Account Deleted!",
-        "payment": "Order Placed!"
+        "payment": "Order Placed!",
+        "shoppingcart": "Shopping Cart"
     }
 }

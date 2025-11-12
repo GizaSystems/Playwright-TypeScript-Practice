@@ -7,12 +7,11 @@ export class ProductsPage {
     readonly addToCart_Button: Locator;
     readonly continueShopping_Button: Locator;
 
-
     constructor(page: Page) {
         this.page = page;
 
-        this.addToCart_Button = page.locator('.btn.btn-default.cart')
-        this.continueShopping_Button = page.locator('.btn.btn-success.close-modal.btn-block')
+        this.addToCart_Button = page.getByRole('button', { name: /add to cart/i });
+        this.continueShopping_Button = page.getByRole('button', { name: /continue shopping/i });
     }
 
     async clickOnAddToCartButton() {

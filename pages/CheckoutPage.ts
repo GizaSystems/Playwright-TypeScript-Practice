@@ -19,6 +19,11 @@ export class CheckoutPage {
     async writeCommentAndPlaceOrder(comment: string) {
         await step('Enter Description in Comment Text Area and Click on Place and Confirm Order', async () => {
             await this.comment_TextArea.fill(comment);
+        })
+    }
+
+    async clickOnPlaceOrderAndConfirm() {
+        await step('Click on Place Order and Confirm Button', async () => {
             await this.placeOrder_Button.click();
         })
     }
