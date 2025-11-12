@@ -1,0 +1,22 @@
+{
+    "user": {
+        "name": "Mahmoud",
+        "email": "mahmoudTest",
+        "password": "mahmoudTest@test.com"
+    },
+    "checkout": {
+        "addressDetails": "Your delivery address\nmr. Mahmoud ElSharkawy\nGiza Systems\nCairo\nElObour\nElObour Cairo\n20100\nIndia\n01155150745",
+        "comment": "Please call before delivery"
+    },
+    "payment": {
+        "name": "Mahmoud ElSharkawy",
+        "cardnumber": "46135468153",
+        "cvc": "113",
+        "expiarymonth": "04",
+        "expiaryyear": "2031"
+    },
+    "messages": {
+        "deleteaccount": "Account Deleted!",
+        "payment": "Order Placed!"
+    }
+}

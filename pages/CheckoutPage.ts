@@ -1,0 +1,32 @@
+import {type Page, type Locator, expect} from '@playwright/test';
+import { step } from 'allure-js-commons';
+
+export class CheckoutPage {
+    readonly page: Page;
+
+    readonly deliveryAddress_Text: Locator; 
+    readonly comment_TextArea: Locator;
+    readonly placeOrder_Button: Locator;
+
+    constructor(page: Page) {
+        this.page = page;
+
+        this.deliveryAddress_Text = page.locator('id=address_delivery');
+        this.comment_TextArea = page.locator('[name="message"]');
+        this.placeOrder_Button = page.locator('.btn.btn-default.check_out');
+    }
+
+    async writeCommentAndPlaceOrder(comment: string) {
+        await step('Enter Description in Comment Text Area and Click on Place and Confirm Order', async () => {
+            await this.comment_TextArea.fill(comment);
+            await this.placeOrder_Button.click();
+        })
+    }
+
+    async assertOnAddressDetails(addressDetails: string) {
+        await step('Assert on Address Details', async () => {
+            await expect(this.deliveryAddress_Text).toContainText(addressDetails);
+        })
+
+    }
+}   
