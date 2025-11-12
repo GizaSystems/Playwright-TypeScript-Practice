@@ -4,33 +4,41 @@ import { step } from 'allure-js-commons';
 export class SignupPage {
   readonly page: Page;
 
-  readonly mr_checkbox: Locator;
-  readonly password_field: Locator;
-  readonly firstName_field: Locator;
-  readonly lastName_field: Locator;
-  readonly address_field: Locator;
-  readonly state_field: Locator;
-  readonly city_field: Locator;
-  readonly zipcode_field: Locator;
-  readonly mobileNumber_field: Locator;
-  readonly createAccount_button: Locator;
+  // Inputs and Controls
+  readonly mr_Checkbox: Locator;
+  readonly password_Input: Locator;
+  readonly firstName_Input: Locator;
+  readonly lastName_Input: Locator;
+  readonly address_Input: Locator;
+  readonly state_Input: Locator;
+  readonly city_Input: Locator;
+  readonly zipcode_Input: Locator;
+  readonly mobileNumber_Input: Locator;
+  creation_Text: Locator;
 
+  // Buttons
+  readonly createAccount_Button: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    //  Locators
-    this.mr_checkbox = page.locator("//input[@id='id_gender1']");
-    this.password_field = page.locator("//input[@id='password']");
-    this.firstName_field = page.locator("//input[@id='first_name']");
-    this.lastName_field = page.locator("//input[@id='last_name']");
-    this.address_field = page.locator("//input[@id='address1']");
-    this.state_field = page.locator("//input[@id='state']");
-    this.city_field = page.locator("//input[@id='city']");
-    this.zipcode_field = page.locator("//input[@id='zipcode']");
-    this.mobileNumber_field = page.locator("//input[@id='mobile_number']");
-    this.createAccount_button = page.locator("//button[normalize-space()='Create Account']");
+
+    // Locators
+    this.mr_Checkbox = page.locator("//input[@id='id_gender1']");
+    this.password_Input = page.locator("//input[@id='password']");
+    this.firstName_Input = page.locator("//input[@id='first_name']");
+    this.lastName_Input = page.locator("//input[@id='last_name']");
+    this.address_Input = page.locator("//input[@id='address1']");
+    this.state_Input = page.locator("//input[@id='state']");
+    this.city_Input = page.locator("//input[@id='city']");
+    this.zipcode_Input = page.locator("//input[@id='zipcode']");
+    this.mobileNumber_Input = page.locator("//input[@id='mobile_number']");
+    this.createAccount_Button = page.locator("//button[normalize-space()='Create Account']");
+    this.creation_Text = page.locator("//b[normalize-space()='Account Created!']");
   }
-async userRegister(
+
+  //////Actions
+
+  async userRegister(
     password: string,
     firstName: string,
     lastName: string,
@@ -40,18 +48,25 @@ async userRegister(
     zipcode: string,
     mobileNumber: string
   ) {
-    await step('register User info', async () => {
-      await this.mr_checkbox.click();
-      await this.password_field.fill(password);
-      await this.firstName_field.fill(firstName);
-      await this.lastName_field.fill(lastName);
-      await this.address_field.fill(address);
-      await this.state_field.fill(state);
-      await this.city_field.fill(city);
-      await this.zipcode_field.fill(zipcode);
-      await this.mobileNumber_field.fill(mobileNumber);
-      await this.createAccount_button.click();
-    })
+    await step('Register user info', async () => {
+      await this.mr_Checkbox.click();
+      await this.password_Input.fill(password);
+      await this.firstName_Input.fill(firstName);
+      await this.lastName_Input.fill(lastName);
+      await this.address_Input.fill(address);
+      await this.state_Input.fill(state);
+      await this.city_Input.fill(city);
+      await this.zipcode_Input.fill(zipcode);
+      await this.mobileNumber_Input.fill(mobileNumber);
+      await this.createAccount_Button.click();
+    });
   }
 
+  /////Validations
+
+  async verifyAccountCreatedSuccessfully(creationText: string) {
+    await step(`Verify that user is navigated to login page`, async () => {
+      await expect(this.creation_Text).toHaveText(creationText);
+    });
   }
+}

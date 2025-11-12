@@ -1,17 +1,20 @@
 import { APIResponse, expect, type APIRequestContext } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 import { ApiActions } from '../utils/ApiActions';
-
 export class ApisUserManagement {
   readonly request: APIRequestContext;
   readonly apiActions: ApiActions;
   // readonly baseURL = 'https://automationexercise.com';   // todos: Should handle the base URL from the config file
   readonly createUser_serviceName = '/api/createAccount';
+  readonly loginUser_serviceName = '/api/verifyLogin';
+  readonly logoutUser_serviceName = '/logout';
 
   constructor(request: APIRequestContext) {
     this.request = request;
     this.apiActions = new ApiActions(request);
   }
+
+  ///// Actions
 
   async createUser(name: string, email: string, password: string): Promise<APIResponse> {
     return await allure.step(`Create User Account with name: ${name}, First Name: ${email} and Last Name: ${password}`,
@@ -40,11 +43,7 @@ export class ApisUserManagement {
       }
     );
   }
-  async verifyUserCreatedSuccessfully(createResponse: APIResponse) {
-    await allure.step(`verify User Created Successfully`, async () => {
-      expect(createResponse.status()).toBe(200);
-    });
-  }
+
   async loginUser(email: string, password: string): Promise<APIResponse> {
     return await allure.step(`Login User with Email: ${email} and Password: ${password}`,
       async () => {
@@ -52,29 +51,34 @@ export class ApisUserManagement {
           email: email,
           password: password
         }
-        const response = await this.apiActions.post('/api/verifyLogin', { form: loginData });
+        const response = await this.apiActions.post(this.loginUser_serviceName, { form: loginData });
         return response;
       }
     );
   }
-  async verifyUserLogedinSuccessfully(loginResponse: APIResponse, loginJson: { message: string }) {
-    await allure.step(`verify User logedin Successfully`, async () => {
-      expect(loginResponse.status()).toBe(200);
-      expect(loginJson.message).toBe("User exists!");
-    });
-  }
+
   async logoutUser(): Promise<APIResponse> {
     return await allure.step(`Logout User`,
       async () => {
-        const response = await this.apiActions.get('/logout');
+        const response = await this.apiActions.get(this.logoutUser_serviceName);
         return response;
       }
     );
   }
-  // async verifyLogoutRequestNotHandledThroughTheApi(logoutResponse: APIResponse) {
-  //   await allure.step(`verify Logout Request Not Handled Through The Api`, async () => {
-  //     expect(logoutResponse.status()).toBe(500);
-  //   });
-  // }
 
+  ///// Validations
+
+  async verifyUserCreatedSuccessfully(createResponse: APIResponse, createUserConfirmationMessage: string) {
+    await allure.step(`Verify User Created Successfully`, async () => {
+      expect(createResponse.status()).toBe(200);
+      expect((await createResponse.json()).message).toBe(createUserConfirmationMessage);
+    });
+  }
+
+  async verifyUserLogedinSuccessfully(loginResponse: APIResponse, loginJson: { message: string }, loginConfirmationMessage: string) {
+    await allure.step(`Verify User logedin Successfully`, async () => {
+      expect(loginResponse.status()).toBe(200);
+      expect(loginJson.message).toBe(loginConfirmationMessage);
+    });
+  }
 }

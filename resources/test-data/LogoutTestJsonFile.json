@@ -1,0 +1,21 @@
+{
+    "username": "ElSharkawy",
+    "emailAddress": "m.elsharkawy",
+    "password": "tp12345678",
+    "errorMessage": "",
+    "firstName": "Mohamed",
+    "lastName": "elsharkawy",
+    "address": "obour",
+    "state": "NA",
+    "city": "Cairo",
+    "zipcode": "1167",
+    "mobileNumber": "0111111111",
+    "loginUrl": "https://automationexercise.com/login",
+    "loginConfirmationMessage": "User exists!",
+    "createUserConfirmationMessage": "User created!",
+    "loginText": "Login to your account",
+    "creationText": "Account Created!",
+    "highlightedColorAttribute": "style",
+    "highlightedColorValue": "color: orange;",
+    "homePageTitle": "Automation Exercise"
+}
