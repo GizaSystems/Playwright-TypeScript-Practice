@@ -3,12 +3,14 @@ import { step } from 'allure-js-commons';
 
 export class HomePage {
   readonly page: Page;
+  readonly testData: any;
     // Locators
-  readonly logo: Locator;
+  readonly logo_img: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, testData: any) {
     this.page = page;
-    this.logo = page.locator('.logo img');
+    this.testData = testData;
+    this.logo_img = page.locator('.logo img');
   }
 
     ///// Actions
@@ -23,8 +25,8 @@ export class HomePage {
 
   async verifyHomePageVisible() {
     await step("Verify home page is visible successfully", async () => {
-      await expect(this.logo).toBeVisible();
-      await expect(this.page).toHaveTitle("Automation Exercise");
+      await expect(this.logo_img).toBeVisible();
+      await expect(this.page).toHaveTitle(this.testData.homePageTitle);
     });
   }
 }

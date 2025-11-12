@@ -26,14 +26,14 @@ test.describe('Verify Email Subscription Functionality From Home Page', () => {
   });
 
    test.beforeAll(async () => {
-    testData = JSON.parse(fs.readFileSync('./resources/test-data/LoginTestJsonFile.json', 'utf8'));
+    testData = JSON.parse(fs.readFileSync('./resources/test-data/SubscriptionTestData.json', 'utf8'));
    });
 
   test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
-    homePage = new HomePage(page);
-    footerPage = new FooterPage(page);
+    homePage = new HomePage(page, testData);
+    footerPage = new FooterPage(page, testData);
   });
 
   test.afterEach(async () => {

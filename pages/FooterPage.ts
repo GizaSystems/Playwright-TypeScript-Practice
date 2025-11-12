@@ -3,18 +3,20 @@ import { step } from 'allure-js-commons';
 
 export class FooterPage {
   readonly page: Page;
+  readonly testData: any;
     // Locators
-  readonly subscriptionTitle: Locator;
-  readonly emailInput: Locator;
-  readonly submitButton: Locator;
+  readonly subscription_Title: Locator;
+  readonly email_Input: Locator;
+  readonly submit_Button: Locator;
   readonly successMessage: Locator;
 
-  constructor(page: Page) {
+  constructor(page: Page, testData: any) {
     this.page = page;
+    this.testData = testData;
 
-    this.subscriptionTitle = page.locator('#footer h2');
-    this.emailInput = page.locator('#susbscribe_email');
-    this.submitButton = page.locator('#subscribe');
+    this.subscription_Title = page.locator('#footer h2');
+    this.email_Input = page.locator('#susbscribe_email');
+    this.submit_Button = page.locator('#subscribe');
     this.successMessage = page.locator('#success-subscribe');
   }
 
@@ -26,8 +28,8 @@ export class FooterPage {
 
   async subscribeWithEmail(email: string) {
     await step(`User subscribes to the newsletter with email '${email}'`, async () => {
-      await this.emailInput.fill(email);
-      await this.submitButton.click();
+      await this.email_Input.fill(email);
+      await this.submit_Button.click();
     });
   }
 
@@ -35,7 +37,7 @@ export class FooterPage {
 
   async verifySubscriptionText() {
     await step("Verify text 'SUBSCRIPTION' is visible", async () => {
-      await expect(this.subscriptionTitle).toBeVisible();
+      await expect(this.subscription_Title).toBeVisible();
     });
   }
 
