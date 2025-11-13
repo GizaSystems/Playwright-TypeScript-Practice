@@ -3,7 +3,7 @@ import { step } from 'allure-js-commons';
 
 export class HomePage {
   readonly page: Page;
-  readonly homePage_url: string = 'https://automationexercise.com/';
+  // readonly homePage_url: string = 'https://automationexercise.com/';
 
   constructor(page: Page) {
     this.page = page;

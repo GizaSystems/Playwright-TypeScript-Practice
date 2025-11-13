@@ -1,6 +1,8 @@
 {
     "name":"Nader Elsayed",
     "emailAddress":"nader.elsayed",
+    "emailAddressAPI":"nader.elsayedAPI",
+    "emailAddressForLogin":"nader.elsayedAPIUI",
     "password":"1qaz!QAZ",
     "day":"12",
     "month":"March",

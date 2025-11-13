@@ -17,6 +17,10 @@ export class SignupPage {
     readonly mobileNumber_Input: Locator;
     readonly createAccount_Button: Locator;
     readonly accountCreated_Label: Locator;
+    readonly enterAccountInfo_title: Locator;
+    readonly accountCreated_title: Locator;
+    readonly accountDeleted_title: Locator;
+    readonly loggedInUser_Label: Locator;
     
   constructor(page: Page) {
     this.page = page;
@@ -34,7 +38,11 @@ export class SignupPage {
     this.zipCode_Input = page.locator('#zipcode');
     this.mobileNumber_Input = page.locator('#mobile_number');
     this.createAccount_Button =  page.locator('[data-qa="create-account"]');
-    this.accountCreated_Label =  page.locator('[data-qa="account-created"]');  
+    this.accountCreated_Label =  page.locator('[data-qa="account-created"]'); 
+    this.enterAccountInfo_title = page.locator('h2', { hasText: 'Enter Account Information' });
+    this.accountCreated_title=page.locator('h2', { hasText: 'Account Created!' });
+    this.accountDeleted_title=page.locator('h2', { hasText: 'Account Deleted!' });
+    this.loggedInUser_Label = page.getByText('Logged in as');
   }
 
  //Actions
@@ -70,8 +78,18 @@ async selectDateOfBirth(day: string, month: string, year: string) {
   });
 }
 //Assertions
-async assertTextIsVisible(text: string) {
-    await expect(this.page.locator(`text=${text}`)).toBeVisible();
+async assertTextEnterAccountInfoIsVisiable(expectedText: string) {
+    await expect(this.enterAccountInfo_title).toHaveText(expectedText);
     }
-
+async assertTextAccountCreatedIsVisiable(expectedText: string) {
+    await expect(this.accountCreated_title).toHaveText(expectedText);
+    }  
+async assertTextAccountDeletedIsVisiable(expectedText: string) {
+    await expect(this.accountDeleted_title).toHaveText(expectedText);
+    }     
+async assertLoggedInUserName(expectedName: string) {
+  await expect(this.loggedInUser_Label).toBeVisible();
+  await expect(this.loggedInUser_Label).toContainText(expectedName);
+}
+ 
 }

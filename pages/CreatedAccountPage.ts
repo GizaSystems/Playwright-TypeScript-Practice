@@ -2,7 +2,7 @@ import { type Page, type Locator } from '@playwright/test';
 export class CreatedAccountPage {
     readonly page: Page;
     readonly continue_Button: Locator;
-    readonly createdtAccountPage_url: string = 'https://automationexercise.com/account_created';
+    readonly createdtAccountPage_url: string = '/account_created';
     constructor(page: Page) {
     this.page = page;
     //  Locators

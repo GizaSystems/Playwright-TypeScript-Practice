@@ -3,7 +3,7 @@ import { step } from 'allure-js-commons';
 
 export class LoginPage {
   readonly page: Page;
-  readonly url: string = 'https://www.automationexercise.com/login';
+  readonly url: string = '/login';
 
   readonly loginEmail_Input: Locator;
   readonly loginPassword_Input: Locator;
@@ -36,7 +36,7 @@ export class LoginPage {
       await this.login_Button.click();
     });
   }
-  async navigateToSignupPage(signupName: string, signupEmail: string) {
+  async openSignupPage(signupName: string, signupEmail: string) {
     await step(`User Navigates To Signup Page With: signupName: ${signupName} and signupEmail: ${signupEmail}`, async () => {
       await this.signupName_Input.fill(signupName);
       await this.signupEmail_Input.fill(signupEmail);
