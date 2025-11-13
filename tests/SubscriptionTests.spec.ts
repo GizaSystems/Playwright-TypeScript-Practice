@@ -18,11 +18,11 @@ test.describe('Verify Email Subscription Functionality From Home Page', () => {
     const randomEmail = testData.emailAddress + timestamp + '@test.com';
 
     await homePage.navigate();
-    await homePage.verifyHomePageVisible();
+    await homePage.verifyHomePageVisible(testData.homePageTitle);
     await footerPage.scrollToFooter();
     await footerPage.verifySubscriptionText();
     await footerPage.subscribeWithEmail(randomEmail);
-    await footerPage.verifySuccessMessage();
+    await footerPage.verifySuccessMessage(testData.successMessage);
   });
 
    test.beforeAll(async () => {
@@ -32,8 +32,8 @@ test.describe('Verify Email Subscription Functionality From Home Page', () => {
   test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
-    homePage = new HomePage(page, testData);
-    footerPage = new FooterPage(page, testData);
+    homePage = new HomePage(page);
+    footerPage = new FooterPage(page);
   });
 
   test.afterEach(async () => {

@@ -3,16 +3,14 @@ import { step } from 'allure-js-commons';
 
 export class FooterPage {
   readonly page: Page;
-  readonly testData: any;
     // Locators
   readonly subscription_Title: Locator;
   readonly email_Input: Locator;
   readonly submit_Button: Locator;
   readonly successMessage: Locator;
 
-  constructor(page: Page, testData: any) {
+  constructor(page: Page) {
     this.page = page;
-    this.testData = testData;
 
     this.subscription_Title = page.locator('#footer h2');
     this.email_Input = page.locator('#susbscribe_email');
@@ -41,9 +39,9 @@ export class FooterPage {
     });
   }
 
-  async verifySuccessMessage() {
+  async verifySuccessMessage(expectedMessage: string) {
     await step("Verify success message is visible", async () => {
-      await expect(this.successMessage).toHaveText('You have been successfully subscribed!');
+      await expect(this.successMessage).toHaveText(expectedMessage);
     });
   }
 }
