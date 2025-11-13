@@ -60,7 +60,7 @@ test('Test Case 3: Login by created new account', async ({ request }) => {
     signupPage.createNewAccount(signupTestData.password,signupTestData.day,signupTestData.month,signupTestData.year,signupTestData.firstName,signupTestData.lastName,signupTestData.companyName,signupTestData.addressDetails,signupTestData.countryName,signupTestData.state,signupTestData.city,signupTestData.zipCode,signupTestData.mobileNumber)
     await createdAccountPage.clickOnContinueButton();
     await signupPage.assertLoggedInUserName(signupTestData.name);
-    // Step 2: Verify API login via The created user 
+    // Step 2: Verify API login via The created account
     const apiUserManagement = new ApisUserManagement(request);
     const { response, body } = await apiUserManagement.login(email, signupTestData.password);
    await apiUserManagement.assertLoginUserSuccess(response, body);
