@@ -4,7 +4,7 @@ import { step } from 'allure-js-commons';
 export class SignupPage {
   readonly page: Page;
 
-  // Inputs and Controls
+  // Locators
   readonly mr_Checkbox: Locator;
   readonly password_Input: Locator;
   readonly firstName_Input: Locator;
@@ -14,15 +14,11 @@ export class SignupPage {
   readonly city_Input: Locator;
   readonly zipcode_Input: Locator;
   readonly mobileNumber_Input: Locator;
-  creation_Text: Locator;
-
-  // Buttons
+  readonly creationSuccessful_Text: Locator;
   readonly createAccount_Button: Locator;
 
   constructor(page: Page) {
     this.page = page;
-
-    // Locators
     this.mr_Checkbox = page.locator("//input[@id='id_gender1']");
     this.password_Input = page.locator("//input[@id='password']");
     this.firstName_Input = page.locator("//input[@id='first_name']");
@@ -32,21 +28,14 @@ export class SignupPage {
     this.city_Input = page.locator("//input[@id='city']");
     this.zipcode_Input = page.locator("//input[@id='zipcode']");
     this.mobileNumber_Input = page.locator("//input[@id='mobile_number']");
-    this.createAccount_Button = page.locator("//button[normalize-space()='Create Account']");
-    this.creation_Text = page.locator("//b[normalize-space()='Account Created!']");
+    this.createAccount_Button = page.locator('button[data-qa="create-account"]');
+    this.creationSuccessful_Text = page.locator('[data-qa="account-created"]');
   }
 
   //////Actions
 
   async userRegister(
-    password: string,
-    firstName: string,
-    lastName: string,
-    address: string,
-    state: string,
-    city: string,
-    zipcode: string,
-    mobileNumber: string
+    password: string,firstName: string,lastName: string,address: string,state: string,city: string,zipcode: string,mobileNumber: string
   ) {
     await step('Register user info', async () => {
       await this.mr_Checkbox.click();
@@ -64,9 +53,10 @@ export class SignupPage {
 
   /////Validations
 
-  async verifyAccountCreatedSuccessfully(creationText: string) {
+  async verifyAccountCreatedSuccessfully(creationSuccessfulText: string , CreationPageTitle: string) {
     await step(`Verify that user is navigated to login page`, async () => {
-      await expect(this.creation_Text).toHaveText(creationText);
+      await expect(this.page).toHaveTitle(CreationPageTitle);
+      await expect(this.creationSuccessful_Text).toHaveText(creationSuccessfulText);
     });
   }
 }

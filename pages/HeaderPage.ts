@@ -13,10 +13,12 @@ export class HeaderPage {
     this.page = page;
     this.signupLogin_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
-    this.logout_Button = page.locator("//a[normalize-space()='Logout']");
+    this.logout_Button = page.locator('a[href="/logout"]');
+
   }
 
   ///// Actions
+  
   async clickOnSignupLoginLink() {
     await step("Click on Signup/Login Link", async () => {
       await this.signupLogin_link.click();
@@ -30,6 +32,7 @@ export class HeaderPage {
   }
 
   ///// Validations
+
   async assertUserLoggedinSuccessfully(username: string) {
     await step("Assert User is Loggedin Successfully", async () => {
       await expect(this.userProfile_link).toContainText(username);

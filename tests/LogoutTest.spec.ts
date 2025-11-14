@@ -16,44 +16,40 @@ let signupPage: SignupPage;
 let logoutTestData: any;
 
 test.describe('Automation Exercise Logout User Tests', () => {
-    // ------------------------------------------------------
-    // UI&API Test case
-    // ------------------------------------------------------
     test('Test Case 4: Logout User via UI&API', async ({ request }) => {
         allure.feature('Automation Exercise Login Test Cases');
         allure.tms('137183070');
         // allure.issue('#link');
-        const email = `${logoutTestData.emailAddress}${Date.now()}@test.com`;
+        const email =logoutTestData.emailAddress + Date.now() + "@test.com";
         const apisUserManagement = new ApisUserManagement(request);
         // test steps :
         const createResponse = await apisUserManagement.createUser(logoutTestData.username, email, logoutTestData.password);
         await apisUserManagement.verifyUserCreatedSuccessfully(createResponse, logoutTestData.createUserConfirmationMessage);
         await homePage.navigate();
-        await homePage.verifyHomePageLoaded(logoutTestData.homePageTitle, logoutTestData.highlightedColorAttribute, logoutTestData.highlightedColorValue);
+        await homePage.verifyUserNavigatedToHomePage(logoutTestData.homePageTitle, logoutTestData.homePageCenterHeader);
         await headerPage.clickOnSignupLoginLink();
-        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginUrl, logoutTestData.loginText);
+        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginEndPoint, logoutTestData.loginPageTitle);
         await loginPage.login(email, logoutTestData.password);
         await headerPage.assertUserLoggedinSuccessfully(logoutTestData.username);
         await headerPage.clickOnLogoutButton();
-        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginUrl, logoutTestData.loginText);
+        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginEndPoint, logoutTestData.loginPageTitle);
     });
-    // ------------------------------------------------------
-    // PURE UI Test case
-    // ------------------------------------------------------
+
     test('Test Case 4: Logout User via UI', async ({ request }) => {
         allure.feature('Automation Exercise Login Test Cases');
         allure.tms('137183070');
-        const email = `${logoutTestData.emailAddress}${Date.now()}@test.com`;
+        // allure.issue('#link');
+        const email =logoutTestData.emailAddress + Date.now() + "@test.com";
         // test steps :
         await homePage.navigate();
-        await homePage.verifyHomePageLoaded(logoutTestData.homePageTitle, logoutTestData.highlightedColorAttribute, logoutTestData.highlightedColorValue);
+        await homePage.verifyUserNavigatedToHomePage(logoutTestData.homePageTitle, logoutTestData.homePageCenterHeader);
         await headerPage.clickOnSignupLoginLink();
         await loginPage.enterNameAndEmailToCreateUser(logoutTestData.username, email);
         await signupPage.userRegister(logoutTestData.password, logoutTestData.firstName, logoutTestData.lastName, logoutTestData.address, logoutTestData.state, logoutTestData.city, logoutTestData.zipcode, logoutTestData.mobileNumber);
-        await signupPage.verifyAccountCreatedSuccessfully(logoutTestData.creationText);
+        await signupPage.verifyAccountCreatedSuccessfully(logoutTestData.creationSuccessfulText , logoutTestData.creationPageTitle);
         await headerPage.clickOnSignupLoginLink();
         await headerPage.clickOnLogoutButton();
-        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginUrl, logoutTestData.loginText);
+        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginEndPoint, logoutTestData.loginPageTitle);
     });
 
     test.beforeEach(async ({ browser, request }) => {
@@ -71,6 +67,6 @@ test.describe('Automation Exercise Logout User Tests', () => {
     });
 
     test.beforeAll(async () => {
-    logoutTestData = JSON.parse(fs.readFileSync('./resources/test-data/LogoutTestJsonFile.json', 'utf8'));
-});
+        logoutTestData = JSON.parse(fs.readFileSync('./resources/test-data/LogoutTestJsonFile.json', 'utf8'));
+    });
 });

@@ -3,15 +3,12 @@ import { step } from 'allure-js-commons';
 
 export class HomePage {
   readonly page: Page;
-  readonly homePage_icon: Locator;
+  readonly homePageCenterHeader: Locator;
   // readonly url: string = 'https://www.automationexercise.com';
 
   constructor(page: Page) {
     this.page = page;
-
-    //locators 
-    this.homePage_icon = page.locator("//a[normalize-space()='Home']");
-
+    this.homePageCenterHeader = page.locator(".features_items h2.title.text-center");
   }
 
   ///// Actions
@@ -24,10 +21,10 @@ export class HomePage {
 
   ///// Validations
 
-  async verifyHomePageLoaded(homePageTitle: string, highlightedColorAttribute: string, highlightedColorValue: string) {
-    await step("Verify that home page is visible successfully", async () => {
+  async verifyUserNavigatedToHomePage(homePageTitle: string, homePageCenterHeader: string) {
+    await step("Verify User Navigated To HomePage", async () => {
       await expect(this.page).toHaveTitle(homePageTitle);
-      await expect(this.homePage_icon).toHaveAttribute(highlightedColorAttribute, highlightedColorValue);
+      await expect(this.homePageCenterHeader).toHaveText(homePageCenterHeader);
     });
   }
 }

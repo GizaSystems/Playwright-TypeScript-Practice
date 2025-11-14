@@ -1,13 +1,12 @@
 import { APIResponse, expect, type APIRequestContext } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 import { ApiActions } from '../utils/ApiActions';
+
 export class ApisUserManagement {
   readonly request: APIRequestContext;
   readonly apiActions: ApiActions;
   // readonly baseURL = 'https://automationexercise.com';   // todos: Should handle the base URL from the config file
   readonly createUser_serviceName = '/api/createAccount';
-  readonly loginUser_serviceName = '/api/verifyLogin';
-  readonly logoutUser_serviceName = '/logout';
 
   constructor(request: APIRequestContext) {
     this.request = request;
@@ -39,28 +38,6 @@ export class ApisUserManagement {
           mobile_number: '01155150745'
         }
         const response = await this.apiActions.post(this.createUser_serviceName, { form: userData });
-        return response;
-      }
-    );
-  }
-
-  async loginUser(email: string, password: string): Promise<APIResponse> {
-    return await allure.step(`Login User with Email: ${email} and Password: ${password}`,
-      async () => {
-        const loginData = {
-          email: email,
-          password: password
-        }
-        const response = await this.apiActions.post(this.loginUser_serviceName, { form: loginData });
-        return response;
-      }
-    );
-  }
-
-  async logoutUser(): Promise<APIResponse> {
-    return await allure.step(`Logout User`,
-      async () => {
-        const response = await this.apiActions.get(this.logoutUser_serviceName);
         return response;
       }
     );
