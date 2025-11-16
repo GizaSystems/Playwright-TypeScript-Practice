@@ -23,6 +23,12 @@ export class HeaderPage {
     });
   }
 
+  async scrollToHeader() {
+    await step('Scroll to Header', async () => {
+      await this.page.evaluate(() => window.scrollTo(0, 0));
+    });
+  }
+
   ///// Validations
 
   async assertUserLoggedinSuccessfully(username: string) {
@@ -30,5 +36,4 @@ export class HeaderPage {
       await expect(this.userProfile_link).toContainText(username);
     });
   }
-
 }
