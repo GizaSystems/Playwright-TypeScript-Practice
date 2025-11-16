@@ -46,7 +46,7 @@ export class ApisUserManagement {
 }
 async login(email: string, password: string) {
   const response = await this.request.post(this.login_serviceName, {
-    form: { email, password } // ✅ must use form data for this API
+    form: { email, password } 
   });
   const body = await response.json();
   return { response, body };
@@ -58,7 +58,6 @@ async assertCreateUserSuccess(response: APIResponse, body: any) {
     expect(body.message).toContain('User created!');
 }
 async assertLoginUserSuccess(response: APIResponse, body: any) {
-  console.log('Login API Response:', body);
   expect(body.responseCode).toBe(200); 
   expect(body.message).toContain('User exists!');
 }
