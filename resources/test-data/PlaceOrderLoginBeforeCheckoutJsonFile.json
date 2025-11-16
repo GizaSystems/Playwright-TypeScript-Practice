@@ -1,4 +1,8 @@
 {
+    "pagesTitle": {
+        "homePageTitle": "Automation Exercise",
+        "shoppingCart": "Shopping Cart"
+    },
     "user": {
         "name": "Mahmoud",
         "email": "mahmoudTest",
@@ -10,14 +14,13 @@
     },
     "payment": {
         "name": "Mahmoud ElSharkawy",
-        "cardnumber": "46135468153",
+        "cardNumber": "46135468153",
         "cvc": "113",
-        "expiarymonth": "04",
-        "expiaryyear": "2031"
+        "expiaryMonth": "04",
+        "expiaryYear": "2031"
     },
     "messages": {
-        "deleteaccount": "Account Deleted!",
-        "payment": "Order Placed!",
-        "shoppingcart": "Shopping Cart"
+        "deleteAccount": "Account Deleted!",
+        "payment": "Order Placed!"
     }
 }

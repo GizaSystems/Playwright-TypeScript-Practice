@@ -20,6 +20,13 @@ export class HomePage {
       await this.page.goto('');
     });
   }
+
+  async clickViewProduct() {
+    await step('Click on View Product', async () => {
+      await this.viewProduct_Button.first().click();
+    })
+  }
+  
     ///// Validations
 
   async verifyHomePageVisible(expectedTitle: string) {
@@ -27,11 +34,5 @@ export class HomePage {
       await expect(this.logo_img).toBeVisible();
       await expect(this.page).toHaveTitle(expectedTitle);
     });
-  }
-
-    async clickViewProduct() {
-    await step('Click on View Product', async () => {
-      await this.viewProduct_Button.first().click();
-    })
   }
 }
