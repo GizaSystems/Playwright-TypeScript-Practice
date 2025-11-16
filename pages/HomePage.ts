@@ -10,7 +10,7 @@ export class HomePage {
     this.page = page;
     this.categoryHeader = page.locator("div.left-sidebar >> text=Category");
   }
-  //locators
+  //locator helpers
   toggleCategory(name: string) {
     return this.page.locator(`a[href="#${name}"]`);
   }
@@ -46,7 +46,7 @@ export class HomePage {
       await subLink.click();
     });
   }
-
+  //validations
   async assertCategoriesVisible() {
     await step("Verify 'Category' section is visible", async () => {
       await expect(this.categoryHeader).toBeVisible();
