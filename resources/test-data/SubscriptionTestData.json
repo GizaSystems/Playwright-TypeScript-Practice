@@ -1,5 +1,6 @@
 {
     "emailAddress": "miber.test",
     "homePageTitle": "Automation Exercise",
-    "successMessage": "You have been successfully subscribed!"
+    "successMessage": "You have been successfully subscribed!",
+    "homePageCenterHeader": "Features Items"
 }

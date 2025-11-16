@@ -26,7 +26,7 @@ test.describe('Automation Exercise Logout User Tests', () => {
         const createResponse = await apisUserManagement.createUser(logoutTestData.username, email, logoutTestData.password);
         await apisUserManagement.verifyUserCreatedSuccessfully(createResponse, logoutTestData.createUserConfirmationMessage);
         await homePage.navigate();
-        await homePage.verifyUserNavigatedToHomePage(logoutTestData.homePageTitle, logoutTestData.homePageCenterHeader);
+        await homePage.verifyHomePageVisible(logoutTestData.homePageTitle, logoutTestData.homePageCenterHeader);
         await headerPage.clickOnSignupLoginLink();
         await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginEndPoint, logoutTestData.loginPageTitle);
         await loginPage.login(email, logoutTestData.password);
@@ -42,7 +42,7 @@ test.describe('Automation Exercise Logout User Tests', () => {
         const email =logoutTestData.emailAddress + Date.now() + "@test.com";
         // test steps :
         await homePage.navigate();
-        await homePage.verifyUserNavigatedToHomePage(logoutTestData.homePageTitle, logoutTestData.homePageCenterHeader);
+        await homePage.verifyHomePageVisible(logoutTestData.homePageTitle, logoutTestData.homePageCenterHeader);
         await headerPage.clickOnSignupLoginLink();
         await loginPage.enterNameAndEmailToCreateUser(logoutTestData.username, email);
         await signupPage.userRegister(logoutTestData.password, logoutTestData.firstName, logoutTestData.lastName, logoutTestData.address, logoutTestData.state, logoutTestData.city, logoutTestData.zipcode, logoutTestData.mobileNumber);
