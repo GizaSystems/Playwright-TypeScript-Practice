@@ -1,13 +1,16 @@
-import { test, type Page, type Locator, expect } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 import { step } from 'allure-js-commons';
 
 export class HomePage {
   readonly page: Page;
+
+  // Locators
+  readonly logo_img: Locator;
   readonly homePageCenterHeader: Locator;
-  // readonly url: string = 'https://www.automationexercise.com';
 
   constructor(page: Page) {
     this.page = page;
+    this.logo_img = page.locator('.logo img');
     this.homePageCenterHeader = page.locator(".features_items h2.title.text-center");
   }
 
@@ -18,12 +21,13 @@ export class HomePage {
       await this.page.goto('');
     });
   }
-
+  
   ///// Validations
 
-  async verifyUserNavigatedToHomePage(homePageTitle: string, homePageCenterHeader: string) {
-    await step("Verify User Navigated To HomePage", async () => {
-      await expect(this.page).toHaveTitle(homePageTitle);
+  async verifyHomePageVisible(expectedTitle: string) {
+    await step("Verify home page is visible successfully", async () => {
+      await expect(this.logo_img).toBeVisible();
+      await expect(this.page).toHaveTitle(expectedTitle);
       await expect(this.homePageCenterHeader).toHaveText(homePageCenterHeader);
     });
   }
