@@ -42,9 +42,10 @@ test.describe('Automation Exercise signup Test Cases', () => {
 test('Test Case 2:API Create user account', async ({ request }) => {
   allure.tms('137182787');  
   const apiUserManagement = new ApisUserManagement(request);
+
   const email = signupTestData.emailAddressAPI + timestamp + '@test.com';
-  const { response, body } = await apiUserManagement.createUser(signupTestData.name, email, signupTestData.password);
-  apiUserManagement.assertCreateUserSuccess(response, body);
+  const response = await apiUserManagement.createUser(signupTestData.name, email, signupTestData.password);
+  apiUserManagement.assertCreateUserSuccess(response);
 });
 test('Test Case 3: Login by created new account', async ({ request }) => {
     allure.feature('Automation Exercise signup Test Cases');
@@ -52,18 +53,16 @@ test('Test Case 3: Login by created new account', async ({ request }) => {
 
     const timestamp = Date.now();
     const email = signupTestData.emailAddressForLogin + timestamp + '@test.com';
-
-    // Step 1: Create a new account via UI
     await homePage.navigate();
     await headerPage.clickOnSignupLoginLink();
     await loginPage.openSignupPage(signupTestData.name, email);
     signupPage.createNewAccount(signupTestData.password,signupTestData.day,signupTestData.month,signupTestData.year,signupTestData.firstName,signupTestData.lastName,signupTestData.companyName,signupTestData.addressDetails,signupTestData.countryName,signupTestData.state,signupTestData.city,signupTestData.zipCode,signupTestData.mobileNumber)
     await createdAccountPage.clickOnContinueButton();
     await signupPage.assertLoggedInUserName(signupTestData.name);
-    // Step 2: Verify API login via The created account
     const apiUserManagement = new ApisUserManagement(request);
-    const { response, body } = await apiUserManagement.login(email, signupTestData.password);
-   await apiUserManagement.assertLoginUserSuccess(response, body);
+
+const { response } = await apiUserManagement.login(email, signupTestData.password);
+await apiUserManagement.assertLoginUserSuccess(response);
 });
 
   test.beforeAll(async () => {
