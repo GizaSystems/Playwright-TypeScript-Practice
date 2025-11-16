@@ -10,7 +10,7 @@ export class HomePage {
     this.page = page;
     this.categoryHeader = page.locator("div.left-sidebar >> text=Category");
   }
-  //locator helpers
+  //locator helper
   toggleCategory(name: string) {
     return this.page.locator(`a[href="#${name}"]`);
   }
