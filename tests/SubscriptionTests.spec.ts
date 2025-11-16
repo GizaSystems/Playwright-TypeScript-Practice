@@ -18,7 +18,7 @@ test.describe('Verify Email Subscription Functionality From Home Page', () => {
     const randomEmail = testData.emailAddress + timestamp + '@test.com';
 
     await homePage.navigate();
-    await homePage.verifyHomePageVisible(testData.homePageTitle);
+    await homePage.verifyHomePageVisible(testData.urls.homePage, testData.pageTitles.homePage);
     await footerPage.scrollToFooter();
     await footerPage.verifySubscriptionText();
     await footerPage.subscribeWithEmail(randomEmail);

@@ -1,0 +1,13 @@
+{
+    "urls": {
+        "homePage": "https://automationexercise.com",
+        "productsPage": "/products",
+        "cartPage": "/view_cart"
+    },
+    "pageTitles": {
+        "homePage": "Automation Exercise"
+    },
+    "expectedProductCount": 2
+}
+
+
