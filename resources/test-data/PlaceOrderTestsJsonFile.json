@@ -1,0 +1,27 @@
+{
+    "registerbeforeCheckout": {
+        "username": "Register",
+        "emailAddress": "Register.test",
+        "password": "tp12345678",
+        "days": "1",
+        "months": "1",
+        "years": "2000",
+        "firstName": "Register",
+        "lastName": "Register",
+        "company": "Giza",
+        "address1": "Giza",
+        "state": "Giza",
+        "city": "Giza",
+        "zipCode": "12345678",
+        "mobileNumber": "01234567891",
+        "commentAboutOrder": "comment",
+        "nameonCard": "Register",
+        "cardNumber": "123456789",
+        "CVCNumber": "576",
+        "expirationMonth": "06",
+        "expirationYear": "2026",
+        "orderplacedsuccessfullyMessage": "Order Placed!",
+        "accountCreatedSuccessfullyMessage": "Account Created!",
+        "accountDeletedSuccessfullyMessage": "Account Deleted!"
+      }
+}
