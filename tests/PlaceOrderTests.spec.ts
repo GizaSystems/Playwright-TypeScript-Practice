@@ -8,6 +8,7 @@ import { SignupPage } from '../pages/SignupPage';
 import { HeaderPage } from '../pages/HeaderPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import { PaymentPage } from '../pages/PaymentPage';
+import { CreatedAccountPage } from '../pages/CreatedAccountPage';
 
 
 let context: BrowserContext;
@@ -20,6 +21,7 @@ let signupPage: SignupPage;
 let headerPage: HeaderPage;
 let checkoutPage: CheckoutPage;
 let paymentPage: PaymentPage;
+let createdAccountPage: CreatedAccountPage; 
 
 let testData : any;
 
@@ -38,12 +40,11 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
         await cartPage.verifyCartPageIsVisible();
         await cartPage.clickProceedToCheckout();
         await cartPage.clickRegisterLoginLink();
-        await loginPage.signup(testData.username, email);
-        await signupPage.fillAccountInfo(testData.title, testData.password, testData.day, testData.month, testData.year,
-            testData.firstName, testData.lastName, testData.company, testData.address, testData.address2, testData.country,
-            testData.state, testData.city, testData.zipcode, testData.mobileNumber
-        );
-        await signupPage.assertAccountCreated(testData.accountCreatedMessage);
+        await loginPage.openSignupPage(testData.username, email);
+        await signupPage.createNewAccount(testData.password, testData.day, testData.month, testData.year, testData.firstName, testData.lastName, 
+          testData.company, testData.address, testData.country, testData.state, testData.city, testData.zipcode, testData.mobileNumber);
+        await signupPage.assertTextAccountCreatedIsVisiable(testData.accountCreatedMessage);
+        await createdAccountPage.clickOnContinueButton();
         await headerPage.assertUserLoggedinSuccessfully(testData.username);
         await headerPage.clickOnCartLink();
         await cartPage.clickProceedToCheckout();
@@ -54,7 +55,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
         await paymentPage.enterPaymentDetails(testData.nameOnCard, testData.cvc, testData.expirationMonth, testData.expirationYear);
         await paymentPage.clickPayAndConfirm();
         await paymentPage.assertOnOrderPlacedSuccessMessage(testData.orderPlacedMessage);
-        await headerPage.deleteAccount();
+        await headerPage.clickOnDeleteAccountLink();
         await headerPage.assertOnAccountDeletedMessage(testData.accountDeletedMessage);
         await headerPage.clickContinue();
     });
@@ -76,6 +77,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
       headerPage = new HeaderPage(page);
       checkoutPage = new CheckoutPage(page);
       paymentPage = new PaymentPage(page);
+      createdAccountPage = new CreatedAccountPage(page);
 
   });
 
