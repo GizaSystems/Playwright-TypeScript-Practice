@@ -7,7 +7,7 @@ export class ApisUserManagement {
   readonly apiActions: ApiActions;
   // readonly baseURL = 'https://automationexercise.com';   // todos: Should handle the base URL from the config file
   readonly createUser_serviceName = '/api/createAccount';
-   readonly login_serviceName = '/api/verifyLogin';
+  readonly login_serviceName = '/api/verifyLogin';
 
   constructor(request: APIRequestContext) {
     this.request = request;
@@ -50,12 +50,14 @@ export class ApisUserManagement {
 }
 
   /////////Assertions
-async assertCreateUserSuccess( response: any) {
+async assertCreateUserSuccess(response: APIResponse) {
   expect(response.status()).toBe(200);
-  expect(response.ok()).toBe(true);
+  const body = await response.json();
+  expect(body.message).toBe("User created!");
 }
 async assertLoginUserSuccess(response: any) {
   expect(response.status()).toBe(200);
-  expect(response.ok()).toBe(true);
+  const body = await response.json();
+  expect(body.message).toBe("User exists!");
 }
 }

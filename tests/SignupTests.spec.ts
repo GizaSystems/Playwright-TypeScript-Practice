@@ -42,7 +42,6 @@ test.describe('Automation Exercise signup Test Cases', () => {
 test('Test Case 2:API Create user account', async ({ request }) => {
   allure.tms('137182787');  
   const apiUserManagement = new ApisUserManagement(request);
-
   const email = signupTestData.emailAddressAPI + timestamp + '@test.com';
   const response = await apiUserManagement.createUser(signupTestData.name, email, signupTestData.password);
   apiUserManagement.assertCreateUserSuccess(response);
@@ -50,8 +49,6 @@ test('Test Case 2:API Create user account', async ({ request }) => {
 test('Test Case 3: Login by created new account', async ({ request }) => {
     allure.feature('Automation Exercise signup Test Cases');
     allure.tms('137182787');
-
-    const timestamp = Date.now();
     const email = signupTestData.emailAddressForLogin + timestamp + '@test.com';
     await homePage.navigate();
     await headerPage.clickOnSignupLoginLink();

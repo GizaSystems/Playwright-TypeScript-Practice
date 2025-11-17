@@ -42,7 +42,7 @@ export class SignupPage {
     this.enterAccountInfo_title = page.locator('h2', { hasText: 'Enter Account Information' });
     this.accountCreated_title=page.locator('h2', { hasText: 'Account Created!' });
     this.accountDeleted_title=page.locator('h2', { hasText: 'Account Deleted!' });
-    this.loggedInUser_Label = page.getByText('Logged in as');
+    this.loggedInUser_Label = page.locator('a:has(i.fa-user)');
   }
 
  //Actions
