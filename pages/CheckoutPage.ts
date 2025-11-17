@@ -16,7 +16,7 @@ export class CheckoutPage {
         this.placeOrder_Button = page.locator('.btn.btn-default.check_out');
     }
 
-    async writeCommentAndPlaceOrder(comment: string) {
+    async writeComment(comment: string) {
         await step('Enter Description in Comment Text Area and Click on Place and Confirm Order', async () => {
             await this.comment_TextArea.fill(comment);
         })

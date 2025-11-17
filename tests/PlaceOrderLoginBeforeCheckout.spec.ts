@@ -45,7 +45,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     await cartPage.assertCartPageLoaded(testData.pagesTitle.shoppingCart);
     await cartPage.clickOnProceedToCheckout();
     await checkoutPage.assertOnAddressDetails(testData.checkout.addressDetails);
-    await checkoutPage.writeCommentAndPlaceOrder(testData.checkout.comment);
+    await checkoutPage.writeComment(testData.checkout.comment);
     await checkoutPage.clickOnPlaceOrderAndConfirm();
     await paymentPage.pay(testData.payment.name, testData.payment.cardNumber, testData.payment.cvc, testData.payment.expiaryMonth, testData.payment.expiaryYear);
     await paymentPage.assertSuccessPaymentMessage(testData.messages.payment);
