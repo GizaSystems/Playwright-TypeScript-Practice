@@ -13,9 +13,6 @@ export class LoginPage {
   readonly signupName_Input: Locator;
   readonly signupEmail_Input: Locator;
   readonly signup_Button: Locator;
-  readonly signupName_Input: Locator;
-  readonly signupEmail_Input: Locator;
-  readonly signup_Button: Locator;
 
   constructor(page: Page) {
     this.page = page;

@@ -21,6 +21,7 @@ export class SignupPage {
   readonly accountCreated_title: Locator;
   readonly accountDeleted_title: Locator;
   readonly loggedInUser_Label: Locator;
+  readonly creationSuccessful_Text: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -43,6 +44,7 @@ export class SignupPage {
     this.accountCreated_title = page.locator('h2', { hasText: 'Account Created!' });
     this.accountDeleted_title = page.locator('h2', { hasText: 'Account Deleted!' });
     this.loggedInUser_Label = page.locator('a:has(i.fa-user)');
+    this.creationSuccessful_Text = page.locator('[data-qa="account-created"]');
   }
 
   //Actions
@@ -77,6 +79,7 @@ export class SignupPage {
       await this.page.locator('#years').selectOption(year);
     });
   }
+
   //Assertions
   async assertTextEnterAccountInfoIsVisiable(expectedText: string) {
     await expect(this.enterAccountInfo_title).toHaveText(expectedText);
@@ -90,6 +93,12 @@ export class SignupPage {
   async assertLoggedInUserName(expectedName: string) {
     await expect(this.loggedInUser_Label).toBeVisible();
     await expect(this.loggedInUser_Label).toContainText(expectedName);
+  }
+  async verifyAccountCreatedSuccessfully(creationSuccessfulText: string, CreationPageTitle: string) {
+    await step(`Verify that user is navigated to login page`, async () => {
+      await expect(this.page).toHaveTitle(CreationPageTitle);
+      await expect(this.creationSuccessful_Text).toHaveText(creationSuccessfulText);
+    });
   }
 
 }
