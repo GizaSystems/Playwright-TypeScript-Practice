@@ -45,8 +45,7 @@ export class ApisUserManagement {
     const response = await this.request.post(this.login_serviceName, {
       form: { email, password }
     });
-    const body = await response.json();
-    return { response };
+    return response;
   }
 
   /////////Assertions
