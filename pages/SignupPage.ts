@@ -1,91 +1,95 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { type Page, type Locator, expect } from '@playwright/test';
 import { step } from 'allure-js-commons';
 
 export class SignupPage {
-    readonly page: Page;
+  readonly page: Page;
+  readonly genderMale_radioButton: Locator;
+  readonly signupPassword_Input: Locator;
+  readonly newsLetter_CheckBox: Locator;
+  readonly recieveSpecialOffers_CheckBox: Locator;
+  readonly firstName_Input: Locator;
+  readonly lastName_Input: Locator;
+  readonly company_Input: Locator;
+  readonly address_Input: Locator;
+  readonly state_Input: Locator;
+  readonly city_Input: Locator;
+  readonly zipCode_Input: Locator;
+  readonly mobileNumber_Input: Locator;
+  readonly createAccount_Button: Locator;
+  readonly accountCreated_Label: Locator;
+  readonly enterAccountInfo_title: Locator;
+  readonly accountCreated_title: Locator;
+  readonly accountDeleted_title: Locator;
+  readonly loggedInUser_Label: Locator;
 
-    // Locators
-    readonly title_RadioButton: Locator;
-    readonly password_Input: Locator;
-    readonly days_List: Locator;
-    readonly months_List: Locator;
-    readonly years_List: Locator;
-    readonly newsletter_Checkbox: Locator;
-    readonly specialOffers_Checkbox: Locator;
-    readonly firstName_Input: Locator;
-    readonly lastName_Input: Locator;
-    readonly company_Input: Locator;
-    readonly address_Input: Locator;
-    readonly address2_Input: Locator;
-    readonly country_List: Locator;
-    readonly state_Input: Locator;
-    readonly city_Input: Locator;
-    readonly zipcode_Input: Locator;
-    readonly mobileNumer_Input: Locator;
-    readonly createAccount_Button: Locator;
-    readonly accountCreated_Header: Locator;
-    readonly continue_Button: Locator;
+  constructor(page: Page) {
+    this.page = page;
+    //  Locators
+    this.genderMale_radioButton = page.locator('#id_gender1');
+    this.signupPassword_Input = page.locator('#password');
+    this.newsLetter_CheckBox = page.locator('#newsletter');
+    this.recieveSpecialOffers_CheckBox = page.locator('#optin');
+    this.firstName_Input = page.locator('#first_name');
+    this.lastName_Input = page.locator('#last_name');
+    this.company_Input = page.locator('#company');
+    this.address_Input = page.locator('#address1');
+    this.state_Input = page.locator('#state');
+    this.city_Input = page.locator('#city');
+    this.zipCode_Input = page.locator('#zipcode');
+    this.mobileNumber_Input = page.locator('#mobile_number');
+    this.createAccount_Button = page.locator('[data-qa="create-account"]');
+    this.accountCreated_Label = page.locator('[data-qa="account-created"]');
+    this.enterAccountInfo_title = page.locator('h2', { hasText: 'Enter Account Information' });
+    this.accountCreated_title = page.locator('h2', { hasText: 'Account Created!' });
+    this.accountDeleted_title = page.locator('h2', { hasText: 'Account Deleted!' });
+    this.loggedInUser_Label = page.locator('a:has(i.fa-user)');
+  }
 
-    constructor(page: Page){
-        this.page = page;
-        this.title_RadioButton = page.getByLabel('Mrs.');
-        this.password_Input = page.locator("//input[@id='password']");
-        this.days_List = page.locator('//select[@id="days"]');
-        this.months_List = page.locator('//select[@id="months"]');
-        this.years_List = page.locator('//select[@id="years"]');
-        this.newsletter_Checkbox = page.locator('#newsletter');
-        this.specialOffers_Checkbox = page.locator('#optin');
-        this.firstName_Input = page.locator('//input[@data-qa="first_name"]');
-        this.lastName_Input = page.locator('//input[@data-qa="last_name"]');
-        this.company_Input = page.locator('//input[@data-qa="company"]');
-        this.address_Input = page.locator('//input[@data-qa="address"]');
-        this.address2_Input = page.locator('//input[@data-qa="address2"]');
-        this.country_List = page.locator('#country');
-        this.state_Input = page.locator('//input[@data-qa="state"]');
-        this.city_Input = page.locator('//input[@data-qa="city"]');
-        this.zipcode_Input = page.locator('//input[@data-qa="zipcode"]');
-        this.mobileNumer_Input = page.locator('//input[@data-qa="mobile_number"]');
-        this.createAccount_Button = page.locator("button[data-qa='create-account']"),
-        this.accountCreated_Header= page.locator('//h2[@data-qa="account-created"]');
-        this.continue_Button = page.locator('//a[@data-qa="continue-button"]');
-        
-    }
+  //Actions
 
-    // Actions
-    async fillAccountInfo(title: string, password: string, day: string, month: string, year: string,
-                          firstName: string, lastName: string, company: string, address: string, addess2: string, 
-                          country: string, state: string, city: string, zipcode: string, mobileNumber: string
-    ){
-        await step('Fill Account Info', async () =>{
-            await this.title_RadioButton.check();
-            await this.password_Input.fill(password);
-            await this.days_List.selectOption(day);
-            await this.months_List.selectOption(month);
-            await this.years_List.selectOption(year);
-            await this.newsletter_Checkbox.check();
-            await this.specialOffers_Checkbox.check();
-            await this.firstName_Input.fill(firstName),
-            await this.lastName_Input.fill(lastName),
-            await this.company_Input.fill(company),
-            await this.address_Input.fill(address),
-            await this.address2_Input.fill(addess2),
-            await this.country_List.selectOption(country),
-            await this.state_Input.fill(state),
-            await this.city_Input.fill(city),
-            await this.zipcode_Input.fill(zipcode),
-            await this.mobileNumer_Input.fill(mobileNumber)
-            await this.createAccount_Button.click();
-        });
-    }
+  async createNewAccount(password: string, day: string, month: string, year: string, firstName: string, lastName: string, company: string, address: string, countryName: string, state: string, city: string, zipCode: string, mobileNumber: string) {
+    await step(`User Creates New Account With: password: ${password} ,day: ${day} ,month: ${month} ,year: ${year} , firstName: ${firstName}, lastName: ${lastName}, company: ${company}, address: ${address}, countryName: ${countryName}, state: ${state}, city: ${city}, zipCode: ${zipCode} and mobileNumber: ${mobileNumber}`, async () => {
+      await this.genderMale_radioButton.click();
+      await this.signupPassword_Input.fill(password);
+      await this.selectDateOfBirth(day, month, year);
+      await this.newsLetter_CheckBox.click();
+      await this.recieveSpecialOffers_CheckBox.click();
+      await this.firstName_Input.fill(firstName);
+      await this.lastName_Input.fill(lastName);
+      await this.company_Input.fill(company);
+      await this.address_Input.fill(address);
+      await this.selectCountry(countryName);
+      await this.state_Input.fill(state);
+      await this.city_Input.fill(city);
+      await this.zipCode_Input.fill(zipCode);
+      await this.mobileNumber_Input.fill(mobileNumber);
+      await this.createAccount_Button.click();
+    });
+  }
 
-    // Validations
-    async assertAccountCreated(accountCreatedMessage: string){
-        await step('Assert Account Created', async () =>{
-            await expect(this.accountCreated_Header).toContainText(accountCreatedMessage);
-            await this.continue_Button.click();
-        })
-        
-    }
+  async selectCountry(countryName: any) {
+    await this.page.locator('#country').selectOption({ label: countryName });
+  }
+  async selectDateOfBirth(day: string, month: string, year: string) {
+    await step(`Select Date of Birth: ${day}-${month}-${year}`, async () => {
+      await this.page.locator('#days').selectOption(day);
+      await this.page.locator('#months').selectOption(month);
+      await this.page.locator('#years').selectOption(year);
+    });
+  }
+  //Assertions
+  async assertTextEnterAccountInfoIsVisiable(expectedText: string) {
+    await expect(this.enterAccountInfo_title).toHaveText(expectedText);
+  }
+  async assertTextAccountCreatedIsVisiable(expectedText: string) {
+    await expect(this.accountCreated_title).toHaveText(expectedText);
+  }
+  async assertTextAccountDeletedIsVisiable(expectedText: string) {
+    await expect(this.accountDeleted_title).toHaveText(expectedText);
+  }
+  async assertLoggedInUserName(expectedName: string) {
+    await expect(this.loggedInUser_Label).toBeVisible();
+    await expect(this.loggedInUser_Label).toContainText(expectedName);
+  }
 
-    
 }
