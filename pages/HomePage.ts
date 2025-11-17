@@ -3,8 +3,12 @@ import { step } from "allure-js-commons";
 
 export class HomePage {
   readonly page: Page;
+
   // readonly url: string = 'https://www.automationexercise.com';
   readonly categoryHeader: Locator;
+
+  // Locators
+  readonly logo_img: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -23,6 +27,8 @@ export class HomePage {
     return this.page.locator(`#${name}.panel-collapse`);
   }
 
+  ///// Actions
+
   async navigate() {
     await step("Navigate to Home Page", async () => {
       await this.page.goto(" ");
@@ -38,6 +44,8 @@ export class HomePage {
       await this.categoryPanel(name).waitFor({ state: "visible" });
     });
   }
+
+  ///// Validations
 
   async clickSubCategory(main: string, sub: string) {
     await step(`Click '${sub}' under '${main}' category`, async () => {
