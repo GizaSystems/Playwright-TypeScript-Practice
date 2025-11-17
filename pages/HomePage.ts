@@ -3,7 +3,7 @@ import { step } from 'allure-js-commons';
 
 export class HomePage {
   readonly page: Page;
-    // Locators
+  // Locators
   readonly logo_img: Locator;
   readonly viewProduct_Button: Locator;
 
@@ -13,7 +13,7 @@ export class HomePage {
     this.viewProduct_Button = page.getByRole('link', { name: /view product/i });
   }
 
-    ///// Actions
+  ///// Actions
 
   async navigate() {
     await step("Navigate to Home Page", async () => {
