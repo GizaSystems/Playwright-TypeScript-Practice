@@ -3,13 +3,13 @@ import { step } from 'allure-js-commons';
 
 export class LoginPage {
   readonly page: Page;
-  readonly url: string = 'https://www.automationexercise.com/login';
+  readonly url: string = '/login';
 
   readonly loginEmail_Input: Locator;
   readonly loginPassword_Input: Locator;
   readonly login_Button: Locator;
-  readonly signupEmail_Input: Locator;
   readonly signupName_Input: Locator;
+  readonly signupEmail_Input: Locator;
   readonly signup_Button: Locator;
 
   constructor(page: Page) {
@@ -18,8 +18,8 @@ export class LoginPage {
     this.loginEmail_Input = page.locator('[data-qa="login-email"]');
     this.loginPassword_Input = page.locator('[data-qa="login-password"]');
     this.login_Button = page.locator('[data-qa="login-button"]');
-    this.signupEmail_Input = page.locator('[data-qa="signup-email"]');
     this.signupName_Input = page.locator('[data-qa="signup-name"]');
+    this.signupEmail_Input = page.locator('[data-qa="signup-email"]');
     this.signup_Button = page.locator('[data-qa="signup-button"]');
   }
 
@@ -34,6 +34,13 @@ export class LoginPage {
       await this.loginEmail_Input.fill(username);
       await this.loginPassword_Input.fill(password);
       await this.login_Button.click();
+    });
+  }
+  async openSignupPage(signupName: string, signupEmail: string) {
+    await step(`User Navigates To Signup Page With: signupName: ${signupName} and signupEmail: ${signupEmail}`, async () => {
+      await this.signupName_Input.fill(signupName);
+      await this.signupEmail_Input.fill(signupEmail);
+      await this.signup_Button.click();
     });
   }
 

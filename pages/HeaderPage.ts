@@ -7,20 +7,20 @@ export class HeaderPage {
   // Locators
   readonly signupLogin_link: Locator;
   readonly userProfile_link: Locator;
-  readonly deleteUser_link: Locator;
   readonly deleteUserSuccess_link: Locator;
   readonly continue_Button: Locator;
   readonly cart_link: Locator;
+  readonly deleteAccount_link: Locator;
 
   constructor(page: Page) {
     this.page = page;
     //  Locators
     this.signupLogin_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
-    this.deleteUser_link = page.locator('[href="/delete_account"]');
     this.deleteUserSuccess_link = page.locator('//*[@data-qa="account-deleted"]/b');
     this.continue_Button = page.locator('[data-qa="continue-button"]');
     this.cart_link = page.locator('(//*[@href="/view_cart"])[1]');
+    this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
   }
 
   ///// Actions
@@ -30,10 +30,9 @@ export class HeaderPage {
       await this.signupLogin_link.click();
     });
   }
-
-  async clickOnDeleteUserLink() {
-    await step("Click on Delete User Link", async () => {
-      await this.deleteUser_link.click();
+  async clickOnDeleteAccountLink() {
+    await step("Click on Delete Account Link", async () => {
+      await this.deleteAccount_link.click();
     });
   }
 
