@@ -32,6 +32,12 @@ export class HeaderPage {
     });
   }
 
+  async clickOnCartLink() {
+    await step("Click on Cart Link", async () => {
+      await this.cart_link.click();
+    });
+  }
+
   ///// Validations
   async assertUserLoggedinSuccessfully(username: string) {
     await step("Assert User is Loggedin Successfully", async () => {
