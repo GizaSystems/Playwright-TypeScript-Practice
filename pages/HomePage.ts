@@ -12,6 +12,8 @@ export class HomePage {
 
   constructor(page: Page) {
     this.page = page;
+    this.logo_img = page.locator(".logo img");
+
     this.categoryHeader = page.locator("div.left-sidebar >> text=Category");
   }
   //locator helper
@@ -46,6 +48,12 @@ export class HomePage {
   }
 
   ///// Validations
+  async verifyHomePageVisible(expectedTitle: string) {
+    await step("Verify home page is visible successfully", async () => {
+      await expect(this.logo_img).toBeVisible();
+      await expect(this.page).toHaveTitle(expectedTitle);
+    });
+  }
 
   async clickSubCategory(main: string, sub: string) {
     await step(`Click '${sub}' under '${main}' category`, async () => {
@@ -54,7 +62,6 @@ export class HomePage {
       await subLink.click();
     });
   }
-  //validations
   async assertCategoriesVisible() {
     await step("Verify 'Category' section is visible", async () => {
       await expect(this.categoryHeader).toBeVisible();
