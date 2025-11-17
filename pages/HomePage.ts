@@ -3,7 +3,6 @@ import { step } from 'allure-js-commons';
 
 export class HomePage {
   readonly page: Page;
-
   // Locators
   readonly logo_img: Locator;
   readonly homePageCenterHeader: Locator;
@@ -21,7 +20,7 @@ export class HomePage {
       await this.page.goto('');
     });
   }
-  
+
   ///// Validations
 
   async verifyHomePageVisible(expectedTitle: string , homePageCenterHeader: string) {

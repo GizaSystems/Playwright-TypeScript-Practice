@@ -13,6 +13,9 @@ export class LoginPage {
   readonly signupName_Input: Locator;
   readonly signupEmail_Input: Locator;
   readonly signup_Button: Locator;
+  readonly signupName_Input: Locator;
+  readonly signupEmail_Input: Locator;
+  readonly signup_Button: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -23,6 +26,9 @@ export class LoginPage {
     this.signupName_Input = page.locator('input[data-qa="signup-name"]');
     this.signupEmail_Input = page.locator('input[data-qa="signup-email"]');
     this.signup_Button = page.locator('button[data-qa="signup-button"]');
+    this.signupName_Input = page.locator('[data-qa="signup-name"]');
+    this.signupEmail_Input = page.locator('[data-qa="signup-email"]');
+    this.signup_Button = page.locator('[data-qa="signup-button"]');
   }
 
   ///// Actions
@@ -38,6 +44,13 @@ export class LoginPage {
       await this.loginEmail_Input.fill(username);
       await this.loginPassword_Input.fill(password);
       await this.login_Button.click();
+    });
+  }
+  async openSignupPage(signupName: string, signupEmail: string) {
+    await step(`User Navigates To Signup Page With: signupName: ${signupName} and signupEmail: ${signupEmail}`, async () => {
+      await this.signupName_Input.fill(signupName);
+      await this.signupEmail_Input.fill(signupEmail);
+      await this.signup_Button.click();
     });
   }
 
