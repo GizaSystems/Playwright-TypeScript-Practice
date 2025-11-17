@@ -7,6 +7,7 @@ import { SignupPage } from '../pages/SignupPage';
 import { ShoppingCartPage } from '../pages/ShoppingCartPage';
 import { CheckoutPage } from '../pages/CheckoutPage';
 import { PaymentPage } from '../pages/PaymentPage';
+import { CreatedAccountPage } from '../pages/CreatedAccountPage';
 import * as fs from 'fs';
 
 let context: BrowserContext;
@@ -19,6 +20,7 @@ let signupPage: SignupPage;
 let shoppingCartPage: ShoppingCartPage;
 let checkoutPage: CheckoutPage;
 let paymentPage: PaymentPage;
+let createdAccountPage: CreatedAccountPage;
 
 let testData: any;
 
@@ -35,11 +37,12 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     await homePage.navigate();
     await headerPage.clickOnSignupLoginLink();
     await loginPage.signup(email, testData.registerbeforeCheckout.username);
-    await signupPage.fillSignupInfo(testData.registerbeforeCheckout.password, testData.registerbeforeCheckout.days, 
+    await signupPage.createNewAccount(testData.registerbeforeCheckout.password, testData.registerbeforeCheckout.days, 
       testData.registerbeforeCheckout.months, testData.registerbeforeCheckout.years,testData.registerbeforeCheckout.firstName, 
       testData.registerbeforeCheckout.lastName, testData.registerbeforeCheckout.company, testData.registerbeforeCheckout.address1, 
-      testData.registerbeforeCheckout.state, testData.registerbeforeCheckout.city, testData.registerbeforeCheckout.zipCode, testData.registerbeforeCheckout.mobileNumber);
-    await signupPage.assertUserCreatedSuccessfully(testData.registerbeforeCheckout.accountCreatedSuccessfullyMessage);
+      testData.registerbeforeCheckout.country, testData.registerbeforeCheckout.state, testData.registerbeforeCheckout.city, testData.registerbeforeCheckout.zipCode, testData.registerbeforeCheckout.mobileNumber);
+    await signupPage.assertTextAccountCreatedIsVisiable(testData.registerbeforeCheckout.accountCreatedSuccessfullyMessage);
+    await createdAccountPage.clickOnContinueButton();
     await headerPage.assertUserLoggedinSuccessfully(testData.registerbeforeCheckout.username);
     await homePage.addItemToCart();
     await headerPage.clickOnCartLink();
@@ -51,7 +54,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     await paymentPage.addPaymentDetails(testData.registerbeforeCheckout.nameonCard, testData.registerbeforeCheckout.cardNumber, testData.registerbeforeCheckout.CVCNumber, testData.registerbeforeCheckout.expirationMonth, testData.registerbeforeCheckout.expirationYear);
     await paymentPage.clickPayandConfirmOrder();
     await paymentPage.assertOrderPlacedSuccessfully(testData.registerbeforeCheckout.orderplacedsuccessfullyMessage);
-    await headerPage.clickOnDeleteUserLink();
+    await headerPage.clickOnDeleteAccountLink();
     await headerPage.assertUserDeletedSuccessfully(testData.registerbeforeCheckout.accountDeletedSuccessfullyMessage);
   });
 
@@ -69,6 +72,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     shoppingCartPage = new ShoppingCartPage(page);
     checkoutPage = new CheckoutPage(page);
     paymentPage = new PaymentPage(page);
+    createdAccountPage = new CreatedAccountPage(page);
   });
 
   test.afterEach(async () => {

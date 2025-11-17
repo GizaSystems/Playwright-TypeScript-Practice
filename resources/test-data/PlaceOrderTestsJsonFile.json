@@ -10,6 +10,7 @@
         "lastName": "Register",
         "company": "Giza",
         "address1": "Giza",
+        "country": "Canada",
         "state": "Giza",
         "city": "Giza",
         "zipCode": "12345678",
