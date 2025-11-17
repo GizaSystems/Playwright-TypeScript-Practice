@@ -12,7 +12,7 @@ let context: BrowserContext;
 let page: Page;
 let loginPage: LoginPage;
 let signupPage: SignupPage;
-let createdAccountPage:CreatedAccountPage;
+let createdAccountPage: CreatedAccountPage;
 let homePage: HomePage;
 let headerPage: HeaderPage;
 
@@ -29,9 +29,9 @@ test.describe('Automation Exercise signup Test Cases', () => {
     const email = signupTestData.emailAddress + timestamp + '@test.com';
     await homePage.navigate();
     await headerPage.clickOnSignupLoginLink();
-    await loginPage.openSignupPage(signupTestData.name,email);
+    await loginPage.openSignupPage(signupTestData.name, email);
     await signupPage.assertTextEnterAccountInfoIsVisiable(signupTestData.enterAccountInformationLabelText);
-    await signupPage.createNewAccount(signupTestData.password,signupTestData.day,signupTestData.month,signupTestData.year,signupTestData.firstName,signupTestData.lastName,signupTestData.companyName,signupTestData.addressDetails,signupTestData.countryName,signupTestData.state,signupTestData.city,signupTestData.zipCode,signupTestData.mobileNumber)
+    await signupPage.createNewAccount(signupTestData.password, signupTestData.day, signupTestData.month, signupTestData.year, signupTestData.firstName, signupTestData.lastName, signupTestData.companyName, signupTestData.addressDetails, signupTestData.countryName, signupTestData.state, signupTestData.city, signupTestData.zipCode, signupTestData.mobileNumber)
     await signupPage.assertTextAccountCreatedIsVisiable(signupTestData.accountCreatedLabelText);
     await createdAccountPage.clickOnContinueButton();
     await signupPage.assertLoggedInUserName(signupTestData.name);
@@ -39,39 +39,39 @@ test.describe('Automation Exercise signup Test Cases', () => {
     await signupPage.assertTextAccountDeletedIsVisiable(signupTestData.accountDeletedLabelText);
   });
 
-test('Test Case 2:API Create user account', async ({ request }) => {
-  allure.tms('137182787');  
-  const apiUserManagement = new ApisUserManagement(request);
-  const email = signupTestData.emailAddressAPI + timestamp + '@test.com';
-  const response = await apiUserManagement.createUser(signupTestData.name, email, signupTestData.password);
-  apiUserManagement.assertCreateUserSuccess(response);
-});
-test('Test Case 3: Login by created new account', async ({ request }) => {
+  test('Test Case 2:API Create user account', async ({ request }) => {
+    allure.tms('137182787');
+    const apiUserManagement = new ApisUserManagement(request);
+    const email = signupTestData.emailAddressAPI + timestamp + '@test.com';
+    const response = await apiUserManagement.createUser(signupTestData.name, email, signupTestData.password);
+    apiUserManagement.assertCreateUserSuccess(response, signupTestData.apiAssertOnUserCreated);
+  });
+  test('Test Case 3: Login by created new account', async ({ request }) => {
     allure.feature('Automation Exercise signup Test Cases');
     allure.tms('137182787');
     const email = signupTestData.emailAddressForLogin + timestamp + '@test.com';
     await homePage.navigate();
     await headerPage.clickOnSignupLoginLink();
     await loginPage.openSignupPage(signupTestData.name, email);
-    signupPage.createNewAccount(signupTestData.password,signupTestData.day,signupTestData.month,signupTestData.year,signupTestData.firstName,signupTestData.lastName,signupTestData.companyName,signupTestData.addressDetails,signupTestData.countryName,signupTestData.state,signupTestData.city,signupTestData.zipCode,signupTestData.mobileNumber)
+    signupPage.createNewAccount(signupTestData.password, signupTestData.day, signupTestData.month, signupTestData.year, signupTestData.firstName, signupTestData.lastName, signupTestData.companyName, signupTestData.addressDetails, signupTestData.countryName, signupTestData.state, signupTestData.city, signupTestData.zipCode, signupTestData.mobileNumber)
     await createdAccountPage.clickOnContinueButton();
     await signupPage.assertLoggedInUserName(signupTestData.name);
     const apiUserManagement = new ApisUserManagement(request);
 
-const { response } = await apiUserManagement.login(email, signupTestData.password);
-await apiUserManagement.assertLoginUserSuccess(response);
-});
+    const { response } = await apiUserManagement.login(email, signupTestData.password);
+    await apiUserManagement.assertLoginUserSuccess(response, signupTestData.apiAssertOnUserLoggedin);
+  });
 
   test.beforeAll(async () => {
     signupTestData = JSON.parse(fs.readFileSync('./resources/test-data/SignupTestJsonFile.json', 'utf8'));
   });
 
-  test.beforeEach(async ({browser }) => {
+  test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
     loginPage = new LoginPage(page);
-    signupPage=new SignupPage(page);
-    createdAccountPage=new CreatedAccountPage(page);
+    signupPage = new SignupPage(page);
+    createdAccountPage = new CreatedAccountPage(page);
     homePage = new HomePage(page);
     headerPage = new HeaderPage(page);
   });

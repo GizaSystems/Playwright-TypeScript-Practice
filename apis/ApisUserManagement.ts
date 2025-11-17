@@ -42,22 +42,22 @@ export class ApisUserManagement {
     );
   }
   async login(email: string, password: string) {
-  const response = await this.request.post(this.login_serviceName, {
-    form: { email, password } 
-  });
-  const body = await response.json();
-  return { response };
-}
+    const response = await this.request.post(this.login_serviceName, {
+      form: { email, password }
+    });
+    const body = await response.json();
+    return { response };
+  }
 
   /////////Assertions
-async assertCreateUserSuccess(response: APIResponse) {
-  expect(response.status()).toBe(200);
-  const body = await response.json();
-  expect(body.message).toBe("User created!");
-}
-async assertLoginUserSuccess(response: any) {
-  expect(response.status()).toBe(200);
-  const body = await response.json();
-  expect(body.message).toBe("User exists!");
-}
+  async assertCreateUserSuccess(response: APIResponse, expectedMessage: string) {
+    expect(response.status()).toBe(200);
+    const body = await response.json();
+    expect(body.message).toBe(expectedMessage);
+  }
+  async assertLoginUserSuccess(response: any, expectedMessage: string) {
+    expect(response.status()).toBe(200);
+    const body = await response.json();
+    expect(body.message).toBe(expectedMessage);
+  }
 }
