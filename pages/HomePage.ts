@@ -3,7 +3,7 @@ import { step } from 'allure-js-commons';
 
 export class HomePage {
   readonly page: Page;
-    // Locators
+  // Locators
   readonly logo_img: Locator;
 
   constructor(page: Page) {
@@ -11,7 +11,7 @@ export class HomePage {
     this.logo_img = page.locator('.logo img');
   }
 
-    ///// Actions
+  ///// Actions
 
   async navigate() {
     await step("Navigate to Home Page", async () => {
@@ -19,7 +19,7 @@ export class HomePage {
     });
   }
 
-    ///// Validations
+  ///// Validations
 
   async verifyHomePageVisible(expectedTitle: string) {
     await step("Verify home page is visible successfully", async () => {
