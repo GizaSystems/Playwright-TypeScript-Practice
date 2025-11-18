@@ -20,11 +20,9 @@ export class LoginPage {
     this.loginPassword_Input = page.locator('[data-qa="login-password"]');
     this.login_Button = page.locator('[data-qa="login-button"]');
     this.login_header = page.locator("div[class='login-form'] h2");
-    this.signupName_Input = page.locator('input[data-qa="signup-name"]');
-    this.signupEmail_Input = page.locator('input[data-qa="signup-email"]');
-    this.signup_Button = page.locator('button[data-qa="signup-button"]');
     this.signupName_Input = page.locator('[data-qa="signup-name"]');
     this.signupEmail_Input = page.locator('[data-qa="signup-email"]');
+    this.signup_Button = page.locator('button[data-qa="signup-button"]');
   }
 
   ///// Actions
@@ -47,14 +45,6 @@ export class LoginPage {
     await step(`User Navigates To Signup Page With: signupName: ${signupName} and signupEmail: ${signupEmail}`, async () => {
       await this.signupName_Input.fill(signupName);
       await this.signupEmail_Input.fill(signupEmail);
-      await this.signup_Button.click();
-    });
-  }
-
-  async registerNewUser(username: string, email: string) {
-    await step(`Create User with username: ${username} and email: ${email}`, async () => {
-      await this.signupName_Input.fill(username);
-      await this.signupEmail_Input.fill(email);
       await this.signup_Button.click();
     });
   }
