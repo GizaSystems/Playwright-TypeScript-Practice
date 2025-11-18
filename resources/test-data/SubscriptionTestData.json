@@ -1,5 +1,10 @@
 {
     "emailAddress": "miber.test",
-    "homePageTitle": "Automation Exercise",
+    "urls": {
+        "homePage": "https://automationexercise.com"
+    },
+    "pageTitles": {
+        "homePage": "Automation Exercise"
+    },
     "successMessage": "You have been successfully subscribed!"
 }

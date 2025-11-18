@@ -21,8 +21,9 @@ export class HomePage {
 
   ///// Validations
 
-  async verifyHomePageVisible(expectedTitle: string) {
+  async verifyHomePageVisible(expectedUrl: string, expectedTitle: string) {
     await step("Verify home page is visible successfully", async () => {
+      await expect(this.page).toHaveURL(expectedUrl);
       await expect(this.logo_img).toBeVisible();
       await expect(this.page).toHaveTitle(expectedTitle);
     });
