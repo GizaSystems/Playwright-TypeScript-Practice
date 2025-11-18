@@ -11,7 +11,7 @@ export class DeleteAccountPage {
         this.page = page;
 
         this.accountDeletedMessage = page.locator('//b[.="Account Deleted!"]')
-        this.continue_Button = page.locator('.btn.btn-primary');
+        this.continue_Button = page.locator('[data-qa="continue-button"]');
     }
 
     async clickOnContinue() {
