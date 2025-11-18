@@ -40,9 +40,9 @@ export class SignupPage {
     this.mobileNumber_Input = page.locator('#mobile_number');
     this.createAccount_Button = page.locator('[data-qa="create-account"]');
     this.accountCreated_Label = page.locator('[data-qa="account-created"]');
-    this.enterAccountInfo_title = page.locator('h2', { hasText: 'Enter Account Information' });
-    this.accountCreated_title = page.locator('h2', { hasText: 'Account Created!' });
-    this.accountDeleted_title = page.locator('h2', { hasText: 'Account Deleted!' });
+    this.enterAccountInfo_title = page.locator('//section[@id="form"]//div[@class="login-form"]/h2[contains(@class,"title") ]');
+    this.accountCreated_title = page.locator('[data-qa="account-created"]');
+    this.accountDeleted_title = page.locator('[data-qa="account-deleted"]');
     this.loggedInUser_Label = page.locator('a:has(i.fa-user)');
     this.creationSuccessful_Text = page.locator('[data-qa="account-created"]');
   }
