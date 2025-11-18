@@ -30,7 +30,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
 
   test('Test Case 15: Place Order: Register before Checkout', async () => {
     allure.feature('Automation Exercise Place Order Test Cases');
-    allure.tms('137183022');
+    allure.tms('137183294');
     // allure.issue('#link');
 
     const email = testData.registerbeforeCheckout.emailAddress + timestamp + '@test.com';
@@ -45,6 +45,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     await createdAccountPage.clickOnContinueButton();
     await headerPage.assertUserLoggedinSuccessfully(testData.registerbeforeCheckout.username);
     await homePage.addItemToCart();
+    await homePage.clickOnContinueShoppingButton();
     await headerPage.clickOnCartLink();
     await shoppingCartPage.assertShoppingCartReachedSuccessfully();
     await shoppingCartPage.proceedToCheckout();
@@ -54,8 +55,6 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     await paymentPage.addPaymentDetails(testData.registerbeforeCheckout.nameonCard, testData.registerbeforeCheckout.cardNumber, testData.registerbeforeCheckout.CVCNumber, testData.registerbeforeCheckout.expirationMonth, testData.registerbeforeCheckout.expirationYear);
     await paymentPage.clickPayandConfirmOrder();
     await paymentPage.assertOrderPlacedSuccessfully(testData.registerbeforeCheckout.orderplacedsuccessfullyMessage);
-    await headerPage.clickOnDeleteAccountLink();
-    await headerPage.assertUserDeletedSuccessfully(testData.registerbeforeCheckout.accountDeletedSuccessfullyMessage);
   });
 
   test.beforeAll(async () => {
@@ -76,6 +75,8 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
   });
 
   test.afterEach(async () => {
+    await headerPage.clickOnDeleteAccountLink();
+    await headerPage.assertUserDeletedSuccessfully(testData.registerbeforeCheckout.accountDeletedSuccessfullyMessage);
     await context.close();
   });
 

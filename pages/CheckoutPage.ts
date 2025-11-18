@@ -12,7 +12,7 @@ export class CheckoutPage {
   constructor(page: Page) {
     this.page = page;
     //  Locators
-    this.address1_link = page.locator('//*[@class="address_address1 address_address2"]');
+    this.address1_link = page.locator('(//li[contains(@class, "address_address1")])[2]');
     this.orderComment_Input = page.locator('[name="message"]');
     this.placeOrder_Button = page.locator('[href="/payment"]');
   }
@@ -35,7 +35,7 @@ export class CheckoutPage {
 
   async assertCheckoutAddress(address1: string) {
       await step("Verify Checkout Address is correct", async () => {
-      await expect(this.address1_link.filter({ hasText: address1 })).toBeVisible;
+      await expect(this.address1_link).toHaveText(address1);
     });
   }
   

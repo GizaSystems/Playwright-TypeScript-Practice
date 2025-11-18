@@ -7,7 +7,7 @@ export class PaymentPage {
   // Locators
   readonly nameonCard_Input: Locator;
   readonly cardNumber_Input: Locator;
-  readonly CVC_Input: Locator;
+  readonly cvcNumber_Input: Locator;
   readonly expirationMonth_Input: Locator;
   readonly expirationYear_Input: Locator;
   readonly payandConfirmOrder_Button: Locator;
@@ -18,21 +18,21 @@ export class PaymentPage {
     //  Locators
     this.nameonCard_Input = page.locator('[name="name_on_card"]');
     this.cardNumber_Input = page.locator('[name="card_number"]');
-    this.CVC_Input = page.locator('[name="cvc"]');
+    this.cvcNumber_Input = page.locator('[name="cvc"]');
     this.expirationMonth_Input = page.locator('[name="expiry_month"]');
     this.expirationYear_Input = page.locator('[name="expiry_year"]');
     this.payandConfirmOrder_Button = page.locator('[id="submit"]');
-    this.successMessage_link = page.locator('//*[@data-qa="order-placed"]/b');
+    this.successMessage_link = page.locator('//h2[@data-qa="order-placed"]/b');
 
   }
 
   ///// Actions
 
-  async addPaymentDetails(nameoncard: string, cardnumber: string, CVC: string, expirationmonth: string, expirationyear: string) {
+  async addPaymentDetails(nameoncard: string, cardnumber: string, cvcnumber: string, expirationmonth: string, expirationyear: string) {
     await step("Add Payment Details", async () => {
       await this.nameonCard_Input.fill(nameoncard);
       await this.cardNumber_Input.fill(cardnumber);
-      await this.CVC_Input.fill(CVC);
+      await this.cvcNumber_Input.fill(cvcnumber);
       await this.expirationMonth_Input.fill(expirationmonth);
       await this.expirationYear_Input.fill(expirationyear);
     });
@@ -48,7 +48,7 @@ export class PaymentPage {
 
   async assertOrderPlacedSuccessfully(massage: string) {
       await step("Verify order has been placed successfully", async () => {
-      await expect(this.successMessage_link).toContainText(massage);
+      await expect(this.successMessage_link).toHaveText(massage);
     });
   }
   

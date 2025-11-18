@@ -11,8 +11,8 @@ export class ShoppingCartPage {
   constructor(page: Page) {
     this.page = page;
     //  Locators
-    this.shoppingCart_link = page.getByText('Shopping Cart');
-    this.proceedToCheckout_Button = page.getByText('Proceed To Checkout');
+    this.shoppingCart_link = page.locator('ol > li.active');
+    this.proceedToCheckout_Button = page.locator('a.check_out');
   }
 
   ///// Actions

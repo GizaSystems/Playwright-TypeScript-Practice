@@ -3,8 +3,6 @@ import { step } from 'allure-js-commons';
 
 export class HomePage {
   readonly page: Page;
-  readonly url: string = 'https://www.automationexercise.com';
-
   // Locators
   readonly addItemTOCart_Button: Locator;
   readonly continueShopping_Button: Locator;
@@ -13,8 +11,8 @@ export class HomePage {
   constructor(page: Page) {
     this.page = page;
     //  Locators
-    this.addItemTOCart_Button = page.locator('(//*[@data-product-id="1"])[1]');
-    this.continueShopping_Button = page.getByText('Continue Shopping');
+    this.addItemTOCart_Button = page.locator('div.features_items div.productinfo a[data-product-id="1"]');
+    this.continueShopping_Button = page.locator('//button[contains(@class,"btn-block")]');
     this.logo_img = page.locator('.logo img');
   }
 
@@ -22,13 +20,18 @@ export class HomePage {
 
   async navigate() {
     await step("Navigate to Home Page", async () => {
-      await this.page.goto(this.url);
+      await this.page.goto('');
     });
   }
 
   async addItemToCart() {
     await step("Add Item to Cart", async () => {
       await this.addItemTOCart_Button.click();
+    });
+  }
+
+  async clickOnContinueShoppingButton(){
+    await step("click On Continue Shopping Button", async () => {
       await this.continueShopping_Button.click();
     });
   }
