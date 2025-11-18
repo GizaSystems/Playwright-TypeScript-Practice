@@ -43,6 +43,14 @@ export class LoginPage {
     });
   }
 
+  async openSignupPage(signupName: string, signupEmail: string) {
+    await step(`User Navigates To Signup Page With: signupName: ${signupName} and signupEmail: ${signupEmail}`, async () => {
+      await this.signupName_Input.fill(signupName);
+      await this.signupEmail_Input.fill(signupEmail);
+      await this.signup_Button.click();
+    });
+  }
+
   async registerNewUser(username: string, email: string) {
     await step(`Create User with username: ${username} and email: ${email}`, async () => {
       await this.signupName_Input.fill(username);
