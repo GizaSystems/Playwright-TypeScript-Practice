@@ -3,7 +3,7 @@ import { step } from 'allure-js-commons';
 
 export class HomePage {
   readonly page: Page;
-    // Locators
+  // Locators
   readonly logo_img: Locator;
   readonly fullFledged_txt: Locator;
 
@@ -13,7 +13,7 @@ export class HomePage {
     this.fullFledged_txt = page.locator('#slider-carousel h2');
   }
 
-    ///// Actions
+  ///// Actions
 
   async navigate() {
     await step("Navigate to Home Page", async () => {
@@ -21,7 +21,7 @@ export class HomePage {
     });
   }
 
-    ///// Validations
+  ///// Validations
 
   async verifyHomePageVisible(expectedTitle: string) {
     await step("Verify home page is visible successfully", async () => {
