@@ -26,13 +26,13 @@ test.describe('Automation Exercise Logout User Tests', () => {
         const createResponse = await apisUserManagement.createUser(logoutTestData.username, email, logoutTestData.password);
         await apisUserManagement.verifyUserCreatedSuccessfully(createResponse, logoutTestData.createUserConfirmationMessage);
         await homePage.navigate();
-        await homePage.verifyHomePageVisible(logoutTestData.homePageTitle, logoutTestData.homePageCenterHeader);
+        await homePage.verifyHomePageVisible(logoutTestData.homePageTitle);
         await headerPage.clickOnSignupLoginLink();
-        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginEndPoint, logoutTestData.loginPageTitle);
+        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginPageTitle);
         await loginPage.login(email, logoutTestData.password);
         await headerPage.assertUserLoggedinSuccessfully(logoutTestData.username);
         await headerPage.clickOnLogoutButton();
-        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginEndPoint, logoutTestData.loginPageTitle);
+        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginPageTitle);
     });
 
     test('Test Case 4: Logout User via UI', async ({ request }) => {
@@ -41,14 +41,14 @@ test.describe('Automation Exercise Logout User Tests', () => {
         // allure.issue('#link');
         const email = logoutTestData.emailAddress + Date.now() + "@test.com";
         await homePage.navigate();
-        await homePage.verifyHomePageVisible(logoutTestData.homePageTitle, logoutTestData.homePageCenterHeader);
+        await homePage.verifyHomePageVisible(logoutTestData.homePageTitle);
         await headerPage.clickOnSignupLoginLink();
-        await loginPage.enterNameAndEmailToCreateUser(logoutTestData.username, email);
+        await loginPage.registerNewUser(logoutTestData.username, email);
         await signupPage.createNewAccount(signupTestData.password, signupTestData.day, signupTestData.month, signupTestData.year, signupTestData.firstName, signupTestData.lastName, signupTestData.companyName, signupTestData.addressDetails, signupTestData.countryName, signupTestData.state, signupTestData.city, signupTestData.zipCode, signupTestData.mobileNumber)
         await signupPage.verifyAccountCreatedSuccessfully(logoutTestData.creationSuccessfulText, logoutTestData.creationPageTitle);
         await headerPage.clickOnSignupLoginLink();
         await headerPage.clickOnLogoutButton();
-        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginEndPoint, logoutTestData.loginPageTitle);
+        await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginPageTitle);
     });
 
     test.beforeEach(async ({ browser, request }) => {

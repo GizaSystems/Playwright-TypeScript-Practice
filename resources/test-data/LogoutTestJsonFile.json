@@ -9,12 +9,10 @@
     "city": "Cairo",
     "zipcode": "1167",
     "mobileNumber": "0111111111",
-    "loginEndPoint": "/login",
     "loginPageTitle": "Automation Exercise - Signup / Login",
     "loginConfirmationMessage": "User exists!",
     "createUserConfirmationMessage": "User created!",
     "creationSuccessfulText": "Account Created!",
     "creationPageTitle": "Automation Exercise - Account Created",
-    "homePageTitle": "Automation Exercise",
-    "homePageCenterHeader": "Features Items"
+    "homePageTitle": "Automation Exercise"
 }

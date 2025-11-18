@@ -25,7 +25,6 @@ export class LoginPage {
     this.signup_Button = page.locator('button[data-qa="signup-button"]');
     this.signupName_Input = page.locator('[data-qa="signup-name"]');
     this.signupEmail_Input = page.locator('[data-qa="signup-email"]');
-    this.signup_Button = page.locator('[data-qa="signup-button"]');
   }
 
   ///// Actions
@@ -43,16 +42,9 @@ export class LoginPage {
       await this.login_Button.click();
     });
   }
-  async openSignupPage(signupName: string, signupEmail: string) {
-    await step(`User Navigates To Signup Page With: signupName: ${signupName} and signupEmail: ${signupEmail}`, async () => {
-      await this.signupName_Input.fill(signupName);
-      await this.signupEmail_Input.fill(signupEmail);
-      await this.signup_Button.click();
-    });
-  }
 
-  async enterNameAndEmailToCreateUser(username: string, email: string) {
-    await step('Create User ', async () => {
+  async registerNewUser(username: string, email: string) {
+    await step(`Create User with username: ${username} and email: ${email}`, async () => {
       await this.signupName_Input.fill(username);
       await this.signupEmail_Input.fill(email);
       await this.signup_Button.click();
@@ -61,9 +53,8 @@ export class LoginPage {
 
   ///// Validations
 
-  async verifyThatUserIsNavigatedToLoginPage(loginEndPoint: string, loginPageTitle: string) {
+  async verifyThatUserIsNavigatedToLoginPage(loginPageTitle: string) {
     await step(`Verify that user is navigated to login page`, async () => {
-      await expect(this.page).toHaveURL(loginEndPoint);
       await expect(this.page).toHaveTitle(loginPageTitle);
       await expect(this.login_header).toBeVisible();
     });

@@ -94,9 +94,9 @@ export class SignupPage {
     await expect(this.loggedInUser_Label).toBeVisible();
     await expect(this.loggedInUser_Label).toContainText(expectedName);
   }
-  async verifyAccountCreatedSuccessfully(creationSuccessfulText: string, CreationPageTitle: string) {
+  async verifyAccountCreatedSuccessfully(creationSuccessfulText: string, creationPageTitle: string) {
     await step(`Verify that user is navigated to login page`, async () => {
-      await expect(this.page).toHaveTitle(CreationPageTitle);
+      await expect(this.page).toHaveTitle(creationPageTitle);
       await expect(this.creationSuccessful_Text).toHaveText(creationSuccessfulText);
     });
   }

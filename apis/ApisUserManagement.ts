@@ -70,11 +70,4 @@ export class ApisUserManagement {
       expect((await createResponse.json()).message).toBe(createUserConfirmationMessage);
     });
   }
-
-  async verifyUserLogedinSuccessfully(loginResponse: APIResponse, loginJson: { message: string }, loginConfirmationMessage: string) {
-    await allure.step(`Verify User logedin Successfully`, async () => {
-      expect(loginResponse.status()).toBe(200);
-      expect(loginJson.message).toBe(loginConfirmationMessage);
-    });
-  }
 }

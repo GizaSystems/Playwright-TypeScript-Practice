@@ -15,12 +15,11 @@ export class HeaderPage {
     this.signupLogin_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
-    this.logout_Button = page.locator('a[href="/logout"]');
-
+    this.logout_Button = page.locator('//i[@class="fa fa-lock"]//parent::a');
   }
 
   ///// Actions
-  
+
   async clickOnSignupLoginLink() {
     await step("Click on Signup/Login Link", async () => {
       await this.signupLogin_link.click();
