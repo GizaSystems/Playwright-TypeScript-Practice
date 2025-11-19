@@ -17,7 +17,7 @@ const timestamp = new Date().toISOString().replace(/[-T:.]/g, "").slice(0, 17);
 
 test.describe('Verify Email Subscription Functionality', () => {
   test('User can subscribe to the newsletter from the home page', async () => {
-    allure.feature('Automation Exercise Home Page Subscription');
+    allure.feature('Email Subscription - Home Page');
     allure.tms('137183189');
     const uniqueEmailHomePage = testData.emailAddress + timestamp + '@test.com';
 
@@ -30,10 +30,9 @@ test.describe('Verify Email Subscription Functionality', () => {
   });
 
 
-  test('User can subscribe from the cart page', async () => {
+  test('User can subscribe to the newsletter from the cart page', async () => {
     allure.feature('Email Subscription - Cart Page');
     allure.tms('137183231');
-
     const uniqueEmailCartPage = testData.emailAddress + timestamp + '@test2.com';
 
     await homePage.navigate();
