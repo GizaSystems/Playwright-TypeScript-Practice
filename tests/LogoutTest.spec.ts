@@ -17,7 +17,7 @@ test.describe('Automation Exercise Logout User Tests', () => {
     test('Test Case 4: Logout User via UI&API', async ({ request }) => {
         allure.feature('Automation Exercise Login Test Cases');
         allure.tms('137183070');
-        // allure.issue('#link');
+        // allure.issue('#link'); 
         const email = logoutTestData.emailAddress + Date.now() + "@test.com";
         const apisUserManagement = new ApisUserManagement(request);
         const createResponse = await apisUserManagement.createUser(logoutTestData.username, email, logoutTestData.password);
