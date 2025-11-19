@@ -25,7 +25,8 @@ export class PaymentPage {
     }
 
     async pay(nameOnCard: string, cardNumber: string, cvc: string, expirationMonth: string, expirationYear: string) {
-        await step('Fill Payment Details and Confirm Order', async () => {
+        await step(`Fill Payment Details (Name on Card ${nameOnCard}, Card Number ${cardNumber}, CVC ${cvc}, Expiration Month ${expirationMonth}, and 
+            Expiration Year ${expirationYear}) and Confirm Order`, async () => {
             await this.nameOnCard_Input.fill(nameOnCard);
             await this.cardNumber_Input.fill(cardNumber);
             await this.cvc_Input.fill(cvc);
