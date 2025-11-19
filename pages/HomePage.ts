@@ -4,16 +4,12 @@ import { step } from 'allure-js-commons';
 export class HomePage {
   readonly page: Page;
   // Locators
-  readonly addItemTOCart_Button: Locator;
-  readonly continueShopping_Button: Locator;
   readonly logo_img: Locator;
   readonly fullFledged_txt: Locator;
 
   constructor(page: Page) {
     this.page = page;
     //  Locators
-    this.addItemTOCart_Button = page.locator('div.features_items div.productinfo a[data-product-id="1"]');
-    this.continueShopping_Button = page.locator('//button[contains(@class,"btn-block")]');
     this.logo_img = page.locator('.logo img');
     this.fullFledged_txt = page.locator('#slider-carousel h2');
   }

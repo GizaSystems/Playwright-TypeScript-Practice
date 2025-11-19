@@ -7,8 +7,6 @@ export class HeaderPage {
   // Locators
   readonly signupLogin_link: Locator;
   readonly userProfile_link: Locator;
-  readonly deleteUserSuccess_link: Locator;
-  readonly continue_Button: Locator;
   readonly deleteAccount_link: Locator;
   readonly cart_link: Locator;
 
@@ -17,8 +15,6 @@ export class HeaderPage {
     //  Locators
     this.signupLogin_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
-    this.deleteUserSuccess_link = page.locator('//h2[@data-qa="account-deleted"]/b');
-    this.continue_Button = page.locator('[data-qa="continue-button"]');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
     this.cart_link = page.locator('//i[@class="fa fa-shopping-cart"]//parent::a');
   }
@@ -52,12 +48,6 @@ export class HeaderPage {
   async assertUserLoggedinSuccessfully(username: string) {
     await step("Assert User is Loggedin Successfully", async () => {
       await expect(this.userProfile_link).toContainText(username);
-    });
-  }
-
-  async assertUserDeletedSuccessfully(massage: string) {
-    await step("Assert User is Deleted Successfully", async () => {
-      await expect(this.deleteUserSuccess_link).toHaveText(massage);
     });
   }
 
