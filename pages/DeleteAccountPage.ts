@@ -10,7 +10,7 @@ export class DeleteAccountPage {
     constructor(page: Page) {
         this.page = page;
 
-        this.accountDeletedMessage = page.locator('//b[.="Account Deleted!"]')
+        this.accountDeletedMessage = page.locator('[data-qa="account-deleted"]')
         this.continue_Button = page.locator('[data-qa="continue-button"]');
     }
 

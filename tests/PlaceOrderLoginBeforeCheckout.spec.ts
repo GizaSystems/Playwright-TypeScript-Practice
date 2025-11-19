@@ -34,12 +34,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     allure.feature('Automation Exercise Place Order: Login before Checkout');
     allure.tms('137183304');
 
-    await homePage.navigate();
-    await homePage.verifyHomePageVisible(testData.pagesTitle.homePageTitle);
-    await headerPage.clickOnSignupLoginLink();
-    await loginPage.login(testEmail, testData.user.password);
-    await headerPage.assertUserLoggedinSuccessfully(testData.user.name);
-    await homePage.clickViewProduct(); 
+    await homePage.clickViewProduct(testData.productName); 
     await productsPage.clickOnAddToCartButton();
     await headerPage.clickOnCartLink();
     await cartPage.assertCartPageLoaded(testData.pagesTitle.shoppingCart);
@@ -49,9 +44,6 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     await checkoutPage.clickOnPlaceOrderAndConfirm();
     await paymentPage.pay(testData.payment.name, testData.payment.cardNumber, testData.payment.cvc, testData.payment.expiaryMonth, testData.payment.expiaryYear);
     await paymentPage.assertSuccessPaymentMessage(testData.messages.payment);
-    await headerPage.clickOnDeleteAccountLink();
-    await deleteAccountPage.assertSuccessDeleteMessage(testData.messages.deleteAccount);
-    await deleteAccountPage.clickOnContinue();
   });
 
   test.beforeAll(async () => {
@@ -74,9 +66,18 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     checkoutPage= new CheckoutPage(page);
     deleteAccountPage= new DeleteAccountPage(page);
     paymentPage= new PaymentPage(page);
+
+    await homePage.navigate();
+    await homePage.verifyHomePageVisible(testData.pagesTitle.homePageTitle);
+    await headerPage.clickOnSignupLoginLink();
+    await loginPage.login(testEmail, testData.user.password);
+    await headerPage.assertUserLoggedinSuccessfully(testData.user.name);
   });
 
   test.afterEach(async () => {
+    await headerPage.clickOnDeleteAccountLink();
+    await deleteAccountPage.assertSuccessDeleteMessage(testData.messages.deleteAccount);
+    await deleteAccountPage.clickOnContinue();
     await context.close();
   });
 });

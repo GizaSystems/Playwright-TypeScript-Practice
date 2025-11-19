@@ -10,8 +10,8 @@ export class ProductsPage {
     constructor(page: Page) {
         this.page = page;
 
-        this.addToCart_Button = page.getByRole('button', { name: /add to cart/i });
-        this.continueShopping_Button = page.getByRole('button', { name: /continue shopping/i });
+        this.addToCart_Button = page.locator('.btn.btn-default.cart');
+        this.continueShopping_Button = page.locator('[data-dismiss="modal"]');
     }
 
     async clickOnAddToCartButton() {

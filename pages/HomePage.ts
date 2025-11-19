@@ -5,12 +5,16 @@ export class HomePage {
   readonly page: Page;
   // Locators
   readonly logo_img: Locator;
-  readonly viewProduct_Button: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.logo_img = page.locator('.logo img');
-    this.viewProduct_Button = page.getByRole('link', { name: /view product/i });
+  }
+
+    viewProduct_Button(productName: string): Locator {
+    return this.page
+      .locator("div.product-image-wrapper", { hasText: productName })
+      .locator("a[href^='/product_details/']");
   }
 
   ///// Actions
@@ -21,9 +25,9 @@ export class HomePage {
     });
   }
 
-  async clickViewProduct() {
-    await step('Click on View Product', async () => {
-      await this.viewProduct_Button.first().click();
+  async clickViewProduct(productName: string) {
+    await step(`Click View Product for ${productName}`, async () => {
+      await this.viewProduct_Button(productName).click();
     })
   }
   

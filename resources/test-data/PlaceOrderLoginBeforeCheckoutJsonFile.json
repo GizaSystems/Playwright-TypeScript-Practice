@@ -22,5 +22,6 @@
     "messages": {
         "deleteAccount": "Account Deleted!",
         "payment": "Order Placed!"
-    }
+    },
+    "productName": "Blue Top"
 }
