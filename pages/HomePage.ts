@@ -27,4 +27,11 @@ export class HomePage {
       await expect(this.page).toHaveTitle(expectedTitle);
     });
   }
+
+  async verifyFullFledgedTextVisible(expectedText: string) {
+    await step('Verify Full-Fledged Text is Visible', async () => {
+      await expect(this.fullFledged_txt.first()).toHaveText(expectedText);
+    });
+  }
 }
+
