@@ -1,43 +1,40 @@
-import {  Page,  Locator, expect } from '@playwright/test';
+import {type Page, type Locator, expect} from '@playwright/test';
 import { step } from 'allure-js-commons';
-
-
 
 export class CheckoutPage {
     readonly page: Page;
 
-    // Locators
-    readonly deliveryAddress_ListItem: Locator;
+    readonly deliveryAddress_Text: Locator; 
     readonly productDetails_Link: Locator;
-    readonly comment_textarea: Locator;
+    readonly comment_TextArea: Locator;
     readonly placeOrder_Button: Locator;
 
-    constructor(page: Page){
+    constructor(page: Page) {
         this.page = page;
-        this.deliveryAddress_ListItem = page.locator("ul[id='address_delivery'] li:nth-child(4)");
+
+        this.deliveryAddress_Text = page.locator('id=address_delivery');
         this.productDetails_Link = page.locator('//a[@href="/product_details/1"]');
-        this.comment_textarea = page.locator("//textarea[@name='message']");
-        this.placeOrder_Button = page.locator('//a[@class="btn btn-default check_out"]');
+        this.comment_TextArea = page.locator('[name="message"]');
+        this.placeOrder_Button = page.locator('.btn.btn-default.check_out');
     }
 
-    // Actions
-    async addComment(comment: string){
-        await step('Add Comment', async () => {
-            await this.comment_textarea.fill(comment);
-        });
+    async writeComment(comment: string) {
+        await step('Enter Description in Comment Text Area and Click on Place and Confirm Order', async () => {
+            await this.comment_TextArea.fill(comment);
+        })
     }
 
-    async placeOrder() {
-        await step('Place Order', async () => {
+    async clickOnPlaceOrderAndConfirm() {
+        await step('Click on Place Order and Confirm Button', async () => {
             await this.placeOrder_Button.click();
-        });
+        })
     }
 
-    // Validations
-    async assertOnDeliveryAddress(expectedAddress: string) {
-        await step('Assert on Delivery Address', async () => {
-            await expect(this.deliveryAddress_ListItem).toHaveText(expectedAddress);
-        });
+    async assertOnAddressDetails(addressDetails: string) {
+        await step('Assert on Address Details', async () => {
+            await expect(this.deliveryAddress_Text).toContainText(addressDetails);
+        })
+
     }
 
     async assertOnReviewOrder(expectedProductName: string){
@@ -45,8 +42,4 @@ export class CheckoutPage {
             await expect(this.productDetails_Link).toHaveText(expectedProductName);
         })
     }
-    
-
-
-    
-}
+}   

@@ -1,53 +1,44 @@
-import {test, Page, Locator, expect  } from '@playwright/test';
+import {type Page, type Locator, expect} from '@playwright/test';
 import { step } from 'allure-js-commons';
 
-
 export class PaymentPage {
-    page: Page;
+    readonly page: Page;
 
-    // Locators
-    readonly nameOnCard_Input: Locator;
-    readonly cardNumber_Input: Locator;
+    readonly nameOnCard_Input: Locator; 
+    readonly cardNumber_Input: Locator; 
     readonly cvc_Input: Locator;
-    readonly expirationMonth_Input: Locator;
-    readonly expirationYear_Input: Locator
-    readonly payAndConfirm_Button: Locator;
-    readonly orderPlaced_sucessMessage: Locator;
+    readonly expirationMonth_Input: Locator;  
+    readonly expirationYear_Input: Locator; 
+    readonly payAndConfirmOrder_Button: Locator;
+    readonly sucessPaymentAlert: Locator;
 
-    constructor(page: Page){
+    constructor(page: Page) {
         this.page = page;
-        this.nameOnCard_Input = page.locator("//input[@class='form-control']");
-        this.cardNumber_Input = page.locator("//input[@name='card_number']");
-        this.cvc_Input = page.locator('//input[@name="cvc"]');
-        this.expirationMonth_Input = page.locator('//input[@name="expiry_month"]');
-        this.expirationYear_Input = page.locator('//input[@name="expiry_year"]');
-        this.payAndConfirm_Button = page.locator('#submit');
-        this.orderPlaced_sucessMessage = page.locator("div[id='success_message'] div[class='alert-success alert']");
+
+        this.nameOnCard_Input = page.locator('//input[@name="name_on_card"]');
+        this.cardNumber_Input = page.locator('.form-control.card-number');
+        this.cvc_Input = page.locator('.form-control.card-cvc');
+        this.expirationMonth_Input = page.locator('.form-control.card-expiry-month');
+        this.expirationYear_Input = page.locator('.form-control.card-expiry-year');
+        this.payAndConfirmOrder_Button = page.locator('id=submit');
+        this.sucessPaymentAlert = page.locator('[data-qa="order-placed"]');   
     }
 
-    // Actions
-    async enterPaymentDetails(nameOnCard: string, cvc: string, expirationMonth: string, expirationYear: string){
-        await step('Enter Payment Details', async () => {
+    async pay(nameOnCard: string, cardNumber: string, cvc: string, expirationMonth: string, expirationYear: string) {
+        await step(`Fill Payment Details (Name on Card ${nameOnCard}, Card Number ${cardNumber}, CVC ${cvc}, Expiration Month ${expirationMonth}, and 
+            Expiration Year ${expirationYear}) and Confirm Order`, async () => {
             await this.nameOnCard_Input.fill(nameOnCard);
+            await this.cardNumber_Input.fill(cardNumber);
             await this.cvc_Input.fill(cvc);
             await this.expirationMonth_Input.fill(expirationMonth);
             await this.expirationYear_Input.fill(expirationYear);
-        });
-    }
-
-    async clickPayAndConfirm(){
-        await step('Click Pay and Confirm', async () => {
-            await this.payAndConfirm_Button.click();
+            await this.payAndConfirmOrder_Button.click();
         })
     }
 
-    // Validations
-    async assertOnOrderPlacedSuccessMessage(expectedMessage: string){
-        await step('Assert on Order Placed Success Message', async () => {
-            await expect(this.orderPlaced_sucessMessage).toHaveText(expectedMessage);
+    async assertSuccessPaymentMessage(message: string) {
+        await step('Assert on Success Payment Message', async () => {
+            await expect(this.sucessPaymentAlert).toContainText(message);
         })
     }
-
-    
-
-} 
+}
