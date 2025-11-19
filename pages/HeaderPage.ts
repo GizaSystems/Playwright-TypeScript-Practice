@@ -8,6 +8,7 @@ export class HeaderPage {
   readonly signupLoginLogout_link: Locator;
   readonly userProfile_link: Locator;
   readonly deleteAccount_link: Locator;
+  readonly cart_link: Locator;
 
   constructor(page: Page) {
     //  Locators
@@ -15,6 +16,7 @@ export class HeaderPage {
     this.signupLoginLogout_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
+    this.cart_link = page.locator('//i[@class="fa fa-shopping-cart"]//parent::a');
   }
 
   ///// Actions
@@ -30,6 +32,12 @@ export class HeaderPage {
     });
   }
 
+  async clickOnCartLink() {
+    await step("Click on Cart Link", async () => {
+      await this.cart_link.click();
+    });
+  }
+
   async clickOnLogoutButton() {
     await step("Click on logout button", async () => {
       await this.signupLoginLogout_link.click();
@@ -37,7 +45,6 @@ export class HeaderPage {
   }
 
   ///// Validations
-
   async assertUserLoggedinSuccessfully(username: string) {
     await step("Assert User is Loggedin Successfully", async () => {
       await expect(this.userProfile_link).toContainText(username);
