@@ -14,6 +14,8 @@ export class ApisUserManagement {
     this.apiActions = new ApiActions(request);
   }
 
+  ///// Actions
+
   async createUser(name: string, email: string, password: string): Promise<APIResponse> {
     return await allure.step(`Create User Account with name: ${name}, First Name: ${email} and Last Name: ${password}`,
       async () => {
@@ -58,5 +60,14 @@ export class ApisUserManagement {
     expect(response.status()).toBe(200);
     const body = await response.json();
     expect(body.message).toBe(expectedMessage);
+  }
+
+  ///// Validations
+
+  async verifyUserCreatedSuccessfully(createResponse: APIResponse, createUserConfirmationMessage: string) {
+    await allure.step(`Verify User Created Successfully`, async () => {
+      expect(createResponse.status()).toBe(200);
+      expect((await createResponse.json()).message).toBe(createUserConfirmationMessage);
+    });
   }
 }

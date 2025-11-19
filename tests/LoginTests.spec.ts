@@ -24,7 +24,7 @@ test.describe('Automation Exercise Login Test Cases', () => {
     allure.feature('Automation Exercise Login Test Cases');
     allure.tms('137183022');
     // allure.issue('#link');
-
+    
     const email = testData.emailAddress + timestamp + '@test.com';
     await homePage.navigate();
     await headerPage.clickOnSignupLoginLink();
