@@ -9,12 +9,12 @@ export class HomePage {
 
   // Locators
   readonly logo_img: Locator;
-
+  readonly fullFledged_txt: Locator;
   constructor(page: Page) {
     this.page = page;
     this.logo_img = page.locator(".logo img");
-
     this.categoryHeader = page.locator("div.left-sidebar >> text=Category");
+    this.fullFledged_txt = page.locator("#slider-carousel h2");
   }
   //locator helper
   toggleCategory(name: string) {
@@ -27,6 +27,12 @@ export class HomePage {
 
   categoryPanel(name: string) {
     return this.page.locator(`#${name}.panel-collapse`);
+  }
+
+  viewProduct_Button(productName: string): Locator {
+    return this.page
+      .locator("div.product-image-wrapper", { hasText: productName })
+      .locator("a[href^='/product_details/']");
   }
 
   ///// Actions
@@ -48,6 +54,13 @@ export class HomePage {
   }
 
   ///// Validations
+
+  async clickViewProduct(productName: string) {
+    await step(`Click View Product for ${productName}`, async () => {
+      await this.viewProduct_Button(productName).click();
+    });
+  }
+
   async verifyHomePageVisible(expectedTitle: string) {
     await step("Verify home page is visible successfully", async () => {
       await expect(this.logo_img).toBeVisible();
@@ -73,6 +86,12 @@ export class HomePage {
       const heading = this.page.locator("h2.title.text-center");
       const actualText = await heading.textContent();
       expect(actualText?.trim().toLowerCase()).toBe(expectedText.toLowerCase());
+    });
+  }
+
+  async verifyFullFledgedTextVisible(expectedText: string) {
+    await step("Verify Full-Fledged Text is Visible", async () => {
+      await expect(this.fullFledged_txt.first()).toHaveText(expectedText);
     });
   }
 }

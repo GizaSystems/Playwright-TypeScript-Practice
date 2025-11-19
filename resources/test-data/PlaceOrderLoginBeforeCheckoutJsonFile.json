@@ -1,0 +1,27 @@
+{
+    "pagesTitle": {
+        "homePageTitle": "Automation Exercise",
+        "shoppingCart": "Shopping Cart"
+    },
+    "user": {
+        "name": "Mahmoud",
+        "email": "mahmoudTest",
+        "password": "mahmoudTest@test.com"
+    },
+    "checkout": {
+        "addressDetails": "Your delivery address\nmr. Mahmoud ElSharkawy\nGiza Systems\nCairo\nElObour\nElObour Cairo\n20100\nIndia\n01155150745",
+        "comment": "Please call before delivery"
+    },
+    "payment": {
+        "name": "Mahmoud ElSharkawy",
+        "cardNumber": "46135468153",
+        "cvc": "113",
+        "expiaryMonth": "04",
+        "expiaryYear": "2031"
+    },
+    "messages": {
+        "deleteAccount": "Account Deleted!",
+        "payment": "Order Placed!"
+    },
+    "productName": "Blue Top"
+}
