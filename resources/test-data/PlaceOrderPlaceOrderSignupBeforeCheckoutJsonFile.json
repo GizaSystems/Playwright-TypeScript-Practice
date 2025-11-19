@@ -1,0 +1,40 @@
+{
+    "pagesTitle": {
+        "homePageTitle": "Automation Exercise",
+        "shoppingCart": "Shopping Cart"
+    },
+    "user": {
+        "username": "userTest",
+        "emailAddress": "userTest@test.com",
+        "password": "12345Pass",
+        "days": "1",
+        "months": "1",
+        "years": "2000",
+        "firstName": "firstName",
+        "lastName": "lastName",
+        "company": "companyName",
+        "address1": "address1",
+        "country": "Canada",
+        "state": "stateName",
+        "city": "cityName",
+        "zipCode": "12345678",
+        "mobileNumber": "01234567891"
+    },
+    "checkout": {
+        "addressDetails": "Your delivery address\nmr. firstName lastName\ncompanyName\naddress1\nstateName cityName\n12345678\nCanada\n01234567891",
+        "comment": "Please call before delivery"
+    },
+    "payment": {
+        "name": "Payment Name",
+        "cardNumber": "46135568153",
+        "cvc": "567",
+        "expiaryMonth": "06",
+        "expiaryYear": "2030"
+    },
+    "messages": {
+        "accountCreated": "Account Created!",
+        "deleteAccount": "Account Deleted!",
+        "payment": "Order Placed!"
+    },
+    "productName": "Blue Top"
+}

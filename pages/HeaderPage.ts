@@ -9,8 +9,8 @@ export class HeaderPage {
   readonly userProfile_link: Locator;
   readonly deleteUserSuccess_link: Locator;
   readonly continue_Button: Locator;
-  readonly cart_link: Locator;
   readonly deleteAccount_link: Locator;
+  readonly cart_link: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -19,8 +19,8 @@ export class HeaderPage {
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteUserSuccess_link = page.locator('//h2[@data-qa="account-deleted"]/b');
     this.continue_Button = page.locator('[data-qa="continue-button"]');
-    this.cart_link = page.locator('//i[contains(@class,"fa fa-shopping-cart")]/parent::a[@href="/view_cart"]');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
+    this.cart_link = page.locator('//i[@class="fa fa-shopping-cart"]//parent::a');
   }
 
   ///// Actions
@@ -37,13 +37,12 @@ export class HeaderPage {
   }
 
   async clickOnCartLink() {
-    await step("Click on Shopping Cart Link", async () => {
+    await step("Click on Cart Link", async () => {
       await this.cart_link.click();
     });
   }
 
   ///// Validations
-
   async assertUserLoggedinSuccessfully(username: string) {
     await step("Assert User is Loggedin Successfully", async () => {
       await expect(this.userProfile_link).toContainText(username);

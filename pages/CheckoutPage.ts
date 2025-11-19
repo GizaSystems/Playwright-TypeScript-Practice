@@ -1,42 +1,37 @@
-import {test, type Page, type Locator, expect } from '@playwright/test';
+import {type Page, type Locator, expect} from '@playwright/test';
 import { step } from 'allure-js-commons';
 
 export class CheckoutPage {
-  readonly page: Page;
-  
-  // Locators
-  readonly address1_link: Locator;
-  readonly orderComment_Input: Locator;
-  readonly placeOrder_Button: Locator;
+    readonly page: Page;
 
-  constructor(page: Page) {
-    this.page = page;
-    //  Locators
-    this.address1_link = page.locator('(//li[contains(@class, "address_address1")])[2]');
-    this.orderComment_Input = page.locator('[name="message"]');
-    this.placeOrder_Button = page.locator('[href="/payment"]');
-  }
+    readonly deliveryAddress_Text: Locator; 
+    readonly comment_TextArea: Locator;
+    readonly placeOrder_Button: Locator;
 
-  ///// Actions
+    constructor(page: Page) {
+        this.page = page;
 
-  async addCommentAboutOrder(comment: string) {
-    await step("Add Comment About An Order", async () => {
-      await this.orderComment_Input.fill(comment);
-    });
-  }
+        this.deliveryAddress_Text = page.locator('id=address_delivery');
+        this.comment_TextArea = page.locator('[name="message"]');
+        this.placeOrder_Button = page.locator('.btn.btn-default.check_out');
+    }
 
-  async placeOrder() {
-    await step("Place The Order", async () => {
-      await this.placeOrder_Button.click();
-    });
-  }
+    async writeComment(comment: string) {
+        await step('Enter Description in Comment Text Area and Click on Place and Confirm Order', async () => {
+            await this.comment_TextArea.fill(comment);
+        })
+    }
 
-  ///// Validations
+    async clickOnPlaceOrderAndConfirm() {
+        await step('Click on Place Order and Confirm Button', async () => {
+            await this.placeOrder_Button.click();
+        })
+    }
 
-  async assertCheckoutAddress(address1: string) {
-      await step("Verify Checkout Address is correct", async () => {
-      await expect(this.address1_link).toHaveText(address1);
-    });
-  }
-  
-}
+    async assertOnAddressDetails(addressDetails: string) {
+        await step('Assert on Address Details', async () => {
+            await expect(this.deliveryAddress_Text).toContainText(addressDetails);
+        })
+
+    }
+}   
