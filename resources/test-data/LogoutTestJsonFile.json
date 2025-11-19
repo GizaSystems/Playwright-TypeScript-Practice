@@ -1,0 +1,18 @@
+{
+    "username": "ElSharkawy",
+    "emailAddress": "m.elsharkawy",
+    "password": "tp12345678",
+    "firstName": "Mohamed",
+    "lastName": "elsharkawy",
+    "address": "obour",
+    "state": "NA",
+    "city": "Cairo",
+    "zipcode": "1167",
+    "mobileNumber": "0111111111",
+    "loginPageTitle": "Automation Exercise - Signup / Login",
+    "loginConfirmationMessage": "User exists!",
+    "createUserConfirmationMessage": "User created!",
+    "creationSuccessfulText": "Account Created!",
+    "creationPageTitle": "Automation Exercise - Account Created",
+    "homePageTitle": "Automation Exercise"
+}
