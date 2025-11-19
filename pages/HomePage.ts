@@ -32,7 +32,7 @@ export class HomePage {
 
   async verifyFullFledgedTextVisible(expectedText: string) {
     await step('Verify Full-Fledged Text is Visible', async () => {
-      await expect(this.fullFledged_txt.first()).toBeVisible();
+      await expect(this.fullFledged_txt.first()).toHaveText(expectedText);
     });
   }
 }

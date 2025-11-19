@@ -31,7 +31,7 @@ test.describe('Automation Exercise Scroll Up Test Cases', () => {
     testData = JSON.parse(fs.readFileSync('./resources/test-data/ScrollUpWithoutArrowJsonFile.json', 'utf8'));
   });
 
-  test.beforeEach(async ({ request, browser }) => {
+  test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
     homePage = new HomePage(page);
