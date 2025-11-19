@@ -4,7 +4,6 @@ import { LoginPage } from '../pages/LoginPage';
 import { HeaderPage } from '../pages/HeaderPage';
 import { HomePage } from '../pages/HomePage';
 import { ApisUserManagement } from '../apis/ApisUserManagement';
-import { SignupPage } from '../pages/SignupPage';
 import * as fs from 'fs';
 
 let context: BrowserContext;
@@ -33,7 +32,7 @@ test.describe('Automation Exercise Logout User Tests', () => {
         await loginPage.verifyThatUserIsNavigatedToLoginPage(logoutTestData.loginPageTitle);
     });
 
-    test.beforeEach(async ({ browser, request }) => {
+    test.beforeEach(async ({ browser }) => {
         context = await browser.newContext();
         page = await context.newPage();
         loginPage = new LoginPage(page);
