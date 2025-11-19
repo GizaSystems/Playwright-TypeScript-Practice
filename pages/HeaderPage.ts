@@ -42,6 +42,10 @@ export class HeaderPage {
     await step("Click on logout button", async () => {
       await this.signupLoginLogout_link.click();
     })
+  async scrollToHeader() {
+    await step('Scroll to Header', async () => {
+      await this.page.evaluate(() => window.scrollTo(0, 0));
+    });
   }
 
   ///// Validations
