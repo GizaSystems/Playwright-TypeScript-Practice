@@ -11,6 +11,12 @@ export class HomePage {
     this.logo_img = page.locator('.logo img');
   }
 
+    viewProduct_Button(productName: string): Locator {
+    return this.page
+      .locator("div.product-image-wrapper", { hasText: productName })
+      .locator("a[href^='/product_details/']");
+  }
+
   ///// Actions
 
   async navigate() {
@@ -19,7 +25,13 @@ export class HomePage {
     });
   }
 
-  ///// Validations
+  async clickViewProduct(productName: string) {
+    await step(`Click View Product for ${productName}`, async () => {
+      await this.viewProduct_Button(productName).click();
+    })
+  }
+  
+    ///// Validations
 
   async verifyHomePageVisible(expectedTitle: string) {
     await step("Verify home page is visible successfully", async () => {
