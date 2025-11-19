@@ -10,11 +10,13 @@ export class HomePage {
   // Locators
   readonly logo_img: Locator;
   readonly fullFledged_txt: Locator;
+  readonly categoryPageHeading: Locator;
   constructor(page: Page) {
     this.page = page;
     this.logo_img = page.locator(".logo img");
     this.categoryHeader = page.locator("div.left-sidebar >> text=Category");
     this.fullFledged_txt = page.locator("#slider-carousel h2");
+    this.categoryPageHeading = page.locator("h2.title.text-center");
   }
   //locator helper
   toggleCategory(name: string) {
@@ -83,8 +85,7 @@ export class HomePage {
 
   async assertCategoryPageText(expectedText: string) {
     await step(`Verify category page shows '${expectedText}'`, async () => {
-      const heading = this.page.locator("h2.title.text-center");
-      const actualText = await heading.textContent();
+      const actualText = await this.categoryPageHeading.textContent();
       expect(actualText?.trim().toLowerCase()).toBe(expectedText.toLowerCase());
     });
   }
