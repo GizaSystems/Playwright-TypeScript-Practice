@@ -16,7 +16,7 @@ export class HeaderPage {
     this.signupLogin_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
-    this.cart_link = page.locator('//i[@class="fa fa-shopping-cart"]//parent::a');
+    this.cart_link = page.locator('//*[@id="header"]//ul/li[3]/a/i');
   }
 
   ///// Actions
