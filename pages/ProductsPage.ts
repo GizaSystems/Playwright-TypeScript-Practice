@@ -4,7 +4,6 @@ import { step } from 'allure-js-commons';
 
 export class ProductsPage {
     readonly page: Page;
-
     readonly addToCart_Button: Locator;
     readonly continueShopping_Button: Locator;
     readonly productsPage_title: Locator;
@@ -13,7 +12,7 @@ export class ProductsPage {
     readonly searchResultsPage_title: Locator;
     readonly firstSearchResult_name: Locator;
 
-    constructor(page: Page){
+    constructor(page: Page) {
         this.page = page;
 
         this.addToCart_Button = page.locator('.btn.btn-default.cart');
