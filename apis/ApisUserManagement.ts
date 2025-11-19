@@ -8,6 +8,7 @@ export class ApisUserManagement {
   // readonly baseURL = 'https://automationexercise.com';   // todos: Should handle the base URL from the config file
   readonly createUser_serviceName = '/api/createAccount';
   readonly login_serviceName = '/api/verifyLogin';
+  readonly deleteUser_serviceName = '/api/deleteAccount';
 
   constructor(request: APIRequestContext) {
     this.request = request;
@@ -50,6 +51,13 @@ export class ApisUserManagement {
     return response;
   }
 
+  async deleteUser(email: string, password: string): Promise<APIResponse> {
+    const response = await this.request.delete(this.deleteUser_serviceName, {
+      form: { email, password }
+    });
+    return response;
+  }
+
   /////////Assertions
   async assertCreateUserSuccess(response: APIResponse, expectedMessage: string) {
     expect(response.status()).toBe(200);
@@ -61,7 +69,11 @@ export class ApisUserManagement {
     const body = await response.json();
     expect(body.message).toBe(expectedMessage);
   }
-
+  async assertDeleteUserSuccess(response: APIResponse, expectedMessage: string) {
+    expect(response.status()).toBe(200);
+    const body = await response.json();
+    expect(body.message).toBe(expectedMessage);
+  }
   ///// Validations
 
   async verifyUserCreatedSuccessfully(createResponse: APIResponse, createUserConfirmationMessage: string) {

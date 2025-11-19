@@ -33,8 +33,9 @@
     },
     "messages": {
         "accountCreated": "Account Created!",
-        "deleteAccount": "Account Deleted!",
+        "deleteAccount": "Account deleted!",
         "payment": "Order Placed!"
     },
-    "productName": "Blue Top"
+    "productName1": "Top",
+    "productName2": "Tshirt"
 }
