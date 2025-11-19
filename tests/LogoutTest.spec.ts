@@ -13,12 +13,15 @@ let homePage: HomePage;
 let headerPage: HeaderPage;
 let logoutTestData: any;
 
+const timestamp = new Date().toISOString().replace(/[-T:.]/g, "").slice(0, 17);
+
+
 test.describe('Automation Exercise Logout User Tests', () => {
     test('Test Case 4: Logout User via UI&API', async ({ request }) => {
         allure.feature('Automation Exercise Login Test Cases');
         allure.tms('137183070');
         // allure.issue('#link'); 
-        const email = logoutTestData.emailAddress + Date.now() + "@test.com";
+        const email = logoutTestData.emailAddress + timestamp + "@test.com";
         const apisUserManagement = new ApisUserManagement(request);
         const createResponse = await apisUserManagement.createUser(logoutTestData.username, email, logoutTestData.password);
         await apisUserManagement.verifyUserCreatedSuccessfully(createResponse, logoutTestData.createUserConfirmationMessage);
