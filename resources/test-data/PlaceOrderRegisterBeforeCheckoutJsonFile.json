@@ -5,7 +5,7 @@
     },
     "user": {
         "username": "userTest",
-        "emailAddress": "userTest@test.com",
+        "emailAddress": "userEmail",
         "password": "12345Pass",
         "days": "1",
         "months": "1",
@@ -21,8 +21,8 @@
         "mobileNumber": "01234567891"
     },
     "checkout": {
-        "addressDetails": "Your delivery address\nmr. firstName lastName\ncompanyName\naddress1\nstateName cityName\n12345678\nCanada\n01234567891",
-        "comment": "Please call before delivery"
+    "addressDetails": "Your delivery address\nMr. firstName lastName\ncompanyName\naddress1\n\ncityName stateName\n12345678\nCanada\n01234567891",        
+    "comment": "Please call before delivery"
     },
     "payment": {
         "name": "Payment Name",

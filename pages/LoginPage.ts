@@ -44,12 +44,4 @@ export class LoginPage {
     });
   }
 
-  async signup(username: string, name: string) {
-    await step(`User Signup with: Username: ${username} and name: ${name}`, async () => {
-      await this.signupEmail_Input.fill(username);
-      await this.signupName_Input.fill(name);
-      await this.signup_Button.click();
-    });
-  }
-
 }

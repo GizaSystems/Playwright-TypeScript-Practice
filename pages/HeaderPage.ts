@@ -42,6 +42,12 @@ export class HeaderPage {
     });
   }
 
+  async scrollToHeader() {
+    await step('Scroll to Header', async () => {
+      await this.page.evaluate(() => window.scrollTo(0, 0));
+    });
+  }
+
   ///// Validations
   async assertUserLoggedinSuccessfully(username: string) {
     await step("Assert User is Loggedin Successfully", async () => {

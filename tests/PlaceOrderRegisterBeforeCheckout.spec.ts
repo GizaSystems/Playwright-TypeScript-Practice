@@ -35,17 +35,11 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
   test('Test Case 15: Place Order: Register before Checkout', async () => {
     allure.feature('Automation Exercise Place Order Test Cases');
     allure.tms('137183294');
-    // allure.issue('#link');
 
     const email = testData.user.emailAddress + timestamp + '@test.com';
-    await homePage.navigate();
     await headerPage.clickOnSignupLoginLink();
-    await loginPage.signup(email, testData.user.username);
-    await signupPage.createNewAccount(testData.user.password, testData.user.days, 
-      testData.user.months, testData.user.years,testData.user.firstName, 
-      testData.user.lastName, testData.user.company, testData.user.address1, 
-      testData.user.country, testData.user.state, testData.user.city, 
-      testData.user.zipCode, testData.user.mobileNumber);
+    await loginPage.openSignupPage(testData.user.username, email);
+    await signupPage.createNewAccount(testData.user.password, testData.user.days, testData.user.months, testData.user.years,testData.user.firstName, testData.user.lastName, testData.user.company, testData.user.address1, testData.user.country, testData.user.state, testData.user.city, testData.user.zipCode, testData.user.mobileNumber);
     await signupPage.assertTextAccountCreatedIsVisiable(testData.messages.accountCreated);
     await createdAccountPage.clickOnContinueButton();
     await headerPage.assertUserLoggedinSuccessfully(testData.user.username);
@@ -62,10 +56,10 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
   });
 
   test.beforeAll(async () => {
-    testData = JSON.parse(fs.readFileSync('./resources/test-data/PlaceOrderTestsJsonFile.json', 'utf8'));
+    testData = JSON.parse(fs.readFileSync('./resources/test-data/PlaceOrderRegisterBeforeCheckoutJsonFile.json', 'utf8'));
   });
 
-  test.beforeEach(async ({ request, browser }) => {
+  test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
     loginPage = new LoginPage(page);
@@ -78,6 +72,9 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     createdAccountPage = new CreatedAccountPage(page);
     deleteAccountPage = new DeleteAccountPage(page);
     productsPage = new ProductsPage(page);
+
+    await homePage.navigate();
+    await homePage.verifyHomePageVisible(testData.pagesTitle.homePageTitle);
   });
 
   test.afterEach(async () => {
@@ -86,5 +83,4 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     await deleteAccountPage.clickOnContinue();
     await context.close();
   });
-
 });
