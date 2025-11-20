@@ -3,5 +3,5 @@
     "emailAddress": "m.elsharkawy",
     "password": "tp12345678",
     "errorMessage": "",
-    "deletedAccountExpectedMessage": "Account deleted!"
+    "deletedUserAccountMessage": "Account deleted!"
 }
