@@ -7,6 +7,7 @@ export class CheckoutPage {
     readonly deliveryAddress_Text: Locator; 
     readonly comment_TextArea: Locator;
     readonly placeOrder_Button: Locator;
+    readonly invoiceAddress_Text: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -14,6 +15,7 @@ export class CheckoutPage {
         this.deliveryAddress_Text = page.locator('id=address_delivery');
         this.comment_TextArea = page.locator('[name="message"]');
         this.placeOrder_Button = page.locator('.btn.btn-default.check_out');
+        this.invoiceAddress_Text = page.locator('id=address_invoice');
     }
 
     async writeComment(comment: string) {
@@ -33,5 +35,11 @@ export class CheckoutPage {
             await expect(this.deliveryAddress_Text).toContainText(addressDetails);
         })
 
+    }
+
+    async assetOnInvoiceAddress(invoiceAddress: string) {
+        await step('Assert on Invoice Address', async () => {
+            await expect(this.invoiceAddress_Text).toContainText(invoiceAddress);
+        })
     }
 }   
