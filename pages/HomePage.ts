@@ -9,6 +9,7 @@ export class HomePage {
 
   constructor(page: Page) {
     this.page = page;
+    //  Locators
     this.logo_img = page.locator('.logo img');
     this.fullFledged_txt = page.locator('#slider-carousel h2');
   }
