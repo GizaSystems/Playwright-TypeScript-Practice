@@ -9,6 +9,7 @@ export class HeaderPage {
   readonly userProfile_link: Locator;
   readonly deleteAccount_link: Locator;
   readonly cart_link: Locator;
+  readonly testCases_link: Locator;
 
   constructor(page: Page) {
     //  Locators
@@ -16,6 +17,7 @@ export class HeaderPage {
     this.signupLoginLogout_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
+    this.testCases_link = page.locator("ul.nav.navbar-nav a[href='/test_cases']");
     this.cart_link = page.locator('//i[@class="fa fa-shopping-cart"]//parent::a');
   }
 
@@ -41,6 +43,11 @@ export class HeaderPage {
   async clickOnLogoutButton() {
     await step("Click on logout button", async () => {
       await this.signupLoginLogout_link.click();
+    })
+  }
+  async clickOnTestCasesLink() {
+    await step("Click on Test Cases link", async () => {
+      await this.testCases_link.click();
     })
   }
   
