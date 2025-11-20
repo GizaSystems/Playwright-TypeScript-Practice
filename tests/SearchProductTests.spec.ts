@@ -39,14 +39,16 @@ test.describe('Automation Excercise Search Product Test Cases', () => {
   test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
+
     productName = testData.productName;
     productsPageTitle = testData.productsPageTitle;
     searchResultsPageTitle = testData.searchResultsPageTitle;
 
-    await homePage.navigate();
     homePage = new HomePage(page);
     headerPage = new HeaderPage(page);
     productsPage = new ProductsPage(page);
+
+    await homePage.navigate();
 
   });
 
