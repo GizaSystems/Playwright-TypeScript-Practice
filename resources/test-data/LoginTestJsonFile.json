@@ -2,5 +2,6 @@
     "username": "ElSharkawy",
     "emailAddress": "m.elsharkawy",
     "password": "tp12345678",
-    "errorMessage": ""
+    "errorMessage": "",
+    "deletedAccountExpectedMessage": "Account deleted!"
 }

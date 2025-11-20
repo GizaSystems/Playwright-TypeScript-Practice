@@ -8,6 +8,7 @@ export class ApisUserManagement {
   // readonly baseURL = 'https://automationexercise.com';   // todos: Should handle the base URL from the config file
   readonly createUser_serviceName = '/api/createAccount';
   readonly login_serviceName = '/api/verifyLogin';
+  readonly deleteUserAccount_serviceName = '/api/deleteAccount';
 
   constructor(request: APIRequestContext) {
     this.request = request;
@@ -50,6 +51,16 @@ export class ApisUserManagement {
     return response;
   }
 
+async deleteUserAccount(email: string, password: string) {
+  return await allure.step(`Delete User Account with email: ${email}`, async () => {
+    const response = await this.request.delete(this.deleteUserAccount_serviceName, {
+      form: { email, password } // POST  مع form data
+    });
+    return response;
+  });
+}
+
+
   /////////Assertions
   async assertCreateUserSuccess(response: APIResponse, expectedMessage: string) {
     expect(response.status()).toBe(200);
@@ -61,6 +72,11 @@ export class ApisUserManagement {
     const body = await response.json();
     expect(body.message).toBe(expectedMessage);
   }
+async assertDeleteUserAccountSuccess(response: APIResponse, expectedMessage: string) {
+  expect(response.status()).toBe(200);
+  const body = await response.json();
+  expect(body.message).toBe(expectedMessage);
+}
 
   ///// Validations
 
