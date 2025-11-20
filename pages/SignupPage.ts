@@ -77,6 +77,7 @@ export class SignupPage {
       await this.page.locator('#years').selectOption(year);
     });
   }
+
   //Assertions
   async assertTextEnterAccountInfoIsVisiable(expectedText: string) {
     await expect(this.enterAccountInfo_title).toHaveText(expectedText);
