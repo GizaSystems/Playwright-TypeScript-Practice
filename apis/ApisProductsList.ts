@@ -1,5 +1,6 @@
-import { expect, type APIRequestContext } from '@playwright/test';
+import { APIResponse, expect, type APIRequestContext } from '@playwright/test';
 import { ApiActions } from '../utils/ApiActions';
+import * as allure from 'allure-js-commons';
 
 export class ApisProductsList {
   readonly request: APIRequestContext;
@@ -13,22 +14,28 @@ export class ApisProductsList {
 
   ///// Actions
 
+  async getProductsListData(): Promise<APIResponse> {
+    return await allure.step(`Get The Available Products List`, async () => {
+      const response = await this.request.get(this.productsList_serviceName, {});
+      return response;
+    });
+  }
 
-  async productsList(): Promise<any> {
-    const response = await this.request.get(this.productsList_serviceName, {});
-    const data = await response.json(); 
-    return data;
+  ///// Validations
+
+  async assertProductsListReturnedSuccessfully(response: APIResponse){
+   return await allure.step(`Validate products list is returned and not empty`, async () => {
+    const data = await response.json();
+    expect(data.responseCode).toBe(200); 
+    expect(data.products && data.products.length > 0).toBe(true);
+   });
+  }
+
+ async validateProductNameExistsInList(response: APIResponse, expectedName: string){
+  return await allure.step(`Verify Product Name Exists In The Available Products List`, async () => {
+   const data = await response.json();
+   const product = data.products.find((p: any) => p.name === expectedName);
+   expect(product?.name).toEqual(expectedName);
+  });
  }
-  
-  async findFirstProductNameByKeyword(response: any, keyword: string): Promise<string> {
-    const product = response.products.find((p: any) => p.name.toLowerCase().includes(keyword.toLowerCase()));
-    return product ? product.name : null;
-  }
-  
-
-  /////////Assertions
-
-  async assertproductsListSuccess(response: any) {
-    expect(response.responseCode).toBe(200);
-  }
 }

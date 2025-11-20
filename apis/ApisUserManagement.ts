@@ -52,10 +52,12 @@ export class ApisUserManagement {
   }
 
   async deleteUser(email: string, password: string): Promise<APIResponse> {
+   return await allure.step(`Delete User Account with email: ${email}`, async () => {
     const response = await this.request.delete(this.deleteUser_serviceName, {
       form: { email, password }
     });
     return response;
+   });
   }
 
   /////////Assertions
@@ -70,9 +72,11 @@ export class ApisUserManagement {
     expect(body.message).toBe(expectedMessage);
   }
   async assertDeleteUserSuccess(response: APIResponse, expectedMessage: string) {
+   return await allure.step(`Verify User deleted Successfully`, async () => {
     expect(response.status()).toBe(200);
     const body = await response.json();
     expect(body.message).toBe(expectedMessage);
+   });
   }
   ///// Validations
 

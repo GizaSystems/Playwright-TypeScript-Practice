@@ -30,8 +30,6 @@ let apisProductsList: ApisProductsList;
 
 let testData: any;
 let email: string;
-let productName1: string;
-let productName2: string;
 
 const timestamp = new Date().toISOString().replace(/[-T:.]/g, "").slice(0, 17);
 
@@ -48,10 +46,10 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     await signupPage.assertTextAccountCreatedIsVisiable(testData.messages.accountCreated);
     await createdAccountPage.clickOnContinueButton();
     await headerPage.assertUserLoggedinSuccessfully(testData.user.username);
-    await homePage.clickViewProduct(productName1);
+    await homePage.clickViewProduct(testData.productName1);
     await productsPage.clickOnAddToCartButton();
     await homePage.navigate();
-    await homePage.clickViewProduct(productName2);
+    await homePage.clickViewProduct(testData.productName2);
     await productsPage.clickOnAddToCartButton();
     await headerPage.clickOnCartLink();
     await cartPage.assertCartPageLoaded(testData.pagesTitle.shoppingCart);
@@ -83,10 +81,10 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
 
     await homePage.navigate();
     await homePage.verifyHomePageVisible(testData.pagesTitle.homePageTitle);
-    const response = await apisProductsList.productsList();
-    await apisProductsList.assertproductsListSuccess(response);
-    productName1 = await apisProductsList.findFirstProductNameByKeyword(response, testData.productName1);
-    productName2 = await apisProductsList.findFirstProductNameByKeyword(response, testData.productName2);
+    const response = await apisProductsList.getProductsListData();
+    await apisProductsList.assertProductsListReturnedSuccessfully(response);
+    await apisProductsList.validateProductNameExistsInList(response, testData.productName1);
+    await apisProductsList.validateProductNameExistsInList(response, testData.productName2);
   });
 
   test.afterEach(async ({request}) => {
