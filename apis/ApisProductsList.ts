@@ -24,7 +24,7 @@ export class ApisProductsList {
   ///// Validations
 
   async assertProductsListReturnedSuccessfully(response: APIResponse){
-   return await allure.step(`Validate products list is returned and not empty`, async () => {
+   return await allure.step(`Validate Products List Returned Successfully And Not Empty`, async () => {
     const data = await response.json();
     expect(data.responseCode).toBe(200); 
     expect(data.products && data.products.length > 0).toBe(true);
