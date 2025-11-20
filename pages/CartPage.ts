@@ -6,14 +6,14 @@ export class CartPage {
 
     readonly proceedToCheckout_Button: Locator;
     readonly shoppingCart_Text: Locator;
-    readonly registerLogin_Link: Locator;
+    readonly checkoutRegisterLogin_Link: Locator;
 
     constructor(page: Page) {
         this.page = page;
 
         this.proceedToCheckout_Button = page.locator('//a[@class="btn btn-default check_out"]');
         this.shoppingCart_Text = page.locator('.breadcrumb li.active');
-        this.registerLogin_Link = page.locator("(//a[@href='/login'])[2]");
+        this.checkoutRegisterLogin_Link = page.locator('//u//parent::a[@href="/login"]');
     }
 
     async clickOnProceedToCheckout() {
@@ -24,7 +24,7 @@ export class CartPage {
 
     async clickCheckoutRegisterLoginLink() {
         await step('Click Checkout Register / Login Link', async () =>{
-            await this.registerLogin_Link.click();
+            await this.checkoutRegisterLogin_Link.click();
         });
     }
 

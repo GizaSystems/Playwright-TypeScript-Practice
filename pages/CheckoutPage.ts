@@ -5,7 +5,6 @@ export class CheckoutPage {
     readonly page: Page;
 
     readonly deliveryAddress_Text: Locator; 
-    readonly productDetails_Link: Locator;
     readonly comment_TextArea: Locator;
     readonly placeOrder_Button: Locator;
 
@@ -13,7 +12,6 @@ export class CheckoutPage {
         this.page = page;
 
         this.deliveryAddress_Text = page.locator('id=address_delivery');
-        this.productDetails_Link = page.locator('//a[@href="/product_details/1"]');
         this.comment_TextArea = page.locator('[name="message"]');
         this.placeOrder_Button = page.locator('.btn.btn-default.check_out');
     }
@@ -35,11 +33,5 @@ export class CheckoutPage {
             await expect(this.deliveryAddress_Text).toContainText(addressDetails);
         })
 
-    }
-
-    async assertOnReviewOrder(expectedProductName: string){
-        await step('Assert On Review Order', async () => {
-            await expect(this.productDetails_Link).toHaveText(expectedProductName);
-        })
     }
 }   

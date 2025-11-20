@@ -1,6 +1,7 @@
 {
     "homePageTitle": "Automation Exercise",
     "productName": "Blue Top",
+    "cartLoadedMessage": "Shopping Cart",
     "username": "Nada",
     "emailAddress": "nada.emad",
     "title": "Mrs.",
@@ -25,7 +26,7 @@
     "cvc": "123",
     "expirationMonth": "06",
     "expirationYear": "2028",
-    "orderPlacedMessage": "Your order has been placed successfully!",
+    "orderPlacedMessage": "Order Placed!",
     "accountDeletedMessage": "Account Deleted!"
 
 }

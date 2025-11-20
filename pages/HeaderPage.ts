@@ -9,8 +9,6 @@ export class HeaderPage {
   readonly userProfile_link: Locator;
   readonly deleteAccount_link: Locator;
   readonly cart_link: Locator;
-  readonly accountDeleted_message: Locator;
-  readonly continue_Button: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -18,9 +16,7 @@ export class HeaderPage {
     this.signupLogin_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
-    this.cart_link = page.locator('//i[@class="fa fa-shopping-cart"]//parent::a');
-    this.accountDeleted_message = page.locator('//h2[@data-qa="account-deleted"]');
-    this.continue_Button = page.locator('//a[@data-qa="continue-button"]');
+    this.cart_link = page.locator('//i[@class="fa fa-shopping-cart"]//parent::a[@href="/view_cart"]');
   }
 
   ///// Actions
@@ -48,25 +44,10 @@ export class HeaderPage {
     });
   }
 
-    async clickContinue() {
-    await step('Click Continue', async () => {
-      await this.continue_Button.click();
-    });
-  }
-
   ///// Validations
   async assertUserLoggedinSuccessfully(username: string) {
     await step("Assert User is Loggedin Successfully", async () => {
       await expect(this.userProfile_link).toContainText(username);
     });
   }
-
-  async assertOnAccountDeletedMessage(expectedMessage: string){
-    await step('Assert on Account Deleted Message', async () => {
-      await expect(this.accountDeleted_message).toHaveText(expectedMessage);
-    });
-  }
-
-
-
 }
