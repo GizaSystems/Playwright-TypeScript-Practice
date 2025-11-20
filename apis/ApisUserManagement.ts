@@ -72,7 +72,7 @@ async deleteUserAccount(email: string, password: string) {
     const body = await response.json();
     expect(body.message).toBe(expectedMessage);
   }
-async assertOnDeleteUserAccountSuccess(response: APIResponse, expectedMessage: string) {
+async assertDeleteUserAccountSuccess(response: APIResponse, expectedMessage: string) {
   expect(response.status()).toBe(200);
   const body = await response.json();
   expect(body.message).toBe(expectedMessage);
