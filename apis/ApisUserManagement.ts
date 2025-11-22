@@ -54,7 +54,7 @@ export class ApisUserManagement {
 async deleteUserAccount(email: string, password: string) {
   return await allure.step(`Delete User Account with email: ${email}`, async () => {
     const response = await this.request.delete(this.deleteUserAccount_serviceName, {
-      form: { email, password } // POST  مع form data
+      form: { email, password }
     });
     return response;
   });
