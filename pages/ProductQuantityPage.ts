@@ -45,9 +45,9 @@ export class ProductQuantityPage {
         })
     }
     /////////////validations////////////
-    async verifyProductDetailsIsOpened(label: string) {
+    async verifyProductDetailsIsOpened(title: string) {
         await step('Verify Product Details is Opened', async () => {
-            await expect(this.page).toHaveTitle(label);
+            await expect(this.page).toHaveTitle(title);
         })
     }
     async verifyProductAddedWithSelectedQuantity(quantity: number) {

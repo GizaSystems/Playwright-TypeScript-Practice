@@ -18,6 +18,7 @@ test.describe('Verify Product Quantity in Cart Page', () => {
         const randomEmail = testData.emailAddress + timestamp + '@test.com';
         await homePage.navigate();
         await homePage.clickViewProduct(testData.productName);
+        await productQuantityPage.verifyProductDetailsIsOpened(testData.productName);
         await productQuantityPage.increaseProductQuantity(parseInt(testData.displayedQuantity));
         await productQuantityPage.clickOnAddToCartButton();
         await productQuantityPage.clickOnViewCartButton();
