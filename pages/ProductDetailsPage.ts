@@ -11,7 +11,6 @@ export class ProductDetailsPage{
     readonly productCondition : Locator;
     readonly productBrand : Locator;         
 
-   
     constructor(page: Page) {
         this.page = page;
         this.productName = page.locator('//div[@class="product-information"]/h2');

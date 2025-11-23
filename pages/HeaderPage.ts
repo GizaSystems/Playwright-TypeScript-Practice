@@ -18,11 +18,10 @@ export class HeaderPage {
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
     this.cart_link = page.locator('//i[@class="fa fa-shopping-cart"]//parent::a');
-    this.products_Link = page.locator ('a[href="/products"]');
+    this.products_Link = page.locator('//i[contains(@class,"material-icons")]/parent::a[contains(@href,"/products")]');
   }
 
   ///// Actions
-
   async clickOnSignupLoginLink() {
     await step("Click on Signup/Login Link", async () => {
       await this.signupLoginLogout_link.click();

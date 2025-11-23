@@ -14,17 +14,17 @@ export class ProductsPage {
 
         this.addToCart_Button = page.locator('.btn.btn-default.cart');
         this.continueShopping_Button = page.locator('[data-dismiss="modal"]');
-        this.sale_image = page.locator('#sale_image');
-        this.productDetails_Button = page.locator('.col-sm-4', { hasText: 'Blue Top' }).getByRole('link', { name: 'View Product' });
+        this.sale_image = page.locator('[id="sale_image"]');
+        this.productDetails_Button = page.locator('div.product-image-wrapper:has-text("Blue Top") a[href^="/product_details/"]');
     }
-
+    
+    ////Actions
     async clickOnAddToCartButton() {
         await step('Add Product to Cart', async () => {
             await this.addToCart_Button.click();
             await this.continueShopping_Button.click();
         })
-    }
-    
+    }   
     async clickViewProductOfFirstItem() {
         await step('Click on Product Details', async () => {
             await this.productDetails_Button.click();

@@ -4,7 +4,7 @@ import { HeaderPage } from '../pages/HeaderPage';
 import { HomePage } from '../pages/HomePage';
 import { ProductsPage } from '../pages/ProductsPage';
 import { ProductDetailsPage } from '../pages/ProductDetailsPage';
-import { ApisProductManagement } from '../apis/ApisProductManagement';
+import { ApisProductsList } from '../apis/ApisProductsList';
 import * as fs from 'fs';
 
 let context: BrowserContext;
@@ -14,7 +14,7 @@ let homePage: HomePage;
 let headerPage: HeaderPage;
 let productsPage: ProductsPage;
 let productDetailsPage: ProductDetailsPage;
-let apisProductManagement: ApisProductManagement;
+let apisProductsList: ApisProductsList;
 
 
 let testData: any;
@@ -28,9 +28,8 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     await productsPage.verifyProductsPageVisible(testData.productsPageTitle);
     await productsPage.clickViewProductOfFirstItem();
     await productDetailsPage.verifyProductDetailsAreVisible(testData.productDetailsTitle);
-    const response = await apisProductManagement.getProductsList();
-    await apisProductManagement.assertGetProductsListSuccess(response,testData.productName, testData.productPrice, testData.productBrand, testData.category, testData.userType);
-
+    const response = await apisProductsList.getProductsListData();
+    await apisProductsList.validateFirstProductDetails(response,testData.productName, testData.productPrice, testData.productBrand, testData.category, testData.userType);
   });
 
   test.beforeAll(async () => {
@@ -38,7 +37,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
   });
 
   test.beforeEach(async ({ request,browser }) => {
-    apisProductManagement = new ApisProductManagement(request);
+    apisProductsList = new ApisProductsList(request);
     context = await browser.newContext();
     page = await context.newPage();
     homePage = new HomePage(page);
@@ -47,8 +46,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     productDetailsPage = new ProductDetailsPage(page);
     
     await homePage.navigate();
-    await homePage.verifyHomePageVisible(testData.homePageTitle);
-    
+    await homePage.verifyHomePageVisible(testData.homePageTitle);   
   });
 
   test.afterEach(async () => {
