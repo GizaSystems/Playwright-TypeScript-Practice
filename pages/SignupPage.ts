@@ -66,7 +66,7 @@ export class SignupPage {
       await this.createAccount_Button.click();
     });
   }
-
+  
   async selectCountry(countryName: any) {
     await this.page.locator('#country').selectOption({ label: countryName });
   }
@@ -77,6 +77,7 @@ export class SignupPage {
       await this.page.locator('#years').selectOption(year);
     });
   }
+
   //Assertions
   async assertTextEnterAccountInfoIsVisiable(expectedText: string) {
     await expect(this.enterAccountInfo_title).toHaveText(expectedText);
@@ -91,5 +92,4 @@ export class SignupPage {
     await expect(this.loggedInUser_Label).toBeVisible();
     await expect(this.loggedInUser_Label).toContainText(expectedName);
   }
-
 }

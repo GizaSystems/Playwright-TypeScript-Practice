@@ -8,11 +8,14 @@ export class ApisUserManagement {
   // readonly baseURL = 'https://automationexercise.com';   // todos: Should handle the base URL from the config file
   readonly createUser_serviceName = '/api/createAccount';
   readonly login_serviceName = '/api/verifyLogin';
+  readonly deleteUser_serviceName = '/api/deleteAccount';
 
   constructor(request: APIRequestContext) {
     this.request = request;
     this.apiActions = new ApiActions(request);
   }
+
+  ///// Actions
 
   async createUser(name: string, email: string, password: string): Promise<APIResponse> {
     return await allure.step(`Create User Account with name: ${name}, First Name: ${email} and Last Name: ${password}`,
@@ -48,6 +51,15 @@ export class ApisUserManagement {
     return response;
   }
 
+  async deleteUser(email: string, password: string): Promise<APIResponse> {
+   return await allure.step(`Delete User Account with email: ${email}`, async () => {
+    const response = await this.request.delete(this.deleteUser_serviceName, {
+      form: { email, password }
+    });
+    return response;
+   });
+  }
+
   /////////Assertions
   async assertCreateUserSuccess(response: APIResponse, expectedMessage: string) {
     expect(response.status()).toBe(200);
@@ -58,5 +70,20 @@ export class ApisUserManagement {
     expect(response.status()).toBe(200);
     const body = await response.json();
     expect(body.message).toBe(expectedMessage);
+  }
+  async assertDeleteUserSuccess(response: APIResponse, expectedMessage: string) {
+   return await allure.step(`Verify User Deleted Successfully`, async () => {
+    expect(response.status()).toBe(200);
+    const body = await response.json();
+    expect(body.message).toBe(expectedMessage);
+   });
+  }
+  ///// Validations
+
+  async verifyUserCreatedSuccessfully(createResponse: APIResponse, createUserConfirmationMessage: string) {
+    await allure.step(`Verify User Created Successfully`, async () => {
+      expect(createResponse.status()).toBe(200);
+      expect((await createResponse.json()).message).toBe(createUserConfirmationMessage);
+    });
   }
 }
