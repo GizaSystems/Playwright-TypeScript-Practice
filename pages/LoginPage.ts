@@ -5,23 +5,27 @@ export class LoginPage {
   readonly page: Page;
   readonly url: string = '/login';
 
+  // Locators
   readonly loginEmail_Input: Locator;
   readonly loginPassword_Input: Locator;
   readonly login_Button: Locator;
+  readonly login_header: Locator;
   readonly signupName_Input: Locator;
   readonly signupEmail_Input: Locator;
   readonly signup_Button: Locator;
 
   constructor(page: Page) {
     this.page = page;
-    //  Locators
     this.loginEmail_Input = page.locator('[data-qa="login-email"]');
     this.loginPassword_Input = page.locator('[data-qa="login-password"]');
     this.login_Button = page.locator('[data-qa="login-button"]');
+    this.login_header = page.locator("div[class='login-form'] h2");
     this.signupName_Input = page.locator('[data-qa="signup-name"]');
     this.signupEmail_Input = page.locator('[data-qa="signup-email"]');
     this.signup_Button = page.locator('[data-qa="signup-button"]');
   }
+
+  ///// Actions
 
   async navigate() {
     await step(`Navigate to Login Page`, async () => {
@@ -36,6 +40,7 @@ export class LoginPage {
       await this.login_Button.click();
     });
   }
+
   async openSignupPage(signupName: string, signupEmail: string) {
     await step(`User Navigates To Signup Page With: signupName: ${signupName} and signupEmail: ${signupEmail}`, async () => {
       await this.signupName_Input.fill(signupName);
@@ -44,4 +49,12 @@ export class LoginPage {
     });
   }
 
+  ///// Validations
+
+  async verifyThatUserIsNavigatedToLoginPage(loginPageTitle: string) {
+    await step(`Verify that user is navigated to login page`, async () => {
+      await expect(this.page).toHaveTitle(loginPageTitle);
+      await expect(this.login_header).toBeVisible();
+    });
+  }
 }
