@@ -3,6 +3,5 @@
     "decreasedQuantity": "3",
     "zeroQuantity": "0",
     "details": "Automation Exercise - Product Details",
-    "errorMessage": "Cant add product with zero quantity",
     "productName": "Blue Top"
   }
