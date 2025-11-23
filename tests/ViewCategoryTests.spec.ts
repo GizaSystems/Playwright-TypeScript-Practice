@@ -6,17 +6,18 @@ let context: BrowserContext;
 let page: Page;
 let homePage: HomePage;
 
-test('Test Case 18: View Category Products', async () => {
-  allure.feature('Automation Exercise Category Navigation');
-  await homePage.navigate();
-  await homePage.assertCategoriesVisible();
-  for (const { mainCategory, subCategory, expectedText } of categoryData) {
-    await homePage.expandCategory(mainCategory);
-    await homePage.clickSubCategory(mainCategory, subCategory);
-    await homePage.assertCategoryPageText(expectedText);
-  }
-});
 test.describe('Automation Exercise Category Navigation', () => {
+  test('Test Case 18: View Category Products', async () => {
+    allure.feature('Automation Exercise Category Navigation');
+    await homePage.navigate();
+    await homePage.assertCategoriesVisible();
+    for (const { mainCategory, subCategory, expectedText } of categoryData) {
+      await homePage.expandCategory(mainCategory);
+      await homePage.clickSubCategory(mainCategory, subCategory);
+      await homePage.assertCategoryPageText(expectedText);
+    }
+  });
+
   test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
