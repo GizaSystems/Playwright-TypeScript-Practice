@@ -50,7 +50,7 @@ export class ProductQuantityPage {
             await expect(this.productQuantityBtn_button).toContainText(quantity.toString());
         })
     }
-    async verifyErrorMessageWithZeroQuantity(expectedText: string) {
-    await expect(this.errorMessage_label).toHaveText(expectedText);
-  }
+//     async verifyErrorMessageWithZeroQuantity(expectedText: string) {
+//     await expect(this.errorMessage_label).toHaveText(expectedText);
+//   }
 }
