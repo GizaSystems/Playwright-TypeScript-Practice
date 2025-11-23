@@ -11,10 +11,10 @@ let productQuantityPage: ProductQuantityPage;
 let testData: any;
 const timestamp = new Date().toISOString().replace(/[-T:.]/g, "").slice(0, 17);
 
-test.describe('Test Case 13: Verify Product Quantity in Cart Page', () => {
+test.describe('Test Case 27: Verify Product Quantity in Cart Page', () => {
     test('Verify That User Can Add Product Quantity', async () => {
         allure.feature('Automation Exercise Product Quantity Tests');
-        allure.tms('137183022');
+        allure.tms('137183261');
 
         const randomEmail = testData.emailAddress + timestamp + '@test.com';
         await homePage.navigate();
@@ -28,7 +28,7 @@ test.describe('Test Case 13: Verify Product Quantity in Cart Page', () => {
 
     test('Verify That User Can Decrease Product Quantity', async () => {
         allure.feature('Automation Exercise Product Quantity Tests');
-        allure.tms('137183022');
+        allure.tms('137183261');
 
         const randomEmail = testData.emailAddress + timestamp + '@test.com';
         await homePage.navigate();
@@ -41,26 +41,28 @@ test.describe('Test Case 13: Verify Product Quantity in Cart Page', () => {
         await productQuantityPage.verifyProductAddedWithSelectedQuantity(testData.decreasedQuantity);
     });
 
-//     test('Verify That User Cannot Add Zero Product Quantity', async () => {
-//         allure.feature('Automation Exercise Product Quantity Tests');
-//         allure.tms('137183022');
+    //     test('Verify That User Cannot Add Zero Product Quantity', async () => {
+    //         allure.feature('Automation Exercise Product Quantity Tests');
+    //         allure.tms('137183022');
 
-//         const randomEmail = testData.emailAddress + timestamp + '@test.com';
-//         await homePage.navigate();
-//         await homePage.clickViewProduct(testData.productName);
-//         await productQuantityPage.verifyProductDetailsIsOpened(testData.details);
-//         await productQuantityPage.addProductQuantity(parseInt(testData.zeroQuantity));
-//         await productQuantityPage.clickOnAddToCartButton();
-//         await productQuantityPage.verifyErrorMessageWithZeroQuantity(testData.displayedQuantity)
-        
-// });
-test.beforeAll(async () => {
-    testData = JSON.parse(fs.readFileSync('./resources/test-data/ProductQuantityTestJsonFile.json', 'utf8'));
-});
-test.beforeEach(async ({ browser }) => {
-    context = await browser.newContext();
-    page = await context.newPage();
-    homePage = new HomePage(page);
-    productQuantityPage = new ProductQuantityPage(page);
-});
+    //         const randomEmail = testData.emailAddress + timestamp + '@test.com';
+    //         await homePage.navigate();
+    //         await homePage.clickViewProduct(testData.productName);
+    //         await productQuantityPage.verifyProductDetailsIsOpened(testData.details);
+    //         await productQuantityPage.addProductQuantity(parseInt(testData.zeroQuantity));
+    //         await productQuantityPage.clickOnAddToCartButton();
+    //         await productQuantityPage.verifyErrorMessageWithZeroQuantity(testData.displayedQuantity)
+
+    // });
+    
+    test.beforeAll(async () => {
+        testData = JSON.parse(fs.readFileSync('./resources/test-data/ProductQuantityTestJsonFile.json', 'utf8'));
+    });
+
+    test.beforeEach(async ({ browser }) => {
+        context = await browser.newContext();
+        page = await context.newPage();
+        homePage = new HomePage(page);
+        productQuantityPage = new ProductQuantityPage(page);
+    });
 });
