@@ -13,6 +13,7 @@ export class HomePage {
   readonly categoryPageHeading: Locator;
   constructor(page: Page) {
     this.page = page;
+    //  Locators
     this.logo_img = page.locator('.logo img');
     this.categoryHeader = page.getByRole('heading', { name: /category/i });
     this.fullFledged_txt = page.locator('#slider-carousel h2');
