@@ -1,0 +1,11 @@
+[{
+        "mainCategory": "Women",
+        "subCategory": "Dress",
+        "expectedText": "Women - Dress Products"
+    },
+    {
+        "mainCategory": "Men",
+        "subCategory": "Tshirts",
+        "expectedText": "Men - Tshirts Products"
+    }
+]

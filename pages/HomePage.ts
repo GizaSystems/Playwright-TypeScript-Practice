@@ -1,5 +1,5 @@
-import { test, type Page, type Locator, expect } from "@playwright/test";
-import { step } from "allure-js-commons";
+import { test, type Page, type Locator, expect } from '@playwright/test';
+import { step } from 'allure-js-commons';
 
 export class HomePage {
   readonly page: Page;
@@ -13,10 +13,10 @@ export class HomePage {
   readonly categoryPageHeading: Locator;
   constructor(page: Page) {
     this.page = page;
-    this.logo_img = page.locator(".logo img");
-    this.categoryHeader = page.locator("div.left-sidebar >> text=Category");
-    this.fullFledged_txt = page.locator("#slider-carousel h2");
-    this.categoryPageHeading = page.locator("h2.title.text-center");
+    this.logo_img = page.locator('.logo img');
+    this.categoryHeader = page.getByRole('heading', { name: /category/i });
+    this.fullFledged_txt = page.locator('#slider-carousel h2');
+    this.categoryPageHeading = page.locator('h2.title.text-center');
   }
   //locator helper
   toggleCategory(name: string) {
@@ -33,16 +33,16 @@ export class HomePage {
 
   viewProduct_Button(productName: string): Locator {
     return this.page
-      .locator("div.product-image-wrapper", { hasText: productName })
+      .locator('div.product-image-wrapper', { hasText: productName })
       .locator("a[href^='/product_details/']");
   }
 
   ///// Actions
 
   async navigate() {
-    await step("Navigate to Home Page", async () => {
-      await this.page.goto(" ");
-      await this.page.waitForLoadState("domcontentloaded");
+    await step('Navigate to Home Page', async () => {
+      await this.page.goto('');
+      await this.page.waitForLoadState('domcontentloaded');
     });
   }
 
@@ -51,25 +51,9 @@ export class HomePage {
       const toggle = this.toggleCategory(name);
       await toggle.scrollIntoViewIfNeeded();
       await toggle.click();
-      await this.categoryPanel(name).waitFor({ state: "visible" });
+      await this.categoryPanel(name).waitFor({ state: 'visible' });
     });
   }
-
-  ///// Validations
-
-  async clickViewProduct(productName: string) {
-    await step(`Click View Product for ${productName}`, async () => {
-      await this.viewProduct_Button(productName).click();
-    });
-  }
-
-  async verifyHomePageVisible(expectedTitle: string) {
-    await step("Verify home page is visible successfully", async () => {
-      await expect(this.logo_img).toBeVisible();
-      await expect(this.page).toHaveTitle(expectedTitle);
-    });
-  }
-
   async clickSubCategory(main: string, sub: string) {
     await step(`Click '${sub}' under '${main}' category`, async () => {
       const subLink = this.subCategory(main, sub);
@@ -77,6 +61,22 @@ export class HomePage {
       await subLink.click();
     });
   }
+
+  async clickViewProduct(productName: string) {
+    await step(`Click View Product for ${productName}`, async () => {
+      await this.viewProduct_Button(productName).click();
+    });
+  }
+  
+  ///// Validations
+
+  async verifyHomePageVisible(expectedTitle: string) {
+    await step('Verify home page is visible successfully', async () => {
+      await expect(this.logo_img).toBeVisible();
+      await expect(this.page).toHaveTitle(expectedTitle);
+    });
+  }
+
   async assertCategoriesVisible() {
     await step("Verify 'Category' section is visible", async () => {
       await expect(this.categoryHeader).toBeVisible();
@@ -91,7 +91,7 @@ export class HomePage {
   }
 
   async verifyFullFledgedTextVisible(expectedText: string) {
-    await step("Verify Full-Fledged Text is Visible", async () => {
+    await step('Verify Full-Fledged Text is Visible', async () => {
       await expect(this.fullFledged_txt.first()).toHaveText(expectedText);
     });
   }
