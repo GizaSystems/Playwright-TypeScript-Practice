@@ -8,7 +8,7 @@ export class ApisUserManagement {
   // readonly baseURL = 'https://automationexercise.com';   // todos: Should handle the base URL from the config file
   readonly createUser_serviceName = '/api/createAccount';
   readonly login_serviceName = '/api/verifyLogin';
-  readonly deleteUserAccount_serviceName = '/api/deleteAccount';
+  readonly deleteUser_serviceName = '/api/deleteAccount';
 
   constructor(request: APIRequestContext) {
     this.request = request;
@@ -59,7 +59,6 @@ async deleteUserAccount(email: string, password: string) {
     return response;
   });
 }
-
 
   /////////Assertions
   async assertCreateUserSuccess(response: APIResponse, expectedMessage: string) {
