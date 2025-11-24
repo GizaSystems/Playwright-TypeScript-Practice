@@ -18,7 +18,6 @@ export class FooterPage {
     this.submit_Button = page.locator('#subscribe');
     this.successMessage = page.locator('#success-subscribe');
     this.arrowBottomRightSide_Button = page.locator('#scrollUp');
-
   }
 
     ///// Actions
