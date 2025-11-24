@@ -9,7 +9,7 @@ export class HeaderPage {
   readonly userProfile_link: Locator;
   readonly deleteAccount_link: Locator;
   readonly cart_link: Locator;
-  readonly arrowBottomRightSide_Button: Locator;
+  readonly products_link: Locator;
 
   constructor(page: Page) {
     //  Locators
@@ -17,8 +17,8 @@ export class HeaderPage {
     this.signupLoginLogout_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
-    this.arrowBottomRightSide_Button = page.locator('#scrollUp');
     this.cart_link = page.locator('//ul//i[@Class="fa fa-shopping-cart"]//parent::a');
+    this.products_link = page.locator('//i[@class="material-icons card_travel"]//parent::a');
   }
 
   ///// Actions
@@ -40,6 +40,12 @@ export class HeaderPage {
     });
   }
 
+  async clickOnProductsLink() {
+    await step("Click on Products Link", async () => {
+      await this.products_link.click();
+    });
+  }
+
   async clickOnLogoutButton() {
     await step("Click on logout button", async () => {
       await this.signupLoginLogout_link.click();
@@ -49,12 +55,6 @@ export class HeaderPage {
   async scrollToHeader() {
     await step('Scroll to Header', async () => {
       await this.page.evaluate(() => window.scrollTo(0, 0));
-    });
-  }
-
-  async clickArrowScrollToHeader() {
-    await step(' Click on arrow at bottom right side to scroll upward', async () => {
-      await this.arrowBottomRightSide_Button.click();
     });
   }
 
