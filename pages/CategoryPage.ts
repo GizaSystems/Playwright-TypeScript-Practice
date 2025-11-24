@@ -37,18 +37,21 @@ export class CategoryPage {
     await step(`Click '${sub}' under '${main}' category`, async () => {
       const subLink = this.subCategory(main, sub);
       await subLink.scrollIntoViewIfNeeded();
-      await subLink.click();
+      await Promise.all([this.page.waitForNavigation({ waitUntil: 'networkidle' }), subLink.click()]);
     });
   }
   //Validations
   async assertCategoriesVisible() {
     await step("Verify 'Category' section is visible", async () => {
+      await this.categoryHeader.scrollIntoViewIfNeeded();
+      await this.categoryHeader.waitFor({ state: 'visible', timeout: 10000 });
       await expect(this.categoryHeader).toBeVisible();
     });
   }
 
   async assertCategoryPageText(expectedText: string) {
     await step(`Verify category page shows '${expectedText}'`, async () => {
+      await this.categoryPage_heading.waitFor({ state: 'visible', timeout: 10000 });
       const actualText = await this.categoryPage_heading.textContent();
       expect(actualText?.trim().toLowerCase()).toBe(expectedText.toLowerCase());
     });
