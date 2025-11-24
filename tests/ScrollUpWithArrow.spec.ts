@@ -1,14 +1,12 @@
 import { test, Page, BrowserContext } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 import { FooterPage } from '../pages/FooterPage'
-import { HeaderPage } from '../pages/HeaderPage';
 import { HomePage } from '../pages/HomePage';
 import * as fs from 'fs';
 
 let context: BrowserContext;
 let page: Page;
 
-let headerPage: HeaderPage;
 let homePage: HomePage;
 let footerPage: FooterPage;
 
@@ -35,7 +33,6 @@ test.describe('Automation Exercise Scroll Up Test Cases', () => {
     context = await browser.newContext();
     page = await context.newPage();
     homePage = new HomePage(page);
-    headerPage = new HeaderPage(page);
     footerPage = new FooterPage(page);
   });
 
