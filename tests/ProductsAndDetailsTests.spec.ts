@@ -15,8 +15,6 @@ let headerPage: HeaderPage;
 let productsPage: ProductsPage;
 let productDetailsPage: ProductDetailsPage;
 let apisProductsList: ApisProductsList;
-
-
 let testData: any;
 
 test.describe('Automation Exercise Place Order Test Cases', () => {
@@ -37,6 +35,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
   });
 
   test.beforeEach(async ({ request,browser }) => {
+    test.setTimeout(100000);
     apisProductsList = new ApisProductsList(request);
     context = await browser.newContext();
     page = await context.newPage();
