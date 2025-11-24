@@ -36,10 +36,13 @@ export class CategoryPage {
   async clickSubCategory(main: string, sub: string) {
     await step(`Click '${sub}' under '${main}' category`, async () => {
       const subLink = this.subCategory(main, sub);
-      await subLink.scrollIntoViewIfNeeded();
-      await Promise.all([this.page.waitForNavigation({ waitUntil: 'networkidle' }), subLink.click()]);
-      // CI FIX: Ensure page is fully loaded before next steps
-      await this.page.waitForLoadState('domcontentloaded');
+      const panel = this.categoryPanel(main);
+      const className = await panel.getAttribute('class');
+      if (!className || !className.includes('in')) {
+        await this.expandCategory(main);
+      }
+      await subLink.waitFor({ state: 'visible' });
+      await Promise.all([this.page.waitForLoadState('domcontentloaded'), subLink.click()]);
     });
   }
   //Validations
