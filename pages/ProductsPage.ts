@@ -6,6 +6,7 @@ export class ProductsPage {
     readonly page: Page;
     readonly addToCart_Button: Locator;
     readonly continueShopping_Button: Locator;
+    readonly allBrands_Text: Locator;
     readonly productsPage_title: Locator;
     readonly searchBar_field: Locator;
     readonly searchBar_button: Locator;
@@ -14,9 +15,9 @@ export class ProductsPage {
 
     constructor(page: Page) {
         this.page = page;
-
         this.addToCart_Button = page.locator('.btn.btn-default.cart');
         this.continueShopping_Button = page.locator('[data-dismiss="modal"]');
+        this.allBrands_Text = page.locator('.brands-name');
         this.productsPage_title = page.locator('.title.text-center');
         this.searchBar_field = page.locator('input[id="search_product"]');
         this.searchBar_button = page.locator('button[id="submit_search"]');
@@ -24,11 +25,21 @@ export class ProductsPage {
         this.firstSearchResult_name = page.locator('div[class="productinfo text-center"] p');
     }
 
+    brand_text(brandName: string): Locator {
+        return this.page.locator(`a[href='/brand_products/${brandName}']`);
+    }
+
     //Actions
     async clickOnAddToCartButton() {
         await step('Add Product to Cart', async () => {
             await this.addToCart_Button.click();
             await this.continueShopping_Button.click();
+        })
+    }
+
+    async clickOnBrand(brandName: string) {
+        await step(`Click View Product for ${brandName}`, async () => {
+            await this.brand_text(brandName).click();
         })
     }
 
@@ -45,6 +56,12 @@ export class ProductsPage {
     }
 
     //Assertions
+    async assertOnBrandsAreVisible() {
+        await step('Assert on Brands are Visible on Left Side Bar', async () => {
+            await expect(this.allBrands_Text).toBeVisible();
+        });
+    }
+
     async assertOnProductsPageTitle(pageTitle: string) {
         await step('Assert on Products Page Title', async () => {
             await expect(this.productsPage_title).toContainText(pageTitle);

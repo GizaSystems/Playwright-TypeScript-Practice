@@ -17,9 +17,8 @@ export class HeaderPage {
     this.signupLoginLogout_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
-    this.cart_link = page.locator('//i[@class="fa fa-shopping-cart"]//parent::a');
-    this.cart_link = page.locator('//i[@class="fa fa-shopping-cart"]//parent::a');
-    this.products_link = page.locator('//i[@class="material-icons card_travel"]//parent::a')
+    this.cart_link = page.locator('//ul//i[@Class="fa fa-shopping-cart"]//parent::a');
+    this.products_link = page.locator('//i[@class="material-icons card_travel"]//parent::a');
   }
 
   ///// Actions
@@ -34,9 +33,15 @@ export class HeaderPage {
       await this.deleteAccount_link.click();
     });
   }
-    async clickOnCartLink() {
+  async clickOnCartLink() {
     await step("Click on Cart Link", async () => {
       await this.cart_link.click();
+    });
+  }
+
+  async clickOnProductsLink() {
+    await step("Click on Products Link", async () => {
+      await this.products_link.click();
     });
   }
 
@@ -45,19 +50,12 @@ export class HeaderPage {
       await this.signupLoginLogout_link.click();
     })
   }
-  
+
   async scrollToHeader() {
     await step('Scroll to Header', async () => {
       await this.page.evaluate(() => window.scrollTo(0, 0));
     });
   }
-
-  async clickOnProductsLink() {
-    await step("Click on Products Link, async", async () => {
-      await this.products_link.click();
-    })
-  }
-
 
   ///// Validations
   async assertUserLoggedinSuccessfully(username: string) {
