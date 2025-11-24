@@ -29,7 +29,6 @@ test.describe('Verify Email Subscription Functionality', () => {
     await footerPage.verifySuccessMessage(testData.successMessage);
   });
 
-
   test('User can subscribe to the newsletter from the cart page', async () => {
     allure.feature('Email Subscription - Cart Page');
     allure.tms('137183231');
