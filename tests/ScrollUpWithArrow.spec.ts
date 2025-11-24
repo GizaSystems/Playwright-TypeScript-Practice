@@ -23,7 +23,7 @@ test.describe('Automation Exercise Scroll Up Test Cases', () => {
     await homePage.navigate();
     await footerPage.scrollToFooter();
     await footerPage.verifySubscriptionText();
-    await headerPage.clickArrowScrollToHeader();
+    await footerPage.clickArrowScrollToHeader();
     await homePage.verifyFullFledgedTextVisible(testData.homePage_Text);
   });
 
