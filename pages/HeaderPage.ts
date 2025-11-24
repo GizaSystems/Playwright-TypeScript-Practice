@@ -9,7 +9,8 @@ export class HeaderPage {
   readonly userProfile_link: Locator;
   readonly deleteAccount_link: Locator;
   readonly cart_link: Locator;
-  readonly products_Link: Locator;
+  readonly products_link: Locator;
+
 
   constructor(page: Page) {
     //  Locators
@@ -18,7 +19,7 @@ export class HeaderPage {
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
     this.cart_link = page.locator('//ul//i[@Class="fa fa-shopping-cart"]//parent::a');
-    this.products_Link = page.locator('//i[contains(@class,"material-icons")]/parent::a[contains(@href,"/products")]');
+    this.products_link = page.locator('//i[@class="material-icons card_travel"]//parent::a');
   }
 
   ///// Actions
@@ -27,6 +28,7 @@ export class HeaderPage {
       await this.signupLoginLogout_link.click();
     });
   }
+  
   async clickOnDeleteAccountLink() {
     await step("Click on Delete Account Link", async () => {
       await this.deleteAccount_link.click();
@@ -39,15 +41,15 @@ export class HeaderPage {
     });
   }
 
+  async clickOnProductsLink() {
+    await step("Click on Products Link", async () => {
+      await this.products_link.click();
+    });
+  }
+
   async clickOnLogoutButton() {
     await step("Click on logout button", async () => {
       await this.signupLoginLogout_link.click();
-    })
-  }
-
-  async clickOnProductsLink() {
-    await step("Click on Products Link", async () => {
-      await this.products_Link.click();
     })
   }
   

@@ -24,7 +24,7 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
     allure.tms('137183156');
     await headerPage.clickOnProductsLink();
     await productsPage.verifyProductsPageVisible(testData.productsPageTitle);
-    await productsPage.clickViewProductOfFirstItem();
+    await productsPage.clickViewProduct(1);
     await productDetailsPage.verifyProductDetailsAreVisible(testData.productDetailsTitle);
     const response = await apisProductsList.getProductsListData();
     await apisProductsList.validateFirstProductDetails(response,testData.productName, testData.productPrice, testData.productBrand, testData.category, testData.userType);
@@ -35,7 +35,6 @@ test.describe('Automation Exercise Place Order Test Cases', () => {
   });
 
   test.beforeEach(async ({ request,browser }) => {
-    test.setTimeout(100000);
     apisProductsList = new ApisProductsList(request);
     context = await browser.newContext();
     page = await context.newPage();
