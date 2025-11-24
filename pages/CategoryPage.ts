@@ -8,7 +8,7 @@ export class CategoryPage {
   constructor(page: Page) {
     this.page = page;
     //  Locators
-    this.categoryHeader = page.locator('div.left-sidebar h2');
+    this.categoryHeader = page.getByRole('heading', { name: 'Category' });
     this.categoryPage_heading = page.locator('h2.title.text-center');
   }
   //locator helper
@@ -48,7 +48,6 @@ export class CategoryPage {
   //Validations
   async assertCategoriesVisible() {
     await step("Verify 'Category' section is visible", async () => {
-      // CI fix: Ensure page finished loading *before* touching the locator
       await this.page.waitForLoadState('domcontentloaded');
       await this.categoryHeader.waitFor({ state: 'attached', timeout: 15000 });
       await this.categoryHeader.scrollIntoViewIfNeeded();
