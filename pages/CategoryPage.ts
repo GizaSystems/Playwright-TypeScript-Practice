@@ -8,7 +8,7 @@ export class CategoryPage {
   constructor(page: Page) {
     this.page = page;
     //  Locators
-    this.categoryHeader = page.locator('h2.category-header');
+    this.categoryHeader = page.locator('div.sidebar h2.category-header');
     this.categoryPage_heading = page.locator('h2.title.text-center');
   }
   //locator helper
