@@ -38,13 +38,17 @@ export class CategoryPage {
       const subLink = this.subCategory(main, sub);
       await subLink.scrollIntoViewIfNeeded();
       await Promise.all([this.page.waitForNavigation({ waitUntil: 'networkidle' }), subLink.click()]);
+      // CI FIX: Ensure page is fully loaded before next steps
+      await this.page.waitForLoadState('domcontentloaded');
     });
   }
   //Validations
   async assertCategoriesVisible() {
     await step("Verify 'Category' section is visible", async () => {
+      // CI fix: Ensure page finished loading *before* touching the locator
+      await this.page.waitForLoadState('domcontentloaded');
+      await this.categoryHeader.waitFor({ state: 'attached', timeout: 15000 });
       await this.categoryHeader.scrollIntoViewIfNeeded();
-      await this.categoryHeader.waitFor({ state: 'visible', timeout: 10000 });
       await expect(this.categoryHeader).toBeVisible();
     });
   }
