@@ -24,7 +24,7 @@ export class LoginPage {
     this.signupName_Input = page.locator('[data-qa="signup-name"]');
     this.signupEmail_Input = page.locator('[data-qa="signup-email"]');
     this.signup_Button = page.locator('[data-qa="signup-button"]');
-    this.login_Error_Message = page.locator('p[style="color: red;"]:has-text("Your email or password is incorrect!")');
+    this.login_Error_Message = page.locator('//div[@class="login-form"]//p');
 
   }
 
