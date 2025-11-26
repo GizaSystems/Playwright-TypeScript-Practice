@@ -40,7 +40,7 @@ test.describe('Automation Exercise Login Test Cases', () => {
     await homePage.navigate();
     await headerPage.clickOnSignupLoginLink();
     await loginPage.login(testData.invalidEmail, testData.invalidPassword);
-    await loginPage.verifyLoginUserWithIncorrectEmailAndPassword(testData.errorMessage);
+    await loginPage.verifyErrorMessage(testData.errorMessages.incorrcetEmailAndPasswordMsg);
   });
 
   test.beforeAll(async () => {

@@ -60,9 +60,9 @@ export class LoginPage {
       await expect(this.login_header).toBeVisible();
     });
   }
-  async verifyLoginUserWithIncorrectEmailAndPassword(errorMessage: string) {
-    await step(`Verify that the error message is visable`, async () => {
-      await expect(this.login_Error_Message).toHaveText(errorMessage);
+  async verifyErrorMessage(expectedMessage: string) {
+    await step(`Verify that the error message is visable and correct`, async () => {
+      await expect(this.login_Error_Message).toHaveText(expectedMessage);
       await expect(this.login_Error_Message).toBeVisible();
     });
   }

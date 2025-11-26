@@ -4,5 +4,5 @@
     "password": "tp12345678",
     "invalidEmail": "Invalid#User@gmail.com",
     "invalidPassword":"Invalid$Passw0rd",
-    "errorMessage": "Your email or password is incorrect!"
+    "errorMessages": {"incorrcetEmailAndPasswordMsg":"Your email or password is incorrect!"}
 }
