@@ -13,7 +13,7 @@ export class ApisProductsList {
   }
 
   ///// Actions
-
+  
   async getProductsListData(): Promise<APIResponse> {
     return await allure.step(`Get The Available Products List`, async () => {
       const response = await this.request.get(this.productsList_serviceName, {});
@@ -36,6 +36,18 @@ export class ApisProductsList {
    const data = await response.json();
    const product = data.products.find((p: any) => p.name === expectedName);
    expect(product?.name).toEqual(expectedName);
+  });
+ }
+
+ async validateFirstProductDetails(response: APIResponse, productName: string, productPrice: string, productBrand: string, productCategory: string, productUserType: string) {
+  return await allure.step(`Validate First Product Details In The Products List`, async () => {
+    expect(response.status()).toBe(200);
+    const body = await response.json();
+    expect(body.products[0].name).toBe(productName);
+    expect(body.products[0].price).toBe(productPrice);
+    expect(body.products[0].brand).toBe(productBrand);
+    expect(body.products[0].category.category).toBe(productCategory);
+    expect(body.products[0].category.usertype.usertype).toBe(productUserType);
   });
  }
 }
