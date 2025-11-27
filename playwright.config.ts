@@ -14,6 +14,7 @@ import * as os from "node:os";
  */
 export default defineConfig({
   metadata: {
+    timeout : 600000,
     apiConsoleLogs: false, // Enable APIs console logs
     // apiConsoleLogs: process.env.API_CONSOLE_LOGS === 'true', // for changing the value from the commandline. will work only if added ($env:API_CONSOLE_LOGS="true";) before the execution command
   },

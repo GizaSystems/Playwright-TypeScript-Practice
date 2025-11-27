@@ -8,6 +8,7 @@ export class HeaderPage {
   readonly signupLoginLogout_link: Locator;
   readonly userProfile_link: Locator;
   readonly deleteAccount_link: Locator;
+  readonly contactUsForm_link: Locator;
   readonly cart_link: Locator;
   readonly products_link: Locator;
   readonly testCases_link: Locator;
@@ -17,6 +18,7 @@ export class HeaderPage {
     this.signupLoginLogout_link = page.locator('//i[@class="fa fa-lock"]//parent::a');
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
+    this.contactUsForm_link = page.locator('//i[contains(@class,"fa fa-envelope")]//parent::a');
     this.cart_link = page.locator('//ul//i[@Class="fa fa-shopping-cart"]//parent::a');
     this.products_link = page.locator('//i[@class="material-icons card_travel"]//parent::a');
     this.testCases_link = page.locator("ul.nav.navbar-nav a[href='/test_cases']");
@@ -32,6 +34,11 @@ export class HeaderPage {
   async clickOnDeleteAccountLink() {
     await step("Click on Delete Account Link", async () => {
       await this.deleteAccount_link.click();
+    });
+  }
+  async clickOnContactUsFormLink(){
+        await step("Click on Delete Account Link", async () => {
+      await this.contactUsForm_link.click();
     });
   }
 
