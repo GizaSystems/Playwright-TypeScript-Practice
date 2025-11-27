@@ -14,7 +14,7 @@ export class HomePage {
     this.fullFledged_txt = page.locator('#slider-carousel h2');
   }
 
-    viewProduct_Button(productName: string): Locator {
+  viewProduct_Button(productName: string): Locator {
     return this.page
       .locator("div.product-image-wrapper", { hasText: productName })
       .locator("a[href^='/product_details/']");
@@ -33,8 +33,8 @@ export class HomePage {
       await this.viewProduct_Button(productName).click();
     })
   }
-  
-    ///// Validations
+
+  ///// Validations
 
   async verifyHomePageVisible(expectedTitle: string) {
     await step("Verify home page is visible successfully", async () => {

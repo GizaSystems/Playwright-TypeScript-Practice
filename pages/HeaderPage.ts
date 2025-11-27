@@ -9,6 +9,7 @@ export class HeaderPage {
   readonly userProfile_link: Locator;
   readonly deleteAccount_link: Locator;
   readonly cart_link: Locator;
+  readonly products_link: Locator;
   readonly testCases_link: Locator;
   constructor(page: Page) {
     //  Locators
@@ -17,6 +18,7 @@ export class HeaderPage {
     this.userProfile_link = page.locator('//i[contains(@class,"fa-user")]//parent::a');
     this.deleteAccount_link = page.locator('//i[contains(@class,"fa fa-trash-o")]//parent::a');
     this.cart_link = page.locator('//ul//i[@Class="fa fa-shopping-cart"]//parent::a');
+    this.products_link = page.locator('//i[@class="material-icons card_travel"]//parent::a');
     this.testCases_link = page.locator("ul.nav.navbar-nav a[href='/test_cases']");
   }
 
@@ -39,14 +41,21 @@ export class HeaderPage {
     });
   }
 
-  async clickOnTestCasesLink() {
-    await step("Click on Test Cases link", async () => {
-      await this.testCases_link.click();
-    })
+  async clickOnProductsLink() {
+    await step("Click on Products Link", async () => {
+      await this.products_link.click();
+    });
   }
+
   async clickOnLogoutButton() {
     await step("Click on logout button", async () => {
       await this.signupLoginLogout_link.click();
+    })
+  }
+
+  async clickOnTestCasesLink() {
+    await step("Click on Test Cases link", async () => {
+      await this.testCases_link.click();
     })
   }
 
