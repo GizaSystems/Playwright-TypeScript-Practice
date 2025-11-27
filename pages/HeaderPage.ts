@@ -12,6 +12,7 @@ export class HeaderPage {
   readonly cart_link: Locator;
   readonly products_link: Locator;
 
+
   constructor(page: Page) {
     //  Locators
     this.page = page;
@@ -24,12 +25,12 @@ export class HeaderPage {
   }
 
   ///// Actions
-
   async clickOnSignupLoginLink() {
     await step("Click on Signup/Login Link", async () => {
       await this.signupLoginLogout_link.click();
     });
   }
+  
   async clickOnDeleteAccountLink() {
     await step("Click on Delete Account Link", async () => {
       await this.deleteAccount_link.click();
