@@ -22,18 +22,17 @@ export class HeaderPage {
   }
 
   ///// Actions
-
   async clickOnSignupLoginLink() {
     await step("Click on Signup/Login Link", async () => {
       await this.signupLoginLogout_link.click();
     });
   }
+
   async clickOnDeleteAccountLink() {
     await step("Click on Delete Account Link", async () => {
       await this.deleteAccount_link.click();
     });
   }
-
   async clickOnCartLink() {
     await step("Click on Cart Link", async () => {
       await this.cart_link.click();
@@ -51,7 +50,7 @@ export class HeaderPage {
       await this.signupLoginLogout_link.click();
     })
   }
-  
+
   async scrollToHeader() {
     await step('Scroll to Header', async () => {
       await this.page.evaluate(() => window.scrollTo(0, 0));
