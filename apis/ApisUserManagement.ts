@@ -72,7 +72,7 @@ async deleteUser(email: string, password: string) {
     expect(body.message).toBe(expectedMessage);
   }
 async assertDeleteUserSuccess(response: APIResponse, expectedMessage: string) {
-    return await allure.step(`Verify User Deleted Successfully`, async () => {
+    return await allure.step(`Verify user account is deleted successfully`, async () => {
         expect(response.status()).toBe(200);
         const body = await response.json();
         expect(body.message).toBe(expectedMessage);
