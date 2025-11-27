@@ -11,6 +11,7 @@ export class HeaderPage {
   readonly contactUsForm_link: Locator;
   readonly cart_link: Locator;
   readonly products_link: Locator;
+  readonly testCases_link: Locator;
 
   constructor(page: Page) {
     //  Locators
@@ -21,15 +22,16 @@ export class HeaderPage {
     this.contactUsForm_link = page.locator('//i[contains(@class,"fa fa-envelope")]//parent::a');
     this.cart_link = page.locator('//ul//i[@Class="fa fa-shopping-cart"]//parent::a');
     this.products_link = page.locator('//i[@class="material-icons card_travel"]//parent::a');
+    this.testCases_link = page.locator("ul.nav.navbar-nav a[href='/test_cases']");
   }
 
   ///// Actions
-
   async clickOnSignupLoginLink() {
     await step("Click on Signup/Login Link", async () => {
       await this.signupLoginLogout_link.click();
     });
   }
+  
   async clickOnDeleteAccountLink() {
     await step("Click on Delete Account Link", async () => {
       await this.deleteAccount_link.click();
@@ -58,7 +60,13 @@ export class HeaderPage {
       await this.signupLoginLogout_link.click();
     })
   }
-  
+
+  async clickOnTestCasesLink() {
+    await step("Click on Test Cases link", async () => {
+      await this.testCases_link.click();
+    })
+  }
+
   async scrollToHeader() {
     await step('Scroll to Header', async () => {
       await this.page.evaluate(() => window.scrollTo(0, 0));
