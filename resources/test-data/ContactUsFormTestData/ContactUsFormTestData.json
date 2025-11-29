@@ -1,0 +1,10 @@
+{
+    "username": "Automation",
+    "useremail": "automation@gs.com",
+    "subject": "Automation Practice",
+    "message": "Testing submission of the contact form using playwright with typescript",
+    "successMsg": "Success! Your details have been submitted successfully.",
+    "homePageTitle": "Automation Exercise",
+    "subTitle": "Get In Touch"
+
+}

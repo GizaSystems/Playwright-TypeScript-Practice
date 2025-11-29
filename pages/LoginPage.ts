@@ -13,6 +13,7 @@ export class LoginPage {
   readonly signupName_Input: Locator;
   readonly signupEmail_Input: Locator;
   readonly signup_Button: Locator;
+  readonly login_Error_Message: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -23,6 +24,8 @@ export class LoginPage {
     this.signupName_Input = page.locator('[data-qa="signup-name"]');
     this.signupEmail_Input = page.locator('[data-qa="signup-email"]');
     this.signup_Button = page.locator('[data-qa="signup-button"]');
+    this.login_Error_Message = page.locator('//div[@class="login-form"]//p');
+
   }
 
   ///// Actions
@@ -55,6 +58,12 @@ export class LoginPage {
     await step(`Verify that user is navigated to login page`, async () => {
       await expect(this.page).toHaveTitle(loginPageTitle);
       await expect(this.login_header).toBeVisible();
+    });
+  }
+  async verifyErrorMessage(expectedMessage: string) {
+    await step(`Verify that the error message is visable and correct`, async () => {
+      await expect(this.login_Error_Message).toHaveText(expectedMessage);
+      await expect(this.login_Error_Message).toBeVisible();
     });
   }
 }
