@@ -43,9 +43,9 @@ test.describe('Verify Email Subscription Functionality', () => {
     await footerPage.verifySuccessMessage(testData.successMessage);
   });
 
-   test.beforeAll(async () => {
+  test.beforeAll(async () => {
     testData = JSON.parse(fs.readFileSync('./resources/test-data/SubscriptionTestData.json', 'utf8'));
-   });
+  });
 
   test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
