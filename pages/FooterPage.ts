@@ -8,6 +8,7 @@ export class FooterPage {
   readonly email_Input: Locator;
   readonly submit_Button: Locator;
   readonly successMessage: Locator;
+  readonly arrowBottomRightSide_Button: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -16,6 +17,7 @@ export class FooterPage {
     this.email_Input = page.locator('#susbscribe_email');
     this.submit_Button = page.locator('#subscribe');
     this.successMessage = page.locator('#success-subscribe');
+    this.arrowBottomRightSide_Button = page.locator('#scrollUp');
   }
 
     ///// Actions
@@ -28,6 +30,12 @@ export class FooterPage {
     await step(`User subscribes to the newsletter with email '${email}'`, async () => {
       await this.email_Input.fill(email);
       await this.submit_Button.click();
+    });
+  }
+  
+  async clickArrowScrollToHeader() {
+    await step(' Click on arrow at bottom right side to scroll upward', async () => {
+      await this.arrowBottomRightSide_Button.click();
     });
   }
 

@@ -32,6 +32,17 @@ test.describe('Automation Exercise Login Test Cases', () => {
     await headerPage.assertUserLoggedinSuccessfully(testData.username);
   });
 
+   test('Test Case 3: Login User with incorrect email and password', async () => {
+    allure.feature('Automation Exercise Login Test Cases');
+    allure.tms('137183053');
+    // allure.issue('#link');
+    
+    await homePage.navigate();
+    await headerPage.clickOnSignupLoginLink();
+    await loginPage.login(testData.invalidEmail, testData.invalidPassword);
+    await loginPage.verifyErrorMessage(testData.errorMessages.incorrcetEmailAndPasswordMsg);
+  });
+
   test.beforeAll(async () => {
     testData = JSON.parse(fs.readFileSync('./resources/test-data/LoginTestJsonFile.json', 'utf8'));
   });
