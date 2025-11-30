@@ -30,6 +30,8 @@ test.describe('Automation Exercise Login Test Cases', () => {
     await headerPage.clickOnSignupLoginLink();
     await loginPage.login(email, testData.password);
     await headerPage.assertUserLoggedinSuccessfully(testData.username);
+    const deleteResponse = await apisUserManagement.deleteUser(email, testData.password);
+    await apisUserManagement.assertDeleteUserSuccess(deleteResponse, testData.deletedAccountMessage);
   });
 
    test('Test Case 3: Login User with incorrect email and password', async () => {

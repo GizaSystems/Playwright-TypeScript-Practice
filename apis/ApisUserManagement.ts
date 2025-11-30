@@ -51,14 +51,15 @@ export class ApisUserManagement {
     return response;
   }
 
-  async deleteUser(email: string, password: string): Promise<APIResponse> {
-   return await allure.step(`Delete User Account with email: ${email}`, async () => {
+async deleteUser(email: string, password: string): Promise<APIResponse> {
+  return await allure.step(`Delete User Account with email: ${email}`, async () => {
     const response = await this.request.delete(this.deleteUser_serviceName, {
       form: { email, password }
     });
     return response;
-   });
-  }
+  });
+}
+
 
   /////////Assertions
   async assertCreateUserSuccess(response: APIResponse, expectedMessage: string) {
@@ -71,13 +72,14 @@ export class ApisUserManagement {
     const body = await response.json();
     expect(body.message).toBe(expectedMessage);
   }
-  async assertDeleteUserSuccess(response: APIResponse, expectedMessage: string) {
-   return await allure.step(`Verify User Deleted Successfully`, async () => {
-    expect(response.status()).toBe(200);
-    const body = await response.json();
-    expect(body.message).toBe(expectedMessage);
-   });
-  }
+async assertDeleteUserSuccess(response: APIResponse, expectedMessage: string) {
+    return await allure.step(`Verify user account is deleted successfully`, async () => {
+        expect(response.status()).toBe(200);
+        const body = await response.json();
+        expect(body.message).toBe(expectedMessage);
+    });
+}
+
   ///// Validations
 
   async verifyUserCreatedSuccessfully(createResponse: APIResponse, createUserConfirmationMessage: string) {

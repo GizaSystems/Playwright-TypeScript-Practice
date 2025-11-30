@@ -2,6 +2,8 @@
     "username": "ElSharkawy",
     "emailAddress": "m.elsharkawy",
     "password": "tp12345678",
+    "errorMessage": "",
+    "deletedAccountMessage": "Account deleted!",
     "invalidEmail": "Invalid#User@gmail.com",
     "invalidPassword":"Invalid$Passw0rd",
     "errorMessages": {"incorrcetEmailAndPasswordMsg":"Your email or password is incorrect!"}
