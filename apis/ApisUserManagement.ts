@@ -51,7 +51,7 @@ export class ApisUserManagement {
     return response;
   }
 
-async deleteUser(email: string, password: string) {
+async deleteUser(email: string, password: string): Promise<APIResponse> {
   return await allure.step(`Delete User Account with email: ${email}`, async () => {
     const response = await this.request.delete(this.deleteUser_serviceName, {
       form: { email, password }
@@ -59,6 +59,7 @@ async deleteUser(email: string, password: string) {
     return response;
   });
 }
+
 
   /////////Assertions
   async assertCreateUserSuccess(response: APIResponse, expectedMessage: string) {
@@ -78,7 +79,6 @@ async assertDeleteUserSuccess(response: APIResponse, expectedMessage: string) {
         expect(body.message).toBe(expectedMessage);
     });
 }
-
 
   ///// Validations
 
