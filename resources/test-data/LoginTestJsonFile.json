@@ -4,5 +4,6 @@
     "password": "tp12345678",
     "invalidEmail": "Invalid#User@gmail.com",
     "invalidPassword":"Invalid$Passw0rd",
-    "errorMessages": {"incorrcetEmailAndPasswordMsg":"Your email or password is incorrect!"}
+    "errorMessages": {"incorrcetEmailAndPasswordMsg":"Your email or password is incorrect!"},
+    "deletedAccountExpectedMessage": "Account deleted!"
 }
