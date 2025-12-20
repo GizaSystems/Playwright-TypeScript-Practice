@@ -20,7 +20,7 @@ const timestamp = new Date().toISOString().replace(/[-T:.]/g, "").slice(0, 17);
 
 test.describe('Automation Exercise Login Test Cases', () => {
 
-  test('Test Case 2: Login User with correct email and password', async () => {
+  test('Test Case 2: Login User with correct email and password then delete user account', async () => {
     allure.feature('Automation Exercise Login Test Cases');
     allure.tms('137183022');
     // allure.issue('#link');
@@ -30,6 +30,19 @@ test.describe('Automation Exercise Login Test Cases', () => {
     await headerPage.clickOnSignupLoginLink();
     await loginPage.login(email, testData.password);
     await headerPage.assertUserLoggedinSuccessfully(testData.username);
+    const deleteResponse = await apisUserManagement.deleteUser(email, testData.password);
+    await apisUserManagement.assertDeleteUserSuccess(deleteResponse, testData.deletedAccountExpectedMessage);
+  });
+
+   test('Test Case 3: Login User with incorrect email and password', async () => {
+    allure.feature('Automation Exercise Login Test Cases');
+    allure.tms('137183053');
+    // allure.issue('#link');
+    
+    await homePage.navigate();
+    await headerPage.clickOnSignupLoginLink();
+    await loginPage.login(testData.invalidEmail, testData.invalidPassword);
+    await loginPage.verifyErrorMessage(testData.errorMessages.incorrcetEmailAndPasswordMsg);
   });
 
   test.beforeAll(async () => {

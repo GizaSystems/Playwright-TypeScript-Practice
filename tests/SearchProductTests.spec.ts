@@ -7,11 +7,9 @@ import * as fs from 'fs';
 
 let context: BrowserContext;
 let page: Page;
-
 let homePage: HomePage;
 let headerPage: HeaderPage;
 let productsPage: ProductsPage;
-
 let testData: any;
 let productName: string;
 let productsPageTitle: string;
@@ -39,11 +37,9 @@ test.describe('Automation Excercise Search Product Test Cases', () => {
   test.beforeEach(async ({ browser }) => {
     context = await browser.newContext();
     page = await context.newPage();
-
     productName = testData.productName;
     productsPageTitle = testData.productsPageTitle;
     searchResultsPageTitle = testData.searchResultsPageTitle;
-
     homePage = new HomePage(page);
     headerPage = new HeaderPage(page);
     productsPage = new ProductsPage(page);
