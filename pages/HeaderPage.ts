@@ -31,7 +31,7 @@ export class HeaderPage {
       await this.signupLoginLogout_link.click();
     });
   }
-  
+
   async clickOnDeleteAccountLink() {
     await step("Click on Delete Account Link", async () => {
       await this.deleteAccount_link.click();
